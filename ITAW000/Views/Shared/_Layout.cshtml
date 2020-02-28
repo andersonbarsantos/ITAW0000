@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <link href="font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <title>@ViewBag.Title - App Classificação</title>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar Holder -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Confitec</h3>
+                <strong>431</strong>
+            </div>
+
+            <ul class="list-unstyled components">
+
+                <li class="active">
+                    <a href="@Url.Action("index", "Home")">
+                        <i class="glyphicon glyphicon-home"></i>
+                        Inicial
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="#">
+                        <i class="glyphicon glyphicon-briefcase"></i>
+                        Dominios
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="#">
+                        <i class="glyphicon glyphicon-registration-mark"></i>
+                        Regras
+                    </a>
+                </li>
+                <li>
+                    <a href="#CadSubmenu" data-toggle="collapse" aria-expanded="false">
+                        <i class="glyphicon glyphicon-grain"></i>
+                        Cadastros
+                    </a>
+                    <ul class="collapse list-unstyled" id="CadSubmenu">
+                        <li><a href="#"> <i class="glyphicon glyphicon-user"></i>Responsavel</a></li>
+                        <li><a href="#"> <i class="glyphicon glyphicon-hand-up"></i>Retorno</a></li>
+                        <li><a href="#"> <i class="glyphicon glyphicon-ok-sign"></i>Sistema</a></li>
+                        <li><a href="#"> <i class="glyphicon glyphicon-comment"></i>Situação</a></li>
+                        <li><a href="#"> <i class="glyphicon glyphicon-compressed"></i>Tipo</a></li>
+                    </ul>
+                </li>
+
+                <ul class="list-unstyled CTAs">
+                    <li><a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a></li>
+                    <li><a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a></li>
+                </ul>
+
+            </ul>
+        </nav>
+
+        <!-- Page Content Holder -->
+        <div id="content" class="container-fluid">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button id="sidebarCollapse" class="btn btn-info navbar-btn">
+                            <i class="glyphicon glyphicon-menu-hamburger"></i>
+                        </button>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="@Url.Action("Contact", "Home")">Contato</a></li>
+                            <li><a href="@Url.Action("About","Home")">Sobre</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+
+            
+            <footer>
+                <span class="text-muted ">@DateTime.Now.Year - Meu Aplicativo ASP.NET</span>
+            </footer>
+        </div>
+
+   
+    </div>
+
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
