@@ -79,22 +79,15 @@
                     </div>
                 </div>
             </nav>
-            <div class="container-fluid">
-                @RenderBody()
-            </div>
 
-            
+                @RenderBody()
+                        
             <footer>
                 <span class="text-muted ">@DateTime.Now.Year - Meu Aplicativo ASP.NET</span>
             </footer>
-        </div>
-
-   
+        </div>   
     </div>
-
-
-
-
+         
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
