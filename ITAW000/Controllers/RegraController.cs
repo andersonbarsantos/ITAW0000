@@ -10,12 +10,17 @@ namespace ITAW000.Controllers
 {
     public class RegraController : Controller
     {
-        private RegraRepository respository = new RegraRepository();
+        private RegraRepository regraRespository = new RegraRepository();
+        private RetornoRepository retornoRespository = new RetornoRepository();
+        private ResponsavelRepository responsavelRespository = new ResponsavelRepository();
+        private TipoRepository tipoRespository = new TipoRepository();
+        private SituacaoRepository situacaoRepository = new SituacaoRepository();
+        private SistemaRepository sistemaRepository = new SistemaRepository();
 
         // GET: Regra
         public ActionResult Index()
         {
-            return View(respository.GetAll());
+            return View(regraRespository.GetAll());
         }
 
         // GET: Regra/Details/5
@@ -27,17 +32,34 @@ namespace ITAW000.Controllers
         // GET: Regra/Create
         public ActionResult Create()
         {
-            return View();
+
+            RegraViewModel view = new RegraViewModel();
+            view.ListRetorno = retornoRespository.GetAll();
+            view.ListResponsavel = responsavelRespository.GetAll();
+            view.ListTipo = tipoRespository.GetAll();
+            view.ListSituacao = situacaoRepository.GetAll();
+            view.ListSistema = sistemaRepository.GetAll();
+            return View(view);
         }
 
         // POST: Regra/Create
         [HttpPost]
-        public ActionResult Create(Regra objModel)
+        public ActionResult Create(RegraViewModel objModel)
         {
             try
             {
+
+                Regra regra = new Regra();
+
+                regra.Descricao = objModel.Descricao;
+                regra.IdTipo = Convert.ToInt32( objModel.SelectedTipo);
+                regra.IdRetorno = Convert.ToInt32(objModel.SelectedRetorno);
+                regra.IdResponsavel = Convert.ToInt32(objModel.SelectedResponsavel);
+                regra.IdSistema = Convert.ToInt32(objModel.SelectedSistema);
+                regra.IdSituacao = Convert.ToInt32(objModel.SelectedSituacao);
+
                 // TODO: Add insert logic here
-                respository.Add(objModel);
+                regraRespository.Add(regra);
                 return RedirectToAction("Index");
             }
             catch
@@ -71,7 +93,7 @@ namespace ITAW000.Controllers
         // GET: Regra/Delete/5
         public ActionResult DeleteRegra(int id)
         {
-            respository.DeleteById(id);
+            regraRespository.DeleteById(id);
 
             return RedirectToAction("Index");
         }
@@ -91,5 +113,41 @@ namespace ITAW000.Controllers
                 return View();
             }
         }
+
+
+        private void SetViewBagRetornoType(Retorno itemSelected)
+        {
+
+            IEnumerable<Retorno> values =
+
+                              Enum.GetValues(typeof(Retorno))
+
+                              .Cast<Retorno>();
+
+            IEnumerable<SelectListItem> items =
+
+                from value in values
+
+                select new SelectListItem
+                {
+                    Text = value.ToString(),
+                    Value = value.ToString(),
+                    Selected = value == itemSelected,
+                };
+
+            ViewBag.MovieType = items;
+
+        }
+
+        public ActionResult SelectRetornoEnum()
+        {
+
+            SetViewBagRetornoType(new Retorno());
+
+            return View("SelectCategory");
+
+        }
+
+
     }
 }

@@ -52,7 +52,7 @@ namespace ITAW000.Repository
 
         public override List<Situacao> GetAll()
         {
-            string sql = "Select * FROM Situacao_tb ORDER BY Nome";
+            string sql = "Select * FROM Situacao_tb ORDER BY NomeSituacao";
             using (var conn = new SqlConnection(StringConnection))
             {
                 var cmd = new SqlCommand(sql, conn);
@@ -68,8 +68,8 @@ namespace ITAW000.Repository
                             situacao = new Situacao
                             {
                                 IdSituacao = (int)reader["IdSituacao"],
-                                Nome = reader["Nome"].ToString(),
-                                Descricao = reader["Descricao"].ToString(),
+                                NomeSituacao = reader["NomeSituacao"].ToString(),
+                                DescSituacao = reader["DescSituacao"].ToString(),
                                 DtInclusao = Convert.ToDateTime( reader["DtInclusao"]),
                                 //DtAlteracao = Convert.ToDateTime(Tools.Tools.SafeGetString(reader, "DtAlteracao")),
                                 Usuario = reader["Usuario"].ToString(),
@@ -108,8 +108,8 @@ namespace ITAW000.Repository
                                 situacao = new Situacao
                                 {
                                     IdSituacao = (int)reader["IdSituacao"],
-                                    Nome = reader["Nome"].ToString(),
-                                    Descricao = reader["Descricao"].ToString(),
+                                    NomeSituacao = reader["NomeSituacao"].ToString(),
+                                    DescSituacao = reader["DescSituacao"].ToString(),
                                     DtInclusao = Convert.ToDateTime(reader["DtInclusao"]),
                                     //DtAlteracao = Convert.ToDateTime(Tools.Tools.SafeGetString(reader,"DtAlteracao")),
                                     Usuario = reader["Usuario"].ToString(),
@@ -135,11 +135,11 @@ namespace ITAW000.Repository
 
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "INSERT INTO Situacao_tb (Nome, Descricao, DtInclusao, Usuario) " +
-                    "VALUES (@Nome, @Descricao, @DtInclusao, @Usuario)";
+                string sql = "INSERT INTO Situacao_tb (NomeSituacao, DescSituacao, DtInclusao, Usuario) " +
+                    "VALUES (@NomeSituacao, @DescSituacao, @DtInclusao, @Usuario)";
                 SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@Nome", entity.Nome);
-                cmd.Parameters.AddWithValue("@Descricao", entity.Descricao);
+                cmd.Parameters.AddWithValue("@NomeSituacao", entity.NomeSituacao);
+                cmd.Parameters.AddWithValue("@DescSituacao", entity.DescSituacao);
                 cmd.Parameters.AddWithValue("@DtInclusao", entity.DtInclusao);   
                 cmd.Parameters.AddWithValue("@Usuario", entity.Usuario);
 
@@ -162,11 +162,11 @@ namespace ITAW000.Repository
 
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "UPDATE Situacao_tb SET Nome=@Nome, Descricao=@Descricao, DtAlteracao=@DtAlteracao, Usuario=@Usuario Where IdSituacao=@Id";
+                string sql = "UPDATE Situacao_tb SET NomeSituacao=@NomeSituacao, DescSituacao=@DescSituacao, DtAlteracao=@DtAlteracao, Usuario=@Usuario Where IdSituacao=@Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", entity.IdSituacao);
-                cmd.Parameters.AddWithValue("@Nome", entity.Nome);
-                cmd.Parameters.AddWithValue("@Descricao", entity.Descricao);
+                cmd.Parameters.AddWithValue("@NomeSituacao", entity.NomeSituacao);
+                cmd.Parameters.AddWithValue("@DescSituacao", entity.DescSituacao);
                 cmd.Parameters.AddWithValue("@DtAlteracao", entity.DtAlteracao);
                 cmd.Parameters.AddWithValue("@Usuario", entity.Usuario);
 

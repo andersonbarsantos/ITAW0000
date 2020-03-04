@@ -48,7 +48,7 @@ namespace ITAW000.Repository
 
             public override List<Sistema> GetAll()
             {
-                string sql = "Select * FROM Sistema_tb ORDER BY Nome";
+                string sql = "Select * FROM Sistema_tb ORDER BY NomeSistema";
                 using (var conn = new SqlConnection(StringConnection))
                 {
                     var cmd = new SqlCommand(sql, conn);
@@ -64,8 +64,8 @@ namespace ITAW000.Repository
                                 Sistema = new Sistema
                                 {
                                     IdSistema = (int)reader["IdSistema"],
-                                    Nome = reader["Nome"].ToString(),
-                                    Descricao = reader["Descricao"].ToString(),
+                                    NomeSistema = reader["NomeSistema"].ToString(),
+                                    DescSistema = reader["DescSistema"].ToString(),
                                     DtInclusao = Convert.ToDateTime(reader["DtInclusao"]),
                                     //DtAlteracao = Convert.ToDateTime(Tools.Tools.SafeGetString(reader, "DtAlteracao")),
                                     Usuario = reader["Usuario"].ToString(),
@@ -104,8 +104,8 @@ namespace ITAW000.Repository
                                     Sistema = new Sistema
                                     {
                                         IdSistema = (int)reader["IdSistema"],
-                                        Nome = reader["Nome"].ToString(),
-                                        Descricao = reader["Descricao"].ToString(),
+                                        NomeSistema = reader["NomeSistema"].ToString(),
+                                        DescSistema = reader["DescSistema"].ToString(),
                                         DtInclusao = Convert.ToDateTime(reader["DtInclusao"]),
                                         //DtAlteracao = Convert.ToDateTime(Tools.Tools.SafeGetString(reader,"DtAlteracao")),
                                         Usuario = reader["Usuario"].ToString(),
@@ -131,11 +131,11 @@ namespace ITAW000.Repository
 
                 using (var conn = new SqlConnection(StringConnection))
                 {
-                    string sql = "INSERT INTO Sistema_tb (Nome, Descricao, DtInclusao, Usuario) " +
-                        "VALUES (@Nome, @Descricao, @DtInclusao, @Usuario)";
+                    string sql = "INSERT INTO Sistema_tb (NomeSistema, DescSistema, DtInclusao, Usuario) " +
+                        "VALUES (@NomeSistema, @DescSistema, @DtInclusao, @Usuario)";
                     SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@Nome", entity.Nome);
-                    cmd.Parameters.AddWithValue("@Descricao", entity.Descricao);
+                    cmd.Parameters.AddWithValue("@NomeSistema", entity.NomeSistema);
+                    cmd.Parameters.AddWithValue("@DescSistema", entity.DescSistema);
                     cmd.Parameters.AddWithValue("@DtInclusao", entity.DtInclusao);
                     cmd.Parameters.AddWithValue("@Usuario", entity.Usuario);
 
@@ -158,11 +158,11 @@ namespace ITAW000.Repository
 
                 using (var conn = new SqlConnection(StringConnection))
                 {
-                    string sql = "UPDATE Sistema_tb SET Nome=@Nome, Descricao=@Descricao, DtAlteracao=@DtAlteracao, Usuario=@Usuario Where IdSistema=@Id";
+                    string sql = "UPDATE Sistema_tb SET NomeSistema=@NomeSistema, DescSistema=@DescSistema, DtAlteracao=@DtAlteracao, Usuario=@Usuario Where IdSistema=@Id";
                     SqlCommand cmd = new SqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@Id", entity.IdSistema);
-                    cmd.Parameters.AddWithValue("@Nome", entity.Nome);
-                    cmd.Parameters.AddWithValue("@Descricao", entity.Descricao);
+                    cmd.Parameters.AddWithValue("@NomeSistema", entity.NomeSistema);
+                    cmd.Parameters.AddWithValue("@DescSistema", entity.DescSistema);
                     cmd.Parameters.AddWithValue("@DtAlteracao", entity.DtAlteracao);
                     cmd.Parameters.AddWithValue("@Usuario", entity.Usuario);
 

@@ -18,6 +18,7 @@ namespace ITAW000.Models
         public Sistema Sistema { get; set; }
         public int IdResponsavel { get; set; }
         public Responsavel Responsavel { get; set; }
+        public int IdSituacao { get; set; }
         public Situacao Situacao { get; set; }
         public int IdTipo { get; set; }
         public Tipo Tipo { get; set; }

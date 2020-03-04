@@ -52,7 +52,7 @@ namespace ITAW000.Repository
 
         public override List<Retorno> GetAll()
         {
-            string sql = "Select * FROM Retorno_tb ORDER BY Nome";
+            string sql = "Select * FROM Retorno_tb ORDER BY NomeRetorno";
             using (var conn = new SqlConnection(StringConnection))
             {
                 var cmd = new SqlCommand(sql, conn);
@@ -68,8 +68,8 @@ namespace ITAW000.Repository
                             Retorno = new Retorno
                             {
                                 IdRetorno = (int)reader["IdRetorno"],
-                                Nome = reader["Nome"].ToString(),
-                                Descricao = reader["Descricao"].ToString(),
+                                NomeRetorno = reader["NomeRetorno"].ToString(),
+                                DescRetorno = reader["DescRetorno"].ToString(),
                                 DtInclusao = Convert.ToDateTime(reader["DtInclusao"]),
                                 //DtAlteracao = Convert.ToDateTime(Tools.Tools.SafeGetString(reader, "DtAlteracao")),
                                 Usuario = reader["Usuario"].ToString(),
@@ -108,8 +108,8 @@ namespace ITAW000.Repository
                                 Retorno = new Retorno
                                 {
                                     IdRetorno = (int)reader["IdRetorno"],
-                                    Nome = reader["Nome"].ToString(),
-                                    Descricao = reader["Descricao"].ToString(),
+                                    NomeRetorno = reader["NomeRetorno"].ToString(),
+                                    DescRetorno = reader["DescRetorno"].ToString(),
                                     DtInclusao = Convert.ToDateTime(reader["DtInclusao"]),
                                     //DtAlteracao = Convert.ToDateTime(Tools.Tools.SafeGetString(reader,"DtAlteracao")),
                                     Usuario = reader["Usuario"].ToString(),
@@ -135,11 +135,11 @@ namespace ITAW000.Repository
 
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "INSERT INTO Retorno_tb (Nome, Descricao, DtInclusao, Usuario) " +
-                    "VALUES (@Nome, @Descricao, @DtInclusao, @Usuario)";
+                string sql = "INSERT INTO Retorno_tb (NomeRetorno, DescRetorno, DtInclusao, Usuario) " +
+                    "VALUES (@NomeRetorno, @DescRetorno, @DtInclusao, @Usuario)";
                 SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@Nome", entity.Nome);
-                cmd.Parameters.AddWithValue("@Descricao", entity.Descricao);
+                cmd.Parameters.AddWithValue("@NomeRetorno", entity.NomeRetorno);
+                cmd.Parameters.AddWithValue("@DescRetorno", entity.DescRetorno);
                 cmd.Parameters.AddWithValue("@DtInclusao", entity.DtInclusao);
                 cmd.Parameters.AddWithValue("@Usuario", entity.Usuario);
 
@@ -162,11 +162,11 @@ namespace ITAW000.Repository
 
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "UPDATE Retorno_tb SET Nome=@Nome, Descricao=@Descricao, DtAlteracao=@DtAlteracao, Usuario=@Usuario Where IdRetorno=@Id";
+                string sql = "UPDATE Retorno_tb SET NomeRetorno=@NomeRetorno, DescRetorno=@DescRetorno, DtAlteracao=@DtAlteracao, Usuario=@Usuario Where IdRetorno=@Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", entity.IdRetorno);
-                cmd.Parameters.AddWithValue("@Nome", entity.Nome);
-                cmd.Parameters.AddWithValue("@Descricao", entity.Descricao);
+                cmd.Parameters.AddWithValue("@NomeRetorno", entity.NomeRetorno);
+                cmd.Parameters.AddWithValue("@DescRetorno", entity.DescRetorno);
                 cmd.Parameters.AddWithValue("@DtAlteracao", entity.DtAlteracao);
                 cmd.Parameters.AddWithValue("@Usuario", entity.Usuario);
 

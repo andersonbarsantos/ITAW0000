@@ -52,7 +52,7 @@ namespace ITAW000.Repository
 
         public override List<Tipo> GetAll()
         {
-            string sql = "Select * FROM tipo_tb ORDER BY Nome";
+            string sql = "Select * FROM tipo_tb ORDER BY NomeTipo";
             using (var conn = new SqlConnection(StringConnection))
             {
                 var cmd = new SqlCommand(sql, conn);
@@ -68,8 +68,8 @@ namespace ITAW000.Repository
                             tipo = new Tipo
                             {
                                 IdTipo = (int)reader["IdTipo"],
-                                Nome = reader["Nome"].ToString(),
-                                Descricao = reader["Descricao"].ToString(),
+                                NomeTipo = reader["NomeTipo"].ToString(),
+                                DescTipo = reader["DescTipo"].ToString(),
                                 DtInclusao = Convert.ToDateTime( reader["DtInclusao"]),
                                 //DtAlteracao = Convert.ToDateTime(Tools.Tools.SafeGetString(reader, "DtAlteracao")),
                                 Usuario = reader["Usuario"].ToString(),
@@ -108,8 +108,8 @@ namespace ITAW000.Repository
                                 tipo = new Tipo
                                 {
                                     IdTipo = (int)reader["IdTipo"],
-                                    Nome = reader["Nome"].ToString(),
-                                    Descricao = reader["Descricao"].ToString(),
+                                    NomeTipo = reader["NomeTipo"].ToString(),
+                                    DescTipo = reader["DescTipo"].ToString(),
                                     DtInclusao = Convert.ToDateTime(reader["DtInclusao"]),
                                     //DtAlteracao = Convert.ToDateTime(Tools.Tools.SafeGetString(reader,"DtAlteracao")),
                                     Usuario = reader["Usuario"].ToString(),
@@ -135,11 +135,11 @@ namespace ITAW000.Repository
 
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "INSERT INTO tipo_tb (Nome, Descricao, DtInclusao, Usuario) " +
-                    "VALUES (@Nome, @Descricao, @DtInclusao, @Usuario)";
+                string sql = "INSERT INTO tipo_tb (NomeTipo, DescTipo, DtInclusao, Usuario) " +
+                    "VALUES (@NomeTipo, @DescTipo, @DtInclusao, @Usuario)";
                 SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@Nome", entity.Nome);
-                cmd.Parameters.AddWithValue("@Descricao", entity.Descricao);
+                cmd.Parameters.AddWithValue("@NomeTipo", entity.NomeTipo);
+                cmd.Parameters.AddWithValue("@DescTipo", entity.DescTipo);
                 cmd.Parameters.AddWithValue("@DtInclusao", entity.DtInclusao);   
                 cmd.Parameters.AddWithValue("@Usuario", entity.Usuario);
 
@@ -162,11 +162,11 @@ namespace ITAW000.Repository
 
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "UPDATE tipo_tb SET Nome=@Nome, Descricao=@Descricao, DtAlteracao=@DtAlteracao, Usuario=@Usuario Where IdTipo=@Id";
+                string sql = "UPDATE tipo_tb SET NomeTipo=@NomeTipo, DescTipo=@DescTipo, DtAlteracao=@DtAlteracao, Usuario=@Usuario Where IdTipo=@Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", entity.IdTipo);
-                cmd.Parameters.AddWithValue("@Nome", entity.Nome);
-                cmd.Parameters.AddWithValue("@Descricao", entity.Descricao);
+                cmd.Parameters.AddWithValue("@NomeTipo", entity.NomeTipo);
+                cmd.Parameters.AddWithValue("@DescTipo", entity.DescTipo);
                 cmd.Parameters.AddWithValue("@DtAlteracao", entity.DtAlteracao);
                 cmd.Parameters.AddWithValue("@Usuario", entity.Usuario);
 

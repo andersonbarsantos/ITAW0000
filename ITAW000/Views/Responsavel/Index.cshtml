@@ -13,8 +13,8 @@
             dataType: "json",
             success: function (response) {
                 $('#IdEdit').val(response.IdResponsavel);
-                $('#idNome').val(response.Nome);
-                $('#idDescricao').val(response.Descricao);
+                $('#idNome').val(response.NomeResponsavel);
+                $('#idDescricao').val(response.DescResponsavel);
                 $('#editModal').modal('show');
             },
             error: function (response) {
@@ -80,10 +80,10 @@
                                                     @Html.DisplayFor(modelItem => item.IdResponsavel)
                                                 </td>
                                                 <td>
-                                                    @Html.DisplayFor(modelItem => item.Nome)
+                                                    @Html.DisplayFor(modelItem => item.NomeResponsavel)
                                                 </td>
                                                 <td>
-                                                    @Html.DisplayFor(modelItem => item.Descricao)
+                                                    @Html.DisplayFor(modelItem => item.DescResponsavel)
                                                 </td>
                                                 <td>
                                                     @Html.DisplayFor(modelItem => item.DtInclusao)
@@ -131,11 +131,11 @@
                     <div class="form-group">
 
                         <label>Nome</label>
-                        <input type="text" class="form-control" name="Nome" required>
+                        <input type="text" class="form-control" name="NomeResponsavel" required>
                     </div>
                     <div class="form-group">
                         <label>Descrição</label>
-                        <input type="text" class="form-control" name="Descricao" required>
+                        <input type="text" class="form-control" name="DescResponsavel" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -165,11 +165,11 @@
 
                     <div class="form-group">
                         <label>Nome</label>
-                        <input type="text" class="form-control" name="Nome" id="idNome" required>
+                        <input type="text" class="form-control" name="NomeResponsavel" id="idNome" required>
                     </div>
                     <div class="form-group">
                         <label>Descrição</label>
-                        <input type="text" class="form-control" name="Descricao" id="idDescricao" required>
+                        <input type="text" class="form-control" name="DescResponsavel" id="idDescricao" required>
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -52,7 +52,7 @@ namespace ITAW000.Repository
 
         public override List<Responsavel> GetAll()
         {
-            string sql = "Select * FROM Responsavel_tb ORDER BY Nome";
+            string sql = "Select * FROM Responsavel_tb ORDER BY NomeResponsavel";
             using (var conn = new SqlConnection(StringConnection))
             {
                 var cmd = new SqlCommand(sql, conn);
@@ -68,8 +68,8 @@ namespace ITAW000.Repository
                             Responsavel = new Responsavel
                             {
                                 IdResponsavel = (int)reader["IdResponsavel"],
-                                Nome = reader["Nome"].ToString(),
-                                Descricao = reader["Descricao"].ToString(),
+                                NomeResponsavel = reader["NomeResponsavel"].ToString(),
+                                DescResponsavel = reader["DescResponsavel"].ToString(),
                                 DtInclusao = Convert.ToDateTime(reader["DtInclusao"]),
                                 //DtAlteracao = Convert.ToDateTime(Tools.Tools.SafeGetString(reader, "DtAlteracao")),
                                 Usuario = reader["Usuario"].ToString(),
@@ -108,8 +108,8 @@ namespace ITAW000.Repository
                                 Responsavel = new Responsavel
                                 {
                                     IdResponsavel = (int)reader["IdResponsavel"],
-                                    Nome = reader["Nome"].ToString(),
-                                    Descricao = reader["Descricao"].ToString(),
+                                    NomeResponsavel = reader["NomeResponsavel"].ToString(),
+                                    DescResponsavel = reader["DescResponsavel"].ToString(),
                                     DtInclusao = Convert.ToDateTime(reader["DtInclusao"]),
                                     //DtAlteracao = Convert.ToDateTime(Tools.Tools.SafeGetString(reader,"DtAlteracao")),
                                     Usuario = reader["Usuario"].ToString(),
@@ -135,11 +135,11 @@ namespace ITAW000.Repository
 
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "INSERT INTO Responsavel_tb (Nome, Descricao, DtInclusao, Usuario) " +
-                    "VALUES (@Nome, @Descricao, @DtInclusao, @Usuario)";
+                string sql = "INSERT INTO Responsavel_tb (NomeResponsavel, DescResponsavel, DtInclusao, Usuario) " +
+                    "VALUES (@NomeResponsavel, @DescResponsavel, @DtInclusao, @Usuario)";
                 SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@Nome", entity.Nome);
-                cmd.Parameters.AddWithValue("@Descricao", entity.Descricao);
+                cmd.Parameters.AddWithValue("@NomeResponsavel", entity.NomeResponsavel);
+                cmd.Parameters.AddWithValue("@DescResponsavel", entity.DescResponsavel);
                 cmd.Parameters.AddWithValue("@DtInclusao", entity.DtInclusao);
                 cmd.Parameters.AddWithValue("@Usuario", entity.Usuario);
 
@@ -162,11 +162,11 @@ namespace ITAW000.Repository
 
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "UPDATE Responsavel_tb SET Nome=@Nome, Descricao=@Descricao, DtAlteracao=@DtAlteracao, Usuario=@Usuario Where IdResponsavel=@Id";
+                string sql = "UPDATE Responsavel_tb SET NomeResponsavel=@NomeResponsavel, DescResponsavel=@DescResponsavel, DtAlteracao=@DtAlteracao, Usuario=@Usuario Where IdResponsavel=@Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", entity.IdResponsavel);
-                cmd.Parameters.AddWithValue("@Nome", entity.Nome);
-                cmd.Parameters.AddWithValue("@Descricao", entity.Descricao);
+                cmd.Parameters.AddWithValue("@NomeResponsavel", entity.NomeResponsavel);
+                cmd.Parameters.AddWithValue("@DescResponsavel", entity.DescResponsavel);
                 cmd.Parameters.AddWithValue("@DtAlteracao", entity.DtAlteracao);
                 cmd.Parameters.AddWithValue("@Usuario", entity.Usuario);
 

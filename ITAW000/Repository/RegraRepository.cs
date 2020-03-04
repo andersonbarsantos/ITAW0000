@@ -51,12 +51,23 @@ namespace ITAW000.Repository
 
         public override List<Regra> GetAll()
         {
-            string sql = "Select * FROM regra_tb ORDER BY Descricao";
+            string sql = "SELECT * FROM regra_tb regra_tb WITH(NOLOCK) "
+                    + " LEFT JOIN sistema_tb WITH(NOLOCK) "
+                    + " ON sistema_tb.IdSistema = regra_tb.IdSistema "
+                    + " LEFT JOIN responsavel_tb responsavel_tb WITH(NOLOCK) "
+                    + " ON responsavel_tb.IdResponsavel = regra_tb.IdResponsavel "
+                    + " LEFT JOIN situacao_tb situacao_tb WITH(NOLOCK) "
+                    + " ON situacao_tb.IdSituacao = regra_tb.IdSituacao"
+                    + " LEFT JOIN tipo_tb tipo_tb WITH(NOLOCK) "
+                    + " ON tipo_tb.IdTipo = regra_tb.IdTipo "
+                    + " LEFT JOIN retorno_tb WITH(NOLOCK) "
+                    + " ON retorno_tb.IdRetorno = regra_tb.IdRetorno";
+
             using (var conn = new SqlConnection(StringConnection))
             {
                 var cmd = new SqlCommand(sql, conn);
                 List<Regra> list = new List<Regra>();
-                Regra p = null;
+                Regra regra = null;
                 try
                 {
                     conn.Open();
@@ -64,10 +75,29 @@ namespace ITAW000.Repository
                     {
                         while (reader.Read())
                         {
-                            p = new Regra();
-                            p.IdRegra = (int)reader["IdRegra"];
+                            regra = new Regra
+                            {
+                                IdRegra = (int)reader["IdRegra"],
+                                Sistema = new Sistema(),
+                                Responsavel = new Responsavel(),
+                                Situacao = new Situacao(),
+                                Tipo = new Tipo(),
+                                Retorno = new Retorno()
+                            };
+                            regra.Sistema.IdSistema = (int)reader["IdSistema"];
+                            regra.Sistema.NomeSistema = Convert.ToString(reader["NomeSistema"]);
+                            regra.Responsavel.IdResponsavel = (int)reader["IdResponsavel"];
+                            regra.Responsavel.NomeResponsavel = Convert.ToString(reader["NomeResponsavel"]);
+                            regra.Situacao.IdSituacao = (int)reader["IdSituacao"];
+                            regra.Situacao.NomeSituacao = Convert.ToString(reader["NomeSituacao"]);
+                            regra.Tipo.IdTipo = (int)reader["IdTipo"];
+                            regra.Tipo.NomeTipo = Convert.ToString(reader["NomeTipo"]);
+                            regra.Retorno.IdRetorno = (int)reader["IdRetorno"];
+                            regra.Retorno.NomeRetorno = Convert.ToString(reader["NomeRetorno"]);                            
+                            regra.Ativo = Convert.ToString(reader["ativo"]);
+                            regra.Descricao = Convert.ToString(reader["descricao"]);
 
-                            list.Add(p);
+                            list.Add(regra);
                         }
                     }
                 }
@@ -116,9 +146,24 @@ namespace ITAW000.Repository
         {
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "INSERT INTO regra_tb (Descricao) VALUES (@Descricao)";
+                entity.DtInclusao = DateTime.Now;
+                entity.Usuario = "Sistema";
+
+                string sql = "INSERT INTO regra_tb (IdResponsavel, IdSistema, IdSituacao, Idtipo, IdRetorno, Descricao , dtInicioVigencia, ativo, dtInclusao, usuario) "
+                    + " VALUES (@IdResponsavel, @IdSistema, @IdSituacao, @IdTipo, @IdRetorno, @descricao, @dtInicioVigencia,  @ativo, @dtInclusao, @usuario)";
+                
                 SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@Descricao", entity.Descricao);
+                cmd.Parameters.AddWithValue("@IdResponsavel", entity.IdResponsavel);
+                cmd.Parameters.AddWithValue("@IdSistema", entity.IdSistema);
+                cmd.Parameters.AddWithValue("@IdSituacao", entity.IdSituacao);
+                cmd.Parameters.AddWithValue("@IdTipo", entity.IdTipo);
+                cmd.Parameters.AddWithValue("@IdRetorno", entity.IdRetorno);
+                cmd.Parameters.AddWithValue("@descricao", entity.Descricao);
+                cmd.Parameters.AddWithValue("@dtInicioVigencia", entity.DtInclusao);
+                cmd.Parameters.AddWithValue("@ativo", "S");
+                cmd.Parameters.AddWithValue("@dtInclusao", entity.DtInclusao);
+                cmd.Parameters.AddWithValue("@usuario", entity.Usuario);
+
 
                 try
                 {
@@ -136,9 +181,21 @@ namespace ITAW000.Repository
         {
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "UPDATE regra_tb SET Nome=@Descricao, Where IdRegra=@Id";
+                string sql = "UPDATE regra_tb SET IdResponsavel=@IdResponsavel,  IdSistema=@IdSistema, IdSituacao=@IdSituacao," +
+                     " IdTipo=@IdTipo, IdRetorno=@IdRetorno, descricao=@descricao, ativo=@ativo, dtAlteracao=@dtAlteracao, Usuario=@usuario" +
+                     " Where IdRegra=@Id";
+             
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", entity.IdRegra);
+                cmd.Parameters.AddWithValue("@IdResponsavel", entity.IdResponsavel);
+                cmd.Parameters.AddWithValue("@IdSistema", entity.IdSistema);
+                cmd.Parameters.AddWithValue("@IdSituacao", entity.IdSituacao);
+                cmd.Parameters.AddWithValue("@IdTipo", entity.IdTipo);
+                cmd.Parameters.AddWithValue("@IdRetorno", entity.IdRetorno);
+                cmd.Parameters.AddWithValue("@descricao", entity.Descricao);
+                cmd.Parameters.AddWithValue("@ativo", "S");
+                cmd.Parameters.AddWithValue("@dtAlteracao", entity.DtAlteracao);
+                cmd.Parameters.AddWithValue("@usuario", entity.Usuario);
 
                 try
                 {

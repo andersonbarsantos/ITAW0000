@@ -131,6 +131,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Regra.cs" />
+    <Compile Include="Models\RegraViewModel.cs" />
     <Compile Include="Models\Responsavel.cs" />
     <Compile Include="Models\Retorno.cs" />
     <Compile Include="Models\Sistema.cs" />

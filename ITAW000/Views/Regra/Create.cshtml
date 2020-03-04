@@ -1,4 +1,4 @@
-﻿@model ITAW000.Models.Regra
+﻿@model ITAW000.Models.RegraViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -88,110 +88,82 @@
 
         </div>*@
 
+    <div class="row">
+        <div class="col-12"> 
+            <div class="container-fluid">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title text-center">CADASTRO DE REGRA</h3>
+                    </div>
 
-    <div class="container-fluid">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title text-center">CADASTRO DE REGRA</h3>
-            </div>
+                    <div class="panel-body">
 
-            <div class="panel-body">
+                        <form action="#" class="form-horizontal">
+                            <fieldset>
 
-                <form action="#" class="form-horizontal">
-                    <fieldset>
-                        <legend>Informações Principais</legend>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Sistema</label>
-                            <div class="col-4">
-                                <select class="form-control" name="uf" id="idSistema">
-                                    <option value="AC">AC</option>
-                                    <option value="AL">AL</option>
-                                    <option value="AM">AM</option>
-                                    <option value="AP">AP</option>
-                                    <option value="BA">BA</option>
+                                <legend>Informações Principais</legend>
 
-                                </select>
-                            </div>
-                        </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Sistema</label>
+                                    <div class="col-md-5">
+                                        @Html.DropDownListFor(x => Model.SelectedSistema, new SelectList(Model.ListSistema, "IdSistema", "NomeSistema"), htmlAttributes: new { @class = "form-control", id = "IdSistema" })
+                                        @Html.ValidationMessageFor(x => x.SelectedSistema, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Responsavel</label>
-                            <div class="col-sm-4">
-                                <select class="form-control" name="uf" id="idResponsavel">
-                                    <option value="AC">AC</option>
-                                    <option value="AL">AL</option>
-                                    <option value="AM">AM</option>
-                                    <option value="AP">AP</option>
-                                    <option value="BA">BA</option>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Responsavel</label>
+                                    <div class="col-md-5">
+                                        @Html.DropDownListFor(x => Model.SelectedResponsavel, new SelectList(Model.ListResponsavel, "IdResponsavel", "NomeResponsavel"), htmlAttributes: new { @class = "form-control", id = "IdResponsavel" })
+                                        @Html.ValidationMessageFor(x => x.SelectedResponsavel, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
 
-                                </select>
-                            </div>
-                        </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Situação</label>
+                                    <div class="col-md-5">
+                                        @Html.DropDownListFor(x => Model.SelectedSituacao, new SelectList(Model.ListSituacao, "IdSituacao", "NomeSituacao"), htmlAttributes: new { @class = "form-control", id = "IdSituacao" })
+                                        @Html.ValidationMessageFor(x => x.SelectedSituacao, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Situação</label>
-                            <div class="col-sm-4">
-                                <select class="form-control" name="uf" id="idSituacao">
-                                    <option value="AC">AC</option>
-                                    <option value="AL">AL</option>
-                                    <option value="AM">AM</option>
-                                    <option value="AP">AP</option>
-                                    <option value="BA">BA</option>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Retorno</label>
+                                    <div class="col-md-5">
+                                        @Html.DropDownListFor(x => Model.SelectedRetorno, new SelectList(Model.ListRetorno, "IdRetorno", "NomeRetorno"), htmlAttributes: new { @class = "form-control", id = "IdRetorno" })
+                                        @Html.ValidationMessageFor(x => x.SelectedRetorno, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
 
-                                </select>
-                            </div>
-                        </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Tipo</label>
+                                    <div class="col-md-5">
+                                        @Html.DropDownListFor(x => Model.SelectedTipo, new SelectList(Model.ListTipo, "IdTipo", "NomeTipo"), htmlAttributes: new { @class = "form-control", id = "IdTipo" })
+                                        @Html.ValidationMessageFor(x => x.SelectedTipo, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
 
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Tipo</label>
-                            <div class="col-sm-4">
-                                <select class="form-control" name="uf" id="idSituacao">
-                                    <option value="AC">AC</option>
-                                    <option value="AL">AL</option>
-                                    <option value="AM">AM</option>
-                                    <option value="AP">AP</option>
-                                    <option value="BA">BA</option>
+                                <div class="form-group">
+                                    <label for="nome" class="col-sm-2 control-label">Descrição</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control"  name="Descricao" id="Descricao">
+                                    </div>
+                                </div>
 
-                                </select>
-                            </div>
-                        </div>
+                            </fieldset>
 
 
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Retorno</label>
-                            <div class="col-sm-4">
-                                <select class="form-control" name="uf" id="idSituacao">
-                                    <option value="AC">AC</option>
-                                    <option value="AL">AL</option>
-                                    <option value="AM">AM</option>
-                                    <option value="AP">AP</option>
-                                    <option value="BA">BA</option>
-
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="nome" class="col-sm-2 control-label">Descrição</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" id="nome">
-                            </div>
-                        </div>
-
-                    </fieldset>
-
-                 
-
-                    <button type="submit" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Gravar
-                    </button>
-                </form>
+                            <button type="submit" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Gravar
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
 
 }
 

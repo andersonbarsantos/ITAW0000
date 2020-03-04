@@ -13,8 +13,8 @@
             dataType: "json",
             success: function (response) {
                 $('#IdEdit').val(response.IdSistema);
-                $('#idNome').val(response.Nome);
-                $('#idDescricao').val(response.Descricao);
+                $('#idNome').val(response.NomeSistema);
+                $('#idDescricao').val(response.DescSistema);
                 $('#editModal').modal('show');
             },
             error: function (response) {
@@ -81,10 +81,10 @@
                                                 @Html.DisplayFor(modelItem => item.IdSistema)
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.Nome)
+                                                @Html.DisplayFor(modelItem => item.NomeSistema)
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.Descricao)
+                                                @Html.DisplayFor(modelItem => item.DescSistema)
                                             </td>
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.DtInclusao)
@@ -132,11 +132,11 @@
                     <div class="form-group">
 
                         <label>Nome</label>
-                        <input type="text" class="form-control" name="Nome" required>
+                        <input type="text" class="form-control" name="NomeSistema" required>
                     </div>
                     <div class="form-group">
                         <label>Descrição</label>
-                        <input type="text" class="form-control" name="Descricao" required>
+                        <input type="text" class="form-control" name="DescSistema" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -166,11 +166,11 @@
 
                     <div class="form-group">
                         <label>Nome</label>
-                        <input type="text" class="form-control" name="Nome" id="idNome" required>
+                        <input type="text" class="form-control" name="NomeSistema" id="idNome" required>
                     </div>
                     <div class="form-group">
                         <label>Descrição</label>
-                        <input type="text" class="form-control" name="Descricao" id="idDescricao" required>
+                        <input type="text" class="form-control" name="DescSistema" id="idDescricao" required>
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -56,19 +56,19 @@
                                             @Html.DisplayFor(modelItem => item.IdRegra)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.IdResponsavel)
+                                            @Html.DisplayFor(modelItem => item.Responsavel.NomeResponsavel)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.IdRetorno)
+                                            @Html.DisplayFor(modelItem => item.Retorno.NomeRetorno)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.IdSistema)
+                                            @Html.DisplayFor(modelItem => item.Sistema.NomeSistema)
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Descricao)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Situacao)
+                                            @Html.DisplayFor(modelItem => item.Situacao.NomeSituacao)
                                         </td>
                                         <td>
                                             <a onclick="GetDetails(@item.IdRegra)">
