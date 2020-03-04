@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ITAW000.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,8 @@ namespace ITAW000.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly TipoRepository respository = new TipoRepository();
+
         public ActionResult Index()
         {
             return View();
@@ -22,9 +25,7 @@ namespace ITAW000.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return View(respository.GetAll());
         }
     }
 }
