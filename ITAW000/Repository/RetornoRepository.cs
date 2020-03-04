@@ -11,11 +11,12 @@ namespace ITAW000.Repository
 {
     public class RetornoRepository : AbstractRepository<Retorno, int>
     {
+
         public override void Delete(Retorno entity)
         {
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "DELETE Retorno_tb Where Id=@Id";
+                string sql = "DELETE Retorno_tb Where IdRetorno=@Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", entity.IdRetorno);
                 try
@@ -34,7 +35,7 @@ namespace ITAW000.Repository
         {
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "DELETE Retorno_tb Where Id=@Id";
+                string sql = "DELETE Retorno_tb Where IdRetorno=@Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", id);
                 try
@@ -66,11 +67,11 @@ namespace ITAW000.Repository
                         {
                             Retorno = new Retorno
                             {
-                                IdRetorno = (int)reader["Id"],
+                                IdRetorno = (int)reader["IdRetorno"],
                                 Nome = reader["Nome"].ToString(),
                                 Descricao = reader["Descricao"].ToString(),
-                                DtInclusao = Convert.ToDateTime( reader["DtInclusao"]),
-                                DtAlteracao = Convert.ToDateTime(reader["DtAlteracao"]),
+                                DtInclusao = Convert.ToDateTime(reader["DtInclusao"]),
+                                //DtAlteracao = Convert.ToDateTime(Tools.Tools.SafeGetString(reader, "DtAlteracao")),
                                 Usuario = reader["Usuario"].ToString(),
 
                             };
@@ -91,7 +92,7 @@ namespace ITAW000.Repository
         {
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "Select * FROM Retorno_tb WHERE Id=@Id";
+                string sql = "Select * FROM Retorno_tb WHERE IdRetorno=@Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", id);
                 Retorno Retorno = null;
@@ -106,11 +107,11 @@ namespace ITAW000.Repository
                             {
                                 Retorno = new Retorno
                                 {
-                                    IdRetorno = (int)reader["Id"],
+                                    IdRetorno = (int)reader["IdRetorno"],
                                     Nome = reader["Nome"].ToString(),
                                     Descricao = reader["Descricao"].ToString(),
                                     DtInclusao = Convert.ToDateTime(reader["DtInclusao"]),
-                                    DtAlteracao = Convert.ToDateTime(reader["DtAlteracao"]),
+                                    //DtAlteracao = Convert.ToDateTime(Tools.Tools.SafeGetString(reader,"DtAlteracao")),
                                     Usuario = reader["Usuario"].ToString(),
 
                                 };
@@ -129,15 +130,17 @@ namespace ITAW000.Repository
 
         public override void Add(Retorno entity)
         {
+            entity.DtInclusao = DateTime.Now;
+            entity.Usuario = "Sistema";
+
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "INSERT INTO Retorno_tb (Nome, Descricao, DtInclusao, DtAlteracao, Usuario) " +
-                    "VALUES (@Nome, @Descricao, @DtInclusao, @DtAlteracao, @Usuario)";
+                string sql = "INSERT INTO Retorno_tb (Nome, Descricao, DtInclusao, Usuario) " +
+                    "VALUES (@Nome, @Descricao, @DtInclusao, @Usuario)";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Nome", entity.Nome);
                 cmd.Parameters.AddWithValue("@Descricao", entity.Descricao);
                 cmd.Parameters.AddWithValue("@DtInclusao", entity.DtInclusao);
-                cmd.Parameters.AddWithValue("@DtAlteracao", entity.DtAlteracao);
                 cmd.Parameters.AddWithValue("@Usuario", entity.Usuario);
 
                 try
@@ -154,9 +157,12 @@ namespace ITAW000.Repository
 
         public override void Update(Retorno entity)
         {
+            entity.DtAlteracao = DateTime.Now;
+            entity.Usuario = "Sistema";
+
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "UPDATE Retorno_tb SET Nome=@Nome, Descricao=@Descricao, DtAlteracao=@DtAlteracao, Usuario=@Usuario Where Id=@Id";
+                string sql = "UPDATE Retorno_tb SET Nome=@Nome, Descricao=@Descricao, DtAlteracao=@DtAlteracao, Usuario=@Usuario Where IdRetorno=@Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", entity.IdRetorno);
                 cmd.Parameters.AddWithValue("@Nome", entity.Nome);
@@ -175,5 +181,6 @@ namespace ITAW000.Repository
                 }
             }
         }
+
     }
 }

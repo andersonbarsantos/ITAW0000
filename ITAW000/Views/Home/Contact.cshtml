@@ -35,90 +35,87 @@
 
 </script>
 
-
 <div class="row">
     <div class="col-12">
         <div class="card" style="min-height: 555px">
             <div class="container-fluid">
                 <div class="row-no-gutters">
-            <div class="col-lg-10">
-                <h3> <i class="material-icons" style="font-size:30px;">alarm</i> Classificações Relatório de @DateTime.Today.ToShortDateString()</h3>
-                <p>Relatorio de registro e suas classificações:</p>
-            </div>
-            <div class="col-lg-2">
-                <a  class="btn-default">Back to article</a>
-            </div>
-        </div>
-        
-                @*<div class="table-title">
-                    <div class="row">
-                        <div class="col-sm-9">
-                            <h3> <i class="material-icons" style="font-size:30px;">alarm</i> Classificações Relatório de @DateTime.Today.ToShortDateString()</h3>
-                            <p>Relatorio de registro e suas classificações:</p>
-                        </div>
-                        <div class="col-sm-3">
-                            <a href="#addModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Adicionar Novo </span></a>
+                    <div class="col-lg-10">
+                        <h3> <i class="material-icons" style="font-size:30px;">alarm</i> Classificações Relatório de @DateTime.Today.ToShortDateString()</h3>
+                        <p>Relatorio de registro e suas classificações:</p>
+                    </div>
+
+                         
+
+                    <div class="table-title">
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <h3> <i class="material-icons" style="font-size:30px;">alarm</i> Classificações Relatório de @DateTime.Today.ToShortDateString()</h3>
+                                <p>Relatorio de registro e suas classificações:</p>
+                            </div>
+                            <div class="col-sm-3">
+                                <a href="#addModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Adicionar Novo </span></a>
+                            </div>
                         </div>
                     </div>
-                </div>*@
-               
 
-                <div class="table-responsive">
-                    <table class="table table-hover table-striped">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Id</th>
-                                <th>Nome</th>
-                                <th>Descrição</th>
-                                <th>Data Inclusão</th>
-                                <th>Usuario</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
 
-                            @foreach (var item in Model)
-                            {
+                    <div class="table-responsive">
+                        <table class="table table-hover table-striped">
+                            <thead>
                                 <tr>
-                                    <td>
-                                        <i class="material-icons">outlined_flag</i>
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.IdTipo)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Nome)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Descricao)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.DtInclusao)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Usuario)
-                                    </td>
-                                    <td>
-                                        <a onclick="GetDetails(@item.IdTipo)">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        <a onclick="Delete(@item.IdTipo)">
-                                            <i class="fa fa-trash-o"></i>
-                                        </a>
-
-
-                                    </td>
+                                    <th></th>
+                                    <th>Id</th>
+                                    <th>Nome</th>
+                                    <th>Descrição</th>
+                                    <th>Data Inclusão</th>
+                                    <th>Usuario</th>
+                                    <th></th>
                                 </tr>
-                            }
+                            </thead>
+                            <tbody>
 
-                        </tbody>
-                    </table>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <i class="material-icons">outlined_flag</i>
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.IdTipo)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Nome)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Descricao)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DtInclusao)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Usuario)
+                                        </td>
+                                        <td>
+                                            <a onclick="GetDetails(@item.IdTipo)">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a onclick="Delete(@item.IdTipo)">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+
+
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-            </div>
     </div>
-
+    </div>
 </div>
 <hr>
 

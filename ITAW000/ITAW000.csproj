@@ -122,6 +122,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RegraController.cs" />
+    <Compile Include="Controllers\RetornoController.cs" />
+    <Compile Include="Controllers\SistemaController.cs" />
+    <Compile Include="Controllers\SituacaoController.cs" />
+    <Compile Include="Controllers\ResponsavelController.cs" />
     <Compile Include="Controllers\TipoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -138,6 +142,7 @@
     <Compile Include="Repository\ResponsavelRepository.cs" />
     <Compile Include="Repository\RetornoRepository.cs" />
     <Compile Include="Repository\SistemaRepository.cs" />
+    <Compile Include="Repository\SituacaoRepository.cs" />
     <Compile Include="Repository\TipoRepository.cs" />
     <Compile Include="Tools\Tools.cs" />
   </ItemGroup>
@@ -181,6 +186,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Regra\Index.cshtml" />
     <Content Include="Views\Tipo\Index.cshtml" />
+    <Content Include="Views\Responsavel\Index.cshtml" />
+    <Content Include="Views\Retorno\Index.cshtml" />
+    <Content Include="Views\Sistema\Index.cshtml" />
+    <Content Include="Views\Situacao\Index.cshtml" />
+    <Content Include="Views\Regra\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

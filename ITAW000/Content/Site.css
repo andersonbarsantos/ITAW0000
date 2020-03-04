@@ -144,6 +144,17 @@ table.table td a.delete {
 }
 
 
+.container-fluid button {
+    border: none;
+    cursor: pointer;
+    background: #aaaaaa;
+    color: #ffffff;
+    display: inline-block;
+    margin: 0 -2px;
+    padding: 5px 10px;
+    border: 1px solid #666666;
+}
+
 /* Modal styles */
 .modal .modal-dialog {
     max-width: 600px;

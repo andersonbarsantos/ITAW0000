@@ -1,0 +1,210 @@
+﻿@model IEnumerable<ITAW000.Models.Retorno>
+
+@{
+    ViewBag.Title = "Retorno";
+}
+
+
+<script>
+    function GetDetails(id) {
+        $.ajax({
+            url: "/Retorno/Edit/" + id,
+            typr: "GET",
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            success: function (response) {
+                $('#IdEdit').val(response.IdRetorno);
+                $('#idNome').val(response.Nome);
+                $('#idDescricao').val(response.Descricao);
+                $('#editModal').modal('show');
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        });
+        return false;
+    }
+
+    function Delete(id) {
+        $('#IdDelete').val(id);
+        $('#deleteModal').modal('show');
+    }
+</script>
+
+<div class="row">
+    <div class="col-12">
+
+        <div class="card" style="min-height: 555px">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-sm-10 text-left ">
+                        <h4> <i class="material-icons">cached</i> Retornos </h4>
+                    </div>
+                    <div class="col-sm-2  text-left ">
+                        <a href="#addModal" class="btn btn-success pull-right" data-toggle="modal">Adicionar Novo</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                @if (@Model.Count() == 0)
+                {
+                    <section class="container-fluid h-100 d-flex justify-content-center">
+                        <div class="jumbotron my-auto">
+                            <h3 class="display-3">Nenhum item localizado!</h3>
+                        </div>
+                    </section>
+                }
+                else
+                {
+                    <div class="container-fluid">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Id</th>
+                                        <th>Nome</th>
+                                        <th>Descrição</th>
+                                        <th>Data Inclusão</th>
+                                        <th>Usuario</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <i class="material-icons">cached</i>
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.IdRetorno)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Nome)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Descricao)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.DtInclusao)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Usuario)
+                                            </td>
+                                            <td>
+                                                <a onclick="GetDetails(@item.IdRetorno)">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                                <a onclick="Delete(@item.IdRetorno)">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </a>
+
+
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                }
+                </div>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<!-- Add Modal HTML -->
+<div id="addModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Adicionar Registro</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            @using (Html.BeginForm("Create", "Retorno", FormMethod.Post))
+            {
+                <div class="modal-body">
+                    <div class="form-group">
+
+                        <label>Nome</label>
+                        <input type="text" class="form-control" name="Nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Descrição</label>
+                        <input type="text" class="form-control" name="Descricao" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                    <input type="submit" class="btn btn-success" value="Salvar">
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- Edit Modal HTML -->
+<div id="editModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Editar Registro</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            @using (Html.BeginForm("edit", "Retorno", FormMethod.Post))
+            {
+                <div class="modal-body" style="height:250px">
+
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" name="idRetorno" id="IdEdit">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Nome</label>
+                        <input type="text" class="form-control" name="Nome" id="idNome" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Descrição</label>
+                        <input type="text" class="form-control" name="Descricao" id="idDescricao" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                    <input type="submit" class="btn btn-success" value="Salvar">
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- Delete Modal HTML -->
+<div id="deleteModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            @using (Html.BeginForm("Delete", "Retorno", FormMethod.Post))
+            {
+                <div class="modal-header">
+                    <h4 class="modal-title">Apagar Registro</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="form-group">
+                    <input type="hidden" class="form-control" name="idRetorno" id="IdDelete">
+                </div>
+
+                <div class="modal-body">
+                    <p>Deseja Relamente excluir o item selecionado?</p>
+                    <p class="text-warning"><small>Esta ação não podera ser desfeita.</small></p>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                    <input type="submit" class="btn btn-danger" value="Delete">
+                </div>
+            }
+        </div>
+    </div>
+</div>

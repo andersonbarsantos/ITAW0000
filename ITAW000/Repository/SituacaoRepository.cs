@@ -6,19 +6,19 @@ using System.Linq;
 using System.Web;
 
 using ITAW000.Models;
+using ITAW000.Tools;
 
 namespace ITAW000.Repository
 {
-    public class ResponsavelRepository : AbstractRepository<Responsavel, int>
+    public class SituacaoRepository : AbstractRepository<Situacao, int>
     {
-
-        public override void Delete(Responsavel entity)
+        public override void Delete(Situacao entity)
         {
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "DELETE Responsavel_tb Where IdResponsavel=@Id";
+                string sql = "DELETE situacao_tb Where IdSituacao=@Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@Id", entity.IdResponsavel);
+                cmd.Parameters.AddWithValue("@Id", entity.IdSituacao);
                 try
                 {
                     conn.Open();
@@ -35,7 +35,7 @@ namespace ITAW000.Repository
         {
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "DELETE Responsavel_tb Where IdResponsavel=@Id";
+                string sql = "DELETE situacao_tb Where IdSituacao=@Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", id);
                 try
@@ -50,14 +50,14 @@ namespace ITAW000.Repository
             }
         }
 
-        public override List<Responsavel> GetAll()
+        public override List<Situacao> GetAll()
         {
-            string sql = "Select * FROM Responsavel_tb ORDER BY Nome";
+            string sql = "Select * FROM Situacao_tb ORDER BY Nome";
             using (var conn = new SqlConnection(StringConnection))
             {
                 var cmd = new SqlCommand(sql, conn);
-                List<Responsavel> list = new List<Responsavel>();
-                Responsavel Responsavel = null;
+                List<Situacao> list = new List<Situacao>();
+                Situacao situacao = null;
                 try
                 {
                     conn.Open();
@@ -65,19 +65,19 @@ namespace ITAW000.Repository
                     {
                         while (reader.Read())
                         {
-                            Responsavel = new Responsavel
+                            situacao = new Situacao
                             {
-                                IdResponsavel = (int)reader["IdResponsavel"],
+                                IdSituacao = (int)reader["IdSituacao"],
                                 Nome = reader["Nome"].ToString(),
                                 Descricao = reader["Descricao"].ToString(),
-                                DtInclusao = Convert.ToDateTime(reader["DtInclusao"]),
+                                DtInclusao = Convert.ToDateTime( reader["DtInclusao"]),
                                 //DtAlteracao = Convert.ToDateTime(Tools.Tools.SafeGetString(reader, "DtAlteracao")),
                                 Usuario = reader["Usuario"].ToString(),
 
                             };
 
-                            list.Add(Responsavel);
-                        }
+                            list.Add(situacao);
+                           }
                     }
                 }
                 catch (Exception e)
@@ -88,14 +88,14 @@ namespace ITAW000.Repository
             }
         }
 
-        public override Responsavel GetById(int id)
+        public override Situacao GetById(int id)
         {
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "Select * FROM Responsavel_tb WHERE IdResponsavel=@Id";
+                string sql = "Select * FROM Situacao_tb WHERE IdSituacao=@Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", id);
-                Responsavel Responsavel = null;
+                Situacao situacao = null;
                 try
                 {
                     conn.Open();
@@ -105,9 +105,9 @@ namespace ITAW000.Repository
                         {
                             if (reader.Read())
                             {
-                                Responsavel = new Responsavel
+                                situacao = new Situacao
                                 {
-                                    IdResponsavel = (int)reader["IdResponsavel"],
+                                    IdSituacao = (int)reader["IdSituacao"],
                                     Nome = reader["Nome"].ToString(),
                                     Descricao = reader["Descricao"].ToString(),
                                     DtInclusao = Convert.ToDateTime(reader["DtInclusao"]),
@@ -124,23 +124,23 @@ namespace ITAW000.Repository
                 {
                     throw e;
                 }
-                return Responsavel;
+                return situacao;
             }
         }
 
-        public override void Add(Responsavel entity)
+        public override void Add(Situacao entity)
         {
             entity.DtInclusao = DateTime.Now;
             entity.Usuario = "Sistema";
 
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "INSERT INTO Responsavel_tb (Nome, Descricao, DtInclusao, Usuario) " +
+                string sql = "INSERT INTO Situacao_tb (Nome, Descricao, DtInclusao, Usuario) " +
                     "VALUES (@Nome, @Descricao, @DtInclusao, @Usuario)";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Nome", entity.Nome);
                 cmd.Parameters.AddWithValue("@Descricao", entity.Descricao);
-                cmd.Parameters.AddWithValue("@DtInclusao", entity.DtInclusao);
+                cmd.Parameters.AddWithValue("@DtInclusao", entity.DtInclusao);   
                 cmd.Parameters.AddWithValue("@Usuario", entity.Usuario);
 
                 try
@@ -155,16 +155,16 @@ namespace ITAW000.Repository
             }
         }
 
-        public override void Update(Responsavel entity)
+        public override void Update(Situacao entity)
         {
             entity.DtAlteracao = DateTime.Now;
             entity.Usuario = "Sistema";
 
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "UPDATE Responsavel_tb SET Nome=@Nome, Descricao=@Descricao, DtAlteracao=@DtAlteracao, Usuario=@Usuario Where IdResponsavel=@Id";
+                string sql = "UPDATE Situacao_tb SET Nome=@Nome, Descricao=@Descricao, DtAlteracao=@DtAlteracao, Usuario=@Usuario Where IdSituacao=@Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@Id", entity.IdResponsavel);
+                cmd.Parameters.AddWithValue("@Id", entity.IdSituacao);
                 cmd.Parameters.AddWithValue("@Nome", entity.Nome);
                 cmd.Parameters.AddWithValue("@Descricao", entity.Descricao);
                 cmd.Parameters.AddWithValue("@DtAlteracao", entity.DtAlteracao);
@@ -180,7 +180,7 @@ namespace ITAW000.Repository
                     throw e;
                 }
             }
-        }
+        }     
 
     }
 }
