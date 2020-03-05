@@ -17,9 +17,13 @@ namespace ITAW000.Controllers
         private SituacaoRepository situacaoRepository = new SituacaoRepository();
         private SistemaRepository sistemaRepository = new SistemaRepository();
 
+
+
         // GET: Regra
         public ActionResult Index()
         {
+
+
             return View(regraRespository.GetAll());
         }
 
@@ -32,34 +36,96 @@ namespace ITAW000.Controllers
         // GET: Regra/Create
         public ActionResult Create()
         {
+           
+            CarregaDropDrow(); 
 
-            RegraViewModel view = new RegraViewModel();
-            view.ListRetorno = retornoRespository.GetAll();
-            view.ListResponsavel = responsavelRespository.GetAll();
-            view.ListTipo = tipoRespository.GetAll();
-            view.ListSituacao = situacaoRepository.GetAll();
-            view.ListSistema = sistemaRepository.GetAll();
-            return View(view);
+            return View();
+        }
+
+
+        public void CarregaDropDrow()
+        {
+            List<SelectListItem> ListSistema = new List<SelectListItem>
+            {
+                new SelectListItem() { Value = "-1", Text = "" }
+            };
+
+            ListSistema.AddRange(sistemaRepository.GetAll().Select(x =>
+                                 new SelectListItem()
+                                 {
+                                     Value = x.IdSistema.ToString(),
+                                     Text = x.NomeSistema
+                                 }).ToList());
+
+            ViewBag.ListSistema = ListSistema;
+
+
+            List<SelectListItem> ListRetorno = new List<SelectListItem>
+            {
+                new SelectListItem() { Value = "-1", Text = "" }
+            };
+
+            ListRetorno.AddRange(retornoRespository.GetAll().Select(x =>
+                                 new SelectListItem()
+                                 {
+                                     Value = x.IdRetorno.ToString(),
+                                     Text = x.NomeRetorno
+                                 }).ToList());
+
+            ViewBag.ListRetorno = ListRetorno;
+
+            List<SelectListItem> ListResponsavel = new List<SelectListItem>
+            {
+                new SelectListItem() { Value = "-1", Text = "" }
+            };
+
+            ListResponsavel.AddRange(responsavelRespository.GetAll().Select(x =>
+                                 new SelectListItem()
+                                 {
+                                     Value = x.IdResponsavel.ToString(),
+                                     Text = x.NomeResponsavel
+                                 }).ToList());
+
+            ViewBag.ListResponsavel = ListResponsavel;
+
+
+            List<SelectListItem> ListTipo = new List<SelectListItem>
+            {
+                new SelectListItem() { Value = "-1", Text = "" }
+            };
+
+            ListTipo.AddRange(tipoRespository.GetAll().Select(x =>
+                                 new SelectListItem()
+                                 {
+                                     Value = x.IdTipo.ToString(),
+                                     Text = x.NomeTipo
+                                 }).ToList());
+
+            ViewBag.ListTipo = ListTipo;
+
+            List<SelectListItem> ListSituacao = new List<SelectListItem>
+            {
+                new SelectListItem() { Value = "-1", Text = "" }
+            };
+
+            ListSituacao.AddRange(situacaoRepository.GetAll().Select(x =>
+                                 new SelectListItem()
+                                 {
+                                     Value = x.IdSituacao.ToString(),
+                                     Text = x.NomeSituacao
+                                 }).ToList());
+
+            ViewBag.ListSituacao = ListSituacao;
+        
         }
 
         // POST: Regra/Create
         [HttpPost]
-        public ActionResult Create(RegraViewModel objModel)
+        public ActionResult Create(Regra objModel)
         {
             try
             {
-
-                Regra regra = new Regra();
-
-                regra.Descricao = objModel.Descricao;
-                regra.IdTipo = Convert.ToInt32( objModel.SelectedTipo);
-                regra.IdRetorno = Convert.ToInt32(objModel.SelectedRetorno);
-                regra.IdResponsavel = Convert.ToInt32(objModel.SelectedResponsavel);
-                regra.IdSistema = Convert.ToInt32(objModel.SelectedSistema);
-                regra.IdSituacao = Convert.ToInt32(objModel.SelectedSituacao);
-
-                // TODO: Add insert logic here
-                regraRespository.Add(regra);
+                regraRespository.Add(objModel);
                 return RedirectToAction("Index");
             }
             catch
