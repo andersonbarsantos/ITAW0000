@@ -16,7 +16,7 @@ namespace ITAW000.Repository
         {
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "DELETE tipo_tb Where Id=@Id";
+                string sql = "DELETE AMBIENTE_tipo_tb Where Id=@Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", entity.IdTipo);
                 try
@@ -35,7 +35,7 @@ namespace ITAW000.Repository
         {
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "DELETE tipo_tb Where IdTipo=@Id";
+                string sql = "DELETE AMBIENTE_tipo_tb Where IdTipo=@Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", id);
                 try
@@ -52,7 +52,7 @@ namespace ITAW000.Repository
 
         public override List<Tipo> GetAll()
         {
-            string sql = "Select * FROM tipo_tb ORDER BY NomeTipo";
+            string sql = "Select * FROM AMBIENTE_tipo_tb ORDER BY NomeTipo";
             using (var conn = new SqlConnection(StringConnection))
             {
                 var cmd = new SqlCommand(sql, conn);
@@ -92,7 +92,7 @@ namespace ITAW000.Repository
         {
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "Select * FROM tipo_tb WHERE IdTipo=@Id";
+                string sql = "Select * FROM AMBIENTE_tipo_tb WHERE IdTipo=@Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", id);
                 Tipo tipo = null;
@@ -135,7 +135,7 @@ namespace ITAW000.Repository
 
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "INSERT INTO tipo_tb (NomeTipo, DescTipo, DtInclusao, Usuario) " +
+                string sql = "INSERT INTO AMBIENTE_tipo_tb (NomeTipo, DescTipo, DtInclusao, Usuario) " +
                     "VALUES (@NomeTipo, @DescTipo, @DtInclusao, @Usuario)";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@NomeTipo", entity.NomeTipo);
@@ -162,7 +162,7 @@ namespace ITAW000.Repository
 
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "UPDATE tipo_tb SET NomeTipo=@NomeTipo, DescTipo=@DescTipo, DtAlteracao=@DtAlteracao, Usuario=@Usuario Where IdTipo=@Id";
+                string sql = "UPDATE AMBIENTE_tipo_tb SET NomeTipo=@NomeTipo, DescTipo=@DescTipo, DtAlteracao=@DtAlteracao, Usuario=@Usuario Where IdTipo=@Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", entity.IdTipo);
                 cmd.Parameters.AddWithValue("@NomeTipo", entity.NomeTipo);

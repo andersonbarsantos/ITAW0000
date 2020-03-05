@@ -16,7 +16,7 @@ namespace ITAW000.Repository
         {
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "DELETE situacao_tb Where IdSituacao=@Id";
+                string sql = "DELETE AMBIENTE_situacao_tb Where IdSituacao=@Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", entity.IdSituacao);
                 try
@@ -35,7 +35,7 @@ namespace ITAW000.Repository
         {
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "DELETE situacao_tb Where IdSituacao=@Id";
+                string sql = "DELETE AMBIENTE_situacao_tb Where IdSituacao=@Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", id);
                 try
@@ -52,7 +52,7 @@ namespace ITAW000.Repository
 
         public override List<Situacao> GetAll()
         {
-            string sql = "Select * FROM Situacao_tb ORDER BY NomeSituacao";
+            string sql = "Select * FROM AMBIENTE_situacao_tb ORDER BY NomeSituacao";
             using (var conn = new SqlConnection(StringConnection))
             {
                 var cmd = new SqlCommand(sql, conn);
@@ -92,7 +92,7 @@ namespace ITAW000.Repository
         {
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "Select * FROM Situacao_tb WHERE IdSituacao=@Id";
+                string sql = "Select * FROM AMBIENTE_situacao_tb WHERE IdSituacao=@Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", id);
                 Situacao situacao = null;
@@ -135,7 +135,7 @@ namespace ITAW000.Repository
 
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "INSERT INTO Situacao_tb (NomeSituacao, DescSituacao, DtInclusao, Usuario) " +
+                string sql = "INSERT INTO AMBIENTE_situacao_tb (NomeSituacao, DescSituacao, DtInclusao, Usuario) " +
                     "VALUES (@NomeSituacao, @DescSituacao, @DtInclusao, @Usuario)";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@NomeSituacao", entity.NomeSituacao);
@@ -162,7 +162,7 @@ namespace ITAW000.Repository
 
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "UPDATE Situacao_tb SET NomeSituacao=@NomeSituacao, DescSituacao=@DescSituacao, DtAlteracao=@DtAlteracao, Usuario=@Usuario Where IdSituacao=@Id";
+                string sql = "UPDATE AMBIENTE_situacao_tb SET NomeSituacao=@NomeSituacao, DescSituacao=@DescSituacao, DtAlteracao=@DtAlteracao, Usuario=@Usuario Where IdSituacao=@Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", entity.IdSituacao);
                 cmd.Parameters.AddWithValue("@NomeSituacao", entity.NomeSituacao);

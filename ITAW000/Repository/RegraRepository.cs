@@ -15,7 +15,7 @@ namespace ITAW000.Repository
         {
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "DELETE regra_tb Where IdRegra=@Id";
+                string sql = "DELETE AMBIENTE_regra_tb Where IdRegra=@Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", entity.IdRegra);
                 try
@@ -34,7 +34,7 @@ namespace ITAW000.Repository
         {
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "DELETE regra_tb Where Id=@Id";
+                string sql = "DELETE AMBIENTE_regra_tb Where Id=@Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", id);
                 try
@@ -51,17 +51,17 @@ namespace ITAW000.Repository
 
         public override List<Regra> GetAll()
         {
-            string sql = "SELECT * FROM regra_tb regra_tb WITH(NOLOCK) "
-                    + " LEFT JOIN sistema_tb WITH(NOLOCK) "
-                    + " ON sistema_tb.IdSistema = regra_tb.IdSistema "
-                    + " LEFT JOIN responsavel_tb responsavel_tb WITH(NOLOCK) "
-                    + " ON responsavel_tb.IdResponsavel = regra_tb.IdResponsavel "
-                    + " LEFT JOIN situacao_tb situacao_tb WITH(NOLOCK) "
-                    + " ON situacao_tb.IdSituacao = regra_tb.IdSituacao"
-                    + " LEFT JOIN tipo_tb tipo_tb WITH(NOLOCK) "
-                    + " ON tipo_tb.IdTipo = regra_tb.IdTipo "
-                    + " LEFT JOIN retorno_tb WITH(NOLOCK) "
-                    + " ON retorno_tb.IdRetorno = regra_tb.IdRetorno";
+            string sql = "SELECT * FROM AMBIENTE_regra_tb AMBIENTE_regra_tb WITH(NOLOCK) "
+                    + " LEFT JOIN AMBIENTE_sistema_tb sistema_tb WITH(NOLOCK) "
+                    + " ON sistema_tb.IdSistema = AMBIENTE_regra_tb.IdSistema "
+                    + " LEFT JOIN AMBIENTE_responsavel_tb responsavel_tb WITH(NOLOCK) "
+                    + " ON responsavel_tb.IdResponsavel = AMBIENTE_regra_tb.IdResponsavel "
+                    + " LEFT JOIN AMBIENTE_situacao_tb situacao_tb WITH(NOLOCK) "
+                    + " ON situacao_tb.IdSituacao = AMBIENTE_regra_tb.IdSituacao"
+                    + " LEFT JOIN AMBIENTE_tipo_tb tipo_tb WITH(NOLOCK) "
+                    + " ON tipo_tb.IdTipo = AMBIENTE_regra_tb.IdTipo "
+                    + " LEFT JOIN AMBIENTE_retorno_tb retorno_tb WITH(NOLOCK) "
+                    + " ON retorno_tb.IdRetorno = AMBIENTE_regra_tb.IdRetorno";
 
             using (var conn = new SqlConnection(StringConnection))
             {
@@ -113,7 +113,7 @@ namespace ITAW000.Repository
         {
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "Select Id, Descricao FROM regra_tb WHERE IdRegra=@Id";
+                string sql = "Select Id, Descricao FROM AMBIENTE_regra_tb WHERE IdRegra=@Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", id);
                 Regra p = null;
@@ -149,7 +149,7 @@ namespace ITAW000.Repository
                 entity.DtInclusao = DateTime.Now;
                 entity.Usuario = "Sistema";
 
-                string sql = "INSERT INTO regra_tb (IdResponsavel, IdSistema, IdSituacao, Idtipo, IdRetorno, Descricao , dtInicioVigencia, ativo, dtInclusao, usuario) "
+                string sql = "INSERT INTO AMBIENTE_regra_tb (IdResponsavel, IdSistema, IdSituacao, Idtipo, IdRetorno, Descricao , dtInicioVigencia, ativo, dtInclusao, usuario) "
                     + " VALUES (@IdResponsavel, @IdSistema, @IdSituacao, @IdTipo, @IdRetorno, @descricao, @dtInicioVigencia,  @ativo, @dtInclusao, @usuario)";
                 
                 SqlCommand cmd = new SqlCommand(sql, conn);
@@ -181,7 +181,7 @@ namespace ITAW000.Repository
         {
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "UPDATE regra_tb SET IdResponsavel=@IdResponsavel,  IdSistema=@IdSistema, IdSituacao=@IdSituacao," +
+                string sql = "UPDATE AMBIENTE_regra_tb SET IdResponsavel=@IdResponsavel,  IdSistema=@IdSistema, IdSituacao=@IdSituacao," +
                      " IdTipo=@IdTipo, IdRetorno=@IdRetorno, descricao=@descricao, ativo=@ativo, dtAlteracao=@dtAlteracao, Usuario=@usuario" +
                      " Where IdRegra=@Id";
              

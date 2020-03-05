@@ -1,0 +1,379 @@
+﻿@model IEnumerable<ITAW000.Models.Item431>
+
+@{
+    ViewBag.Title = "Lista";
+}
+
+
+
+<style>
+    .select,
+    #locale {
+        width: 100%;
+    }
+
+    .like {
+        margin-right: 10px;
+    }
+</style>
+
+@*<div class="select">
+    <select class="form-control" id="locale">
+        <option value="af-ZA">af-ZA</option>
+        <option value="ar-SA">ar-SA</option>
+        <option value="en-US" selected>en-US</option>        
+    </select>
+</div>*@
+
+@*<div id="toolbar">
+    <button id="remove" class="btn btn-danger" disabled>
+        <i class="glyphicon glyphicon-remove"></i> Delete
+    </button>
+</div>*@
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 ">
+
+            <div class="card" style="min-height: 655px">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-sm-10 text-left ">
+                            <h4> <i class="material-icons" style="font-size:25px;">swap_vert</i> Classificação de Pendências </h4>
+                        </div>
+                        <button id="remove" class="btn btn-danger" disabled>
+                            <i class="glyphicon glyphicon-remove"></i> Delete
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="container-fluid">
+
+                        <table id="table"
+                               data-toolbar="#toolbar"
+                               data-search="true"
+                               data-show-refresh="true"
+                               data-show-toggle="true"
+                               data-show-fullscreen="false"
+                               data-show-columns="true"
+                               data-show-columns-toggle-all="true"
+                               data-detail-view="false"
+                               data-show-export="true"
+                               data-click-to-select="true"
+                               data-detail-formatter="detailFormatter"
+                               data-minimum-count-columns="2"
+                               data-show-pagination-switch="true"
+                               data-pagination="true"
+                               data-id-field="id"
+                               data-page-list="[10, 25, 50, 100, all]"
+                               data-show-footer="true"
+                               data-side-pagination="server"
+                               data-ajax="ajaxRequest"
+                               data-response-handler="responseHandler">
+                        </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                        <script>
+                            var $table = $('#table')
+                            var $remove = $('#remove')
+                            var selections = []
+
+                            function ajaxRequest(params) {
+                                var url = 'https://examples.wenzhixin.net.cn/examples/bootstrap_table/data'
+                                $.get(url + '?' + $.param(params.data)).then(function (res) {
+                                  params.success(res)
+                                })
+                             }
+
+                            function getIdSelections() {
+                                return $.map($table.bootstrapTable('getSelections'), function (row) {
+                                    return row.id
+                                })
+                            }
+
+                            function responseHandler(res) {
+                                $.each(res.rows, function (i, row) {
+                                    row.state = $.inArray(row.id, selections) !== -1
+                                })
+                                return res
+                            }
+
+                            function detailFormatter(index, row) {
+                                var html = []
+                                $.each(row, function (key, value) {
+                                    html.push('<p><b>' + key + ':</b> ' + value + '</p>')
+                                })
+                                return html.join('')
+                            }
+
+                            function operateFormatter(value, row, index) {
+                                return [
+                                    '<a class="like" href="javascript:void(0)" title="Like">',
+                                    '<i class="fa fa-heart"></i>',
+                                    '</a>  ',
+                                    '<a class="remove" href="javascript:void(0)" title="Remove">',
+                                    '<i class="fa fa-trash"></i>',
+                                    '</a>'
+                                ].join('')
+                            }
+
+                            window.operateEvents = {
+                                'click .like': function (e, value, row, index) {
+                                    alert('You click like action, row: ' + JSON.stringify(row))
+                                },
+                                'click .remove': function (e, value, row, index) {
+                                    $table.bootstrapTable('remove', {
+                                        field: 'id',
+                                        values: [row.id]
+                                    })
+                                }
+                            }
+
+                            function totalTextFormatter(data) {
+                                return 'Total'
+                            }
+
+                            function totalNameFormatter(data) {
+                                return data.length
+                            }
+
+                            function totalPriceFormatter(data) {
+                                var field = this.field
+                                return '$' + data.map(function (row) {
+                                    return +row[field].substring(1)
+                                }).reduce(function (sum, i) {
+                                    return sum + i
+                                }, 0)
+                            }
+
+                            function initTable() {
+                                $table.bootstrapTable('destroy').bootstrapTable({
+                                    height: 550,
+                                    locale: $('#locale').val(),
+                                    columns: [
+                                        [{
+                                            field: 'state',
+                                            checkbox: true,
+                                            rowspan: 2,
+                                            align: 'center',
+                                            valign: 'middle'
+                                        }, {
+                                            title: 'Item ID',
+                                            field: 'id',
+                                            rowspan: 2,
+                                            align: 'center',
+                                            valign: 'middle',
+                                            sortable: true,
+                                            footerFormatter: totalTextFormatter
+                                        }, {
+                                            title: 'Item Detail',
+                                            colspan: 3,
+                                            align: 'center'
+                                        }],
+                                        [{
+                                            field: 'name',
+                                            title: 'Item Name',
+                                            sortable: true,
+                                            footerFormatter: totalNameFormatter,
+                                            align: 'center'
+                                        }, {
+                                            field: 'price',
+                                            title: 'Item Price',
+                                            sortable: true,
+                                            align: 'center',
+                                            footerFormatter: totalPriceFormatter
+                                        }, {
+                                            field: 'operate',
+                                            title: 'Item Operate',
+                                            align: 'center',
+                                            clickToSelect: false,
+                                            events: window.operateEvents,
+                                            formatter: operateFormatter
+                                        }]
+                                    ]
+                                })
+                                $table.on('check.bs.table uncheck.bs.table ' +
+                                    'check-all.bs.table uncheck-all.bs.table',
+                                    function () {
+                                        $remove.prop('disabled', !$table.bootstrapTable('getSelections').length)
+
+                                        // save your data, here just save the current page
+                                        selections = getIdSelections()
+                                        // push or splice the selections if you want to save all data selections
+                                    })
+                                $table.on('all.bs.table', function (e, name, args) {
+                                    console.log(name, args)
+                                })
+                                $remove.click(function () {
+                                    var ids = getIdSelections()
+                                    $table.bootstrapTable('remove', {
+                                        field: 'id',
+                                        values: ids
+                                    })
+                                    $remove.prop('disabled', true)
+                                })
+                            }
+
+                            $(function () {
+                                initTable()
+
+                                $('#locale').change(initTable)
+                            })
+                        </script>
+
+
+
+
+
+
+
+
+
+
+                        @*<h2>Lista</h2>*@
+
+                        @*<p>
+                                @Html.ActionLink("Create New", "Create")
+                            </p>*@
+                        @*<table class="table">
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Empresa)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Responsavel)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Unidade)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Sistema)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.IdProduto)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.NomeProduto)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.IdProdutoBB)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.PropostaBB)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.PropostaID)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.SituacaoProposta)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Ramo)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.SubRamo)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.DtInicioVigencia)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.DtFimVigencia)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.TipoMovimento)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.NumeroContrato)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.NumeroVersaoEndosso)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.DiasPermanencia)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.RegraAplicada)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.DtRemessaBB)
+                                    </th>
+                                    <th></th>
+                                </tr>
+
+                            @foreach (var item in Model) {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Empresa)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Responsavel)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Unidade)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Sistema)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IdProduto)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NomeProduto)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IdProdutoBB)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PropostaBB)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PropostaID)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SituacaoProposta)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Ramo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SubRamo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DtInicioVigencia)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DtFimVigencia)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TipoMovimento)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NumeroContrato)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NumeroVersaoEndosso)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DiasPermanencia)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.RegraAplicada)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DtRemessaBB)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                                        @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+                                    </td>
+                                </tr>
+                            }
+
+                            </table>*@

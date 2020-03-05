@@ -12,7 +12,7 @@ namespace ITAW000.Repository
             {
                 using (var conn = new SqlConnection(StringConnection))
                 {
-                    string sql = "DELETE Sistema_tb Where IdSistema=@Id";
+                    string sql = "DELETE AMBIENTE_Sistema_tb Where IdSistema=@Id";
                     SqlCommand cmd = new SqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@Id", entity.IdSistema);
                     try
@@ -31,7 +31,7 @@ namespace ITAW000.Repository
             {
                 using (var conn = new SqlConnection(StringConnection))
                 {
-                    string sql = "DELETE Sistema_tb Where IdSistema=@Id";
+                    string sql = "DELETE AMBIENTE_Sistema_tb Where IdSistema=@Id";
                     SqlCommand cmd = new SqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@Id", id);
                     try
@@ -48,7 +48,7 @@ namespace ITAW000.Repository
 
             public override List<Sistema> GetAll()
             {
-                string sql = "Select * FROM Sistema_tb ORDER BY NomeSistema";
+                string sql = "Select * FROM AMBIENTE_Sistema_tb ORDER BY NomeSistema";
                 using (var conn = new SqlConnection(StringConnection))
                 {
                     var cmd = new SqlCommand(sql, conn);
@@ -88,7 +88,7 @@ namespace ITAW000.Repository
             {
                 using (var conn = new SqlConnection(StringConnection))
                 {
-                    string sql = "Select * FROM Sistema_tb WHERE IdSistema=@Id";
+                    string sql = "Select * FROM AMBIENTE_Sistema_tb WHERE IdSistema=@Id";
                     SqlCommand cmd = new SqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@Id", id);
                     Sistema Sistema = null;
@@ -131,7 +131,7 @@ namespace ITAW000.Repository
 
                 using (var conn = new SqlConnection(StringConnection))
                 {
-                    string sql = "INSERT INTO Sistema_tb (NomeSistema, DescSistema, DtInclusao, Usuario) " +
+                    string sql = "INSERT INTO AMBIENTE_Sistema_tb (NomeSistema, DescSistema, DtInclusao, Usuario) " +
                         "VALUES (@NomeSistema, @DescSistema, @DtInclusao, @Usuario)";
                     SqlCommand cmd = new SqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@NomeSistema", entity.NomeSistema);
@@ -158,7 +158,7 @@ namespace ITAW000.Repository
 
                 using (var conn = new SqlConnection(StringConnection))
                 {
-                    string sql = "UPDATE Sistema_tb SET NomeSistema=@NomeSistema, DescSistema=@DescSistema, DtAlteracao=@DtAlteracao, Usuario=@Usuario Where IdSistema=@Id";
+                    string sql = "UPDATE AMBIENTE_Sistema_tb SET NomeSistema=@NomeSistema, DescSistema=@DescSistema, DtAlteracao=@DtAlteracao, Usuario=@Usuario Where IdSistema=@Id";
                     SqlCommand cmd = new SqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@Id", entity.IdSistema);
                     cmd.Parameters.AddWithValue("@NomeSistema", entity.NomeSistema);

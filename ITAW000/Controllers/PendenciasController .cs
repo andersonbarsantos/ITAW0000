@@ -10,12 +10,25 @@ namespace ITAW000.Controllers
 {
     public class PendenciasController : Controller
     {
-        private RegraRepository regraRespository = new RegraRepository();
+        private PendenciaRepository pendenciaRespository = new PendenciaRepository();
         // GET: Regra
         public ActionResult Index()
         {
-            return View(regraRespository.GetAll());
+            ViewBag.ListaAll = pendenciaRespository.GetAll();
+            ViewBag.ListaClassificados = pendenciaRespository.GetNaoClassificados();
+            
+            return View();
         }
+
+        public ActionResult Lista()
+        {
+            ViewBag.ListaAll = pendenciaRespository.GetAll();
+            ViewBag.ListaClassificados = pendenciaRespository.GetNaoClassificados();
+
+            return View(pendenciaRespository.GetNaoClassificados());
+        }
+
+
 
         // GET: Regra/Details/5
         public ActionResult Details(int id)
@@ -23,18 +36,15 @@ namespace ITAW000.Controllers
             return View();
         }
 
-        // GET: Regra/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
 
         // POST: Regra/Create
         [HttpPost]
-        public ActionResult Edit(RegraViewModel objModel)
+        public ActionResult Edit(Item431 objModel)
         {
             try
-            {            
+            {
+                pendenciaRespository.Update(objModel); 
+
                 return RedirectToAction("Index");
             }
             catch

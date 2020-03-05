@@ -14,7 +14,7 @@
                         <h4> <i class="material-icons" style="font-size:25px;">cached</i> Regras </h4>
                     </div>
                     <div class="col-sm-2  text-left ">
-                        <a  href="@Url.Action("create", "Regra")" class="btn btn-success pull-right" data-toggle="modal">Adicionar Nova</a>
+                        <a href="@Url.Action("Create", "Regra")" class="btn btn-success pull-right" data-toggle="modal">Adicionar Nova</a>
                     </div>
                 </div>
             </div>
@@ -34,9 +34,10 @@
                             <table class="table table-hover table-striped">
                                 <thead>
                                     <tr>
-                                        <th></th>
+                                        @*<th></th>*@
                                         <th>Id</th>
                                         <th>Responsavel</th>
+                                        <th>Tipo</th>
                                         <th>Retorno</th>
                                         <th>Sistema</th>
                                         <th>Descricao</th>
@@ -49,14 +50,17 @@
                                     @foreach (var item in Model)
                                     {
                                     <tr>
-                                        <td>
+                                        @*<td>
                                             <i class="material-icons">cached</i>
-                                        </td>
+                                        </td>*@
                                         <td>
                                             @Html.DisplayFor(modelItem => item.IdRegra)
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Responsavel.NomeResponsavel)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Tipo.NomeTipo)
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Retorno.NomeRetorno)

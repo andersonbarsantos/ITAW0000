@@ -131,6 +131,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Item431.cs" />
     <Compile Include="Models\Regra.cs" />
     <Compile Include="Models\RegraViewModel.cs" />
     <Compile Include="Models\Responsavel.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="Models\Tipo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AbstractRepository.cs" />
+    <Compile Include="Repository\PendenciaRepository.cs" />
     <Compile Include="Repository\RegraRepository.cs" />
     <Compile Include="Repository\ResponsavelRepository.cs" />
     <Compile Include="Repository\RetornoRepository.cs" />
@@ -194,6 +196,7 @@
     <Content Include="Views\Situacao\Index.cshtml" />
     <Content Include="Views\Regra\Create.cshtml" />
     <Content Include="Views\Pendencias\Index.cshtml" />
+    <Content Include="Views\Pendencias\Lista.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
