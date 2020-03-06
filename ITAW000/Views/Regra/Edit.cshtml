@@ -27,7 +27,7 @@
 
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <label class="col-sm-3 control-label">Sistema</label>>
+                                        <label class="col-sm-3 control-label">Sistema</label>
                                         @Html.DropDownListFor(model => model.IdSistema, new SelectList(ViewBag.ListSistema, "value", "Text", -1), htmlAttributes: new { @class = "form-control", id = "idSistema" })
                                         @Html.ValidationMessageFor(x => x.IdSistema, "", new { @class = "text-danger" })
                                     </div>
@@ -44,7 +44,7 @@
                                 </div>
 
                                 <div class="form-row">
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-5">
                                         <label class="col-sm-3 control-label">Tipo</label>
                                         @Html.DropDownListFor(model => model.IdTipo, new SelectList(ViewBag.ListTipo, "value", "Text", "-1"), htmlAttributes: new { @class = "form-control", id = "IdTipo" })
                                         @Html.ValidationMessageFor(x => x.IdTipo, "", new { @class = "text-danger" })
@@ -55,37 +55,35 @@
                                         @Html.DropDownListFor(model => model.IdRetorno, new SelectList(ViewBag.ListRetorno, "value", "Text", "-1"), htmlAttributes: new { @class = "form-control", id = "IdRetorno" })
                                         @Html.ValidationMessageFor(x => x.IdRetorno, "", new { @class = "text-danger" })
                                     </div>
-                                </div>
 
-                                <div class="form-row">
-                                    <div class="form-group col-md-12">
-                                        <label class="col-sm-12 control-label">Descricao</label>
-                                        @Html.TextAreaFor(model => model.Descricao,
-                                                                new
-                                                                {
-                                                                    @class = "form-control",
-                                                                    cols = "50",
-                                                                    rows = "10",
-                                                                    @style = "width=100%",
-                                                                    @draggable = "false",
-                                                                    @maxlength = "200",
-                                                                    @minlength = "5",
-                                                                    @required = "true"
-                                                                })
-                                        @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+
+                                    <div class="form-group col-md-1">
+                                        <div class="form-check">
+                                            <label class="col-sm-3 control-label">Ativo</label>
+                                            @Html.CheckBoxFor(model => Model.Ativo, htmlAttributes: new { @class = "form-control pull-left", id = "Ativo" })
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="form-group col-md-12">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="gridCheck">
-                                        <label class="form-check-label" for="gridCheck">
-                                            Situação
-                                        </label>
-                                    </div>
-                                </div>
-
-                            </fieldset>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label class="col-sm-12 control-label">Descricao</label>
+                                            @Html.TextAreaFor(model => model.Descricao,
+                                                                    new
+                                                                    {
+                                                                        @class = "form-control",
+                                                                        cols = "50",
+                                                                        rows = "10",
+                                                                        @style = "width=100%",
+                                                                        @draggable = "false",
+                                                                        @maxlength = "200",
+                                                                        @minlength = "5",
+                                                                        @required = "true"
+                                                                    })
+                                            @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>                           
+                                </fieldset>
                             <div class="form-row">
                                 <div class="form-group col-md-12 ">
                                     <button type="submit" class="btn btn-primary ">

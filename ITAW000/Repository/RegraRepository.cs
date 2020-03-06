@@ -73,6 +73,7 @@ namespace ITAW000.Repository
                     conn.Open();
                     using (var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
                     {
+                     
                         while (reader.Read())
                         {
                             regra = new Regra
@@ -94,7 +95,7 @@ namespace ITAW000.Repository
                             regra.Tipo.NomeTipo = Convert.ToString(reader["NomeTipo"]);
                             regra.Retorno.IdRetorno = (int)reader["IdRetorno"];
                             regra.Retorno.NomeRetorno = Convert.ToString(reader["NomeRetorno"]);                            
-                            regra.Ativo = Convert.ToString(reader["ativo"]);
+                            regra.Ativo = Convert.ToString(reader["ativo"]).ToLower() == "s" ? true :false ;
                             regra.Descricao = Convert.ToString(reader["descricao"]);
 
                             list.Add(regra);
@@ -116,7 +117,7 @@ namespace ITAW000.Repository
                 string sql = "Select * FROM AMBIENTE_regra_tb WHERE IdRegra=@Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", id);
-                Regra p = null;
+                Regra regra = null;
                 try
                 {
                     conn.Open();
@@ -126,14 +127,15 @@ namespace ITAW000.Repository
                         {
                             if (reader.Read())
                             {
-                                p = new Regra();
-                                p.IdRegra = (int)reader["IdRegra"];
-                                p.Descricao = reader["Descricao"].ToString();
-                                p.IdSistema = (int)reader["IdSistema"];
-                                p.IdResponsavel = (int)reader["IdResponsavel"];
-                                p.IdRetorno = (int)reader["IdRetorno"];
-                                p.IdTipo = (int)reader["IdTipo"];
-                                p.IdSituacao = (int)reader["IdSituacao"];
+                                regra = new Regra();
+                                regra.IdRegra = (int)reader["IdRegra"];
+                                regra.Descricao = reader["Descricao"].ToString();
+                                regra.IdSistema = (int)reader["IdSistema"];
+                                regra.IdResponsavel = (int)reader["IdResponsavel"];
+                                regra.IdRetorno = (int)reader["IdRetorno"];
+                                regra.IdTipo = (int)reader["IdTipo"];
+                                regra.IdSituacao = (int)reader["IdSituacao"];
+                                regra.Ativo = Convert.ToString(reader["ativo"]).ToLower() == "s" ? true : false;
 
                             }
                         }
@@ -143,7 +145,7 @@ namespace ITAW000.Repository
                 {
                     throw e;
                 }
-                return p;
+                return regra;
             }
         }
 
@@ -165,7 +167,7 @@ namespace ITAW000.Repository
                 cmd.Parameters.AddWithValue("@IdRetorno", entity.IdRetorno);
                 cmd.Parameters.AddWithValue("@descricao", entity.Descricao);
                 cmd.Parameters.AddWithValue("@dtInicioVigencia", entity.DtInclusao);
-                cmd.Parameters.AddWithValue("@ativo", "S");
+                cmd.Parameters.AddWithValue("@ativo",  entity.Ativo == true ? 'S' : 'N' );
                 cmd.Parameters.AddWithValue("@dtInclusao", entity.DtInclusao);
                 cmd.Parameters.AddWithValue("@usuario", entity.Usuario);
 
@@ -201,7 +203,7 @@ namespace ITAW000.Repository
                 cmd.Parameters.AddWithValue("@IdTipo", entity.IdTipo);
                 cmd.Parameters.AddWithValue("@IdRetorno", entity.IdRetorno);
                 cmd.Parameters.AddWithValue("@descricao", entity.Descricao);
-                cmd.Parameters.AddWithValue("@ativo", "S");
+                cmd.Parameters.AddWithValue("@ativo", entity.Ativo == true ? 'S' : 'N');
                 cmd.Parameters.AddWithValue("@dtAlteracao", entity.DtAlteracao);
                 cmd.Parameters.AddWithValue("@usuario", entity.Usuario);
 

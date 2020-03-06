@@ -77,21 +77,19 @@
                                 </div>
 
                                 <div class="form-group col-md-12">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="gridCheck">
-                                        <label class="form-check-label" for="gridCheck">
-                                            Situação
-                                        </label>
+                                    <div class="form-check">                            
+                                           @Html.CheckBoxFor(model => Model.Ativo,  htmlAttributes: new { @class = "form-control", id = "Idstatus" })
+                                           <label class="form-check-label" for="gridCheck"> Situação</label>
                                     </div>
                                 </div>
 
                             </fieldset>
                             <div class="form-row">
                                 <div class="form-group col-md-12 ">
-                                    <button type="submit" class="btn btn-primary ">
+                                    <button type="submit" class="btn btn-primary " data-dismiss="alert">
                                         <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Gravar
                                     </button>
-                                    <input type="button" value="Cancelar" class="btn btn-danger " data-dismiss="modal" />
+                                    @Html.ActionLink("Cancelar", "Index", "Regra", new { @class = "button btn btn-danger" })
                                 </div>
                             </div>
                         </form>                      
@@ -105,4 +103,13 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+      $(document).ready(function(){
+            $("#myAlert").on('closed.bs.alert', function(){
+                alert("Alert message box has been closed.");
+            });
+        });
+        </script>
+
 }

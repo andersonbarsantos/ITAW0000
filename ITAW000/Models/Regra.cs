@@ -9,7 +9,7 @@ namespace ITAW000.Models
     public class Regra
     {
         public int IdRegra { get; set; }
-        public string Ativo { get; set; }
+        public bool Ativo { get; set; }
 
         [DataType(DataType.MultilineText)]
         [Required(ErrorMessage = "Favor preencher o campo Descrição")]
