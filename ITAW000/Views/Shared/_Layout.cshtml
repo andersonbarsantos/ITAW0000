@@ -3,13 +3,12 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css">
 
 
@@ -17,7 +16,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 
 
-
+ 
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 
     <title>@ViewBag.Title - App Classificação</title>
@@ -47,15 +47,15 @@
                         <i class="glyphicon glyphicon-registration-mark"></i>
                         Regras
                     </a>
-                </li>                
+                </li>
                 <li>
-                    <a href="#CadSubmenu" data-toggle="collapse" aria-expanded="false">
+                    <a href="#classSubmenu" data-toggle="collapse" aria-expanded="false">
                         <i class="glyphicon glyphicon-arrow-up"></i>
-                        Classificar Pendencias
+                        Classificar 
                     </a>
-                    <ul class="collapse list-unstyled" id="CadSubmenu">
+                    <ul class="collapse list-unstyled" id="classSubmenu">
                         <li><a href="@Url.Action("index", "Pendencias")"> <i class="glyphicon glyphicon-user"></i>A Classificar</a></li>
-                        <li><a href="@Url.Action("Lista", "Pendencias")"> <i class="glyphicon glyphicon-hand-up"></i>Classificados</a></li>                        
+                        <li><a href="@Url.Action("Lista", "Pendencias")"> <i class="glyphicon glyphicon-hand-up"></i>Classificados</a></li>
                     </ul>
                 </li>
 
@@ -74,9 +74,9 @@
                 </li>
 
                 @*<ul class="list-unstyled CTAs">
-            <li><a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a></li>
-            <li><a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a></li>
-        </ul>*@
+                        <li><a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a></li>
+                        <li><a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a></li>
+                    </ul>*@
 
             </ul>
         </nav>
@@ -84,12 +84,15 @@
         <!-- Page Content Holder -->
         <div id="content" class="container-fluid">
             @*<nav class="navbar navbar-default">*@
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="navbar navbar-expand-lg navbar-dark ">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <button id="sidebarCollapse" class="btn btn-info navbar-btn">
-                            <i class="glyphicon glyphicon-menu-hamburger"></i>
+                        <button id="sidebarCollapse" class="btn btn-success navbar-btn">
+                            <i class="material-icons">
+                                menu
+                            </i>
                         </button>
+                        <Span class="title" style="font-size:x-large; padding-left:8px;">Monitoramento 431</Span>
                     </div>
 
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -101,11 +104,13 @@
                 </div>
             </nav>
 
-            @RenderBody()
 
-            @*<footer>
-                <span class="text-muted ">@DateTime.Now.Year - Meu Aplicativo ASP.NET</span>
-            </footer>*@
+                @RenderBody()
+   
+
+            @*<div class="footer">
+              <span >@DateTime.Now.Year - Meu Aplicativo ASP.NET</span>
+             </div>*@
         </div>
     </div>
 
@@ -114,3 +119,8 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+
+
+
+
+

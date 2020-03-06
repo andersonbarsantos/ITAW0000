@@ -3,98 +3,92 @@
 @{
     ViewBag.Title = "Regras";
 }
+        <div class="row">
+            <div class="col-12">
 
-<div class="row">
-    <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="material-icons">cached</i>
+                    <h3>Regras </h3>
+                    <p>Realação de regras cadastradas no sistema</p>
+                    <a href="@Url.Action("Create", "Regra")" class="btn btn-success" data-toggle="modal">Adicionar Nova</a>
+                </div>
+                <div class="card-body">
+                    @if (@Model.Count() == 0)
+                    {
+                        <section class="container-fluid h-100 d-flex justify-content-center">
+                            <div class="jumbotron my-auto">
+                                <h3 class="display-3">Nenhum regra foi localizada</h3>
+                            </div>
+                        </section>
+                    }
+                    else
+                    {
+                        <div class="container-fluid">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-striped ">
+                                    <thead>
+                                        <tr>
+                                            @*<th></th>*@
+                                            <th>Id</th>
+                                            <th>Responsavel</th>
+                                            <th>Tipo</th>
+                                            <th>Retorno</th>
+                                            <th>Sistema</th>
+                                            <th>Descricao</th>
+                                            <th>Situacao</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-        <div class="card" style="min-height: 555px">
-            <div class="card-header">
-                <div class="row">
-                    <div class="col-sm-10 text-left ">
-                        <h4> <i class="material-icons" style="font-size:25px;">cached</i> Regras </h4>
-                    </div>
-                    <div class="col-sm-2  text-left ">
-                        <a href="@Url.Action("Create", "Regra")" class="btn btn-success pull-right" data-toggle="modal">Adicionar Nova</a>
-                    </div>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                @*<td>
+                            <i class="material-icons">cached</i>
+                        </td>*@
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.IdRegra)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Responsavel.NomeResponsavel)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Tipo.NomeTipo)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Retorno.NomeRetorno)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Sistema.NomeSistema)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Descricao)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Situacao.NomeSituacao)
+                                                </td>
+                                                <td>
+                                                    <a onclick="GetDetails(@item.IdRegra)">
+                                                        <i class="fa fa-edit text-success"></i>
+                                                    </a>
+                                                    <a onclick="Delete(@item.IdRegra)">
+                                                        <i class="fa fa-trash-o text-danger"></i>
+                                                    </a>
+
+
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
-            <div class="card-body">
-                @if (@Model.Count() == 0)
-                {
-                    <section class="container-fluid h-100 d-flex justify-content-center">
-                        <div class="jumbotron my-auto">
-                            <h3 class="display-3">Nenhum regra foi localizada</h3>
-                        </div>
-                    </section>
-                }
-                else
-                {
-                    <div class="container-fluid">
-                        <div class="table-responsive">
-                            <table class="table table-hover table-striped">
-                                <thead>
-                                    <tr>
-                                        @*<th></th>*@
-                                        <th>Id</th>
-                                        <th>Responsavel</th>
-                                        <th>Tipo</th>
-                                        <th>Retorno</th>
-                                        <th>Sistema</th>
-                                        <th>Descricao</th>
-                                        <th>Situacao</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    @foreach (var item in Model)
-                                    {
-                                    <tr>
-                                        @*<td>
-                                            <i class="material-icons">cached</i>
-                                        </td>*@
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.IdRegra)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Responsavel.NomeResponsavel)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Tipo.NomeTipo)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Retorno.NomeRetorno)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Sistema.NomeSistema)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Descricao)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Situacao.NomeSituacao)
-                                        </td>
-                                        <td>
-                                            <a onclick="GetDetails(@item.IdRegra)">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-                                            <a onclick="Delete(@item.IdRegra)">
-                                                <i class="fa fa-trash-o"></i>
-                                            </a>
-
-
-                                        </td>
-                                    </tr>
-                                    }
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                }
             </div>
         </div>
-    </div>
-</div>
 
-<hr>

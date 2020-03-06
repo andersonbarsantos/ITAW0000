@@ -4,20 +4,15 @@
     ViewBag.Title = "Regras";
 }
 
-    <div class="container-fluid">
+
         <div class="row">
             <div class="col-12 ">
-
-                <div class="card" style="min-height: 555px">
+                <div class="card">
                     <div class="card-header">
-                        <div class="row">
-                            <div class="col-sm-10 text-left ">
-                                <h4> <i class="material-icons" style="font-size:25px;">swap_vert</i> Classificação de Pendências </h4>
-                            </div>
-                            <div class="col-sm-2  text-left ">
-                                <a href="@Url.Action("", "Pendencia")" class="btn btn-success pull-right" data-toggle="modal">Classificar Selecionados</a>
-                            </div>
-                        </div>
+                        <i class="material-icons">swap_vert</i>
+                        <h3>Classificação de Pendências </h3>
+                        <p>Classificar registros ainda não classificados</p>
+                        <a href="@Url.Action("", "Pendencia")" class="btn btn-success pull-right" data-toggle="modal">Classificar Selecionados</a>
                     </div>
                     <div class="card-body">
                         <div class="container-fluid">
@@ -47,45 +42,45 @@
 
                                         @foreach (var item in ViewBag.ListaAll as IList<ITAW000.Models.Item431>)
                                         {
-                                        <tr>
-                                            <td>
-                                                <span class="custom-checkbox">
-                                                    <input type="checkbox" id="checkItem" name="options[]" value="1" class="custom-checkbox">
-                                                    <label for="checkItem"></label>
-                                                </span>
-                                            </td>
+                                            <tr>
+                                                <td>
+                                                    <span class="custom-checkbox">
+                                                        <input type="checkbox" id="checkItem" name="options[]" value="1" class="custom-checkbox">
+                                                        <label for="checkItem"></label>
+                                                    </span>
+                                                </td>
 
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Empresa)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Sistema)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Responsavel)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.IdProdutoBB)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.NomeProduto)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.PropostaBB)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.PropostaID)
-                                            </td>
-                                            <td style="text-align:center">
-                                                @Html.DisplayFor(modelItem => item.NumeroContrato)
-                                            </td>
-                                            <td style="text-align:center">
-                                                @Html.DisplayFor(modelItem => item.NumeroVersaoEndosso)
-                                            </td>
-                                            <td style="text-align:center">
-                                                @Html.DisplayFor(modelItem => item.DiasPermanencia)
-                                            </td>
-                                        </tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Empresa)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Sistema)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Responsavel)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.IdProdutoBB)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.NomeProduto)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.PropostaBB)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.PropostaID)
+                                                </td>
+                                                <td style="text-align:center">
+                                                    @Html.DisplayFor(modelItem => item.NumeroContrato)
+                                                </td>
+                                                <td style="text-align:center">
+                                                    @Html.DisplayFor(modelItem => item.NumeroVersaoEndosso)
+                                                </td>
+                                                <td style="text-align:center">
+                                                    @Html.DisplayFor(modelItem => item.DiasPermanencia)
+                                                </td>
+                                            </tr>
                                         }
 
                                     </tbody>
@@ -97,8 +92,7 @@
             </div>
         </div>
 
-        <hr>
-        </div>
+ 
 
 
     <script type="text/javascript">
