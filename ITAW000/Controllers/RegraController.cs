@@ -130,17 +130,21 @@ namespace ITAW000.Controllers
         // GET: Regra/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            CarregaDropDrow();
+
+            var objModel = regraRespository.GetById(id);
+         //    return Json(objModel, JsonRequestBehavior.AllowGet);
+
+            return View(objModel);
         }
 
         // POST: Regra/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Regra objModel)
         {
             try
             {
-                // TODO: Add update logic here
-
+                regraRespository.Update(objModel);
                 return RedirectToAction("Index");
             }
             catch
@@ -173,7 +177,6 @@ namespace ITAW000.Controllers
         
         private void SetViewBagRetornoType(Retorno itemSelected)
         {
-
             IEnumerable<Retorno> values =
 
                               Enum.GetValues(typeof(Retorno))

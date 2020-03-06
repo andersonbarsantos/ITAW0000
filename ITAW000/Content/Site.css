@@ -21,27 +21,45 @@ a, a:hover, a:focus {
 
 .navbar {
     padding: 2px;
-    background: #fff;
-    border: none;
+    background: #f6eb1a;
+    border:nome;
+    border-style:nome;
     border-radius: 0;
-    margin-bottom: 10px;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    margin-bottom: 12px;
+    box-shadow: 1px 1px 3px 1px #999;
     transition: 0.3s;
     border-radius: 5px; /* 5px rounded corners */
-
+    height:60px;
 }
 
 .title {
-    Text-shadow: 2px 0px 0px black, -1px 0px 0px black, 0px 2px 0px black, 0px -1px 0px black;
+    Text-shadow: 2px 0px 2px white, 2px 0px 0px white, 0px 2px 0px white, 0px 2px 0px white;
     font-size: 100%;
-    font-weight: bold;
-    color: #FFF;
+    font-weight: 900;
+    color: #313885;
+    padding-left: 8px;
+    margin-top: 5px;
 }
 
 .navbar-btn {
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     outline: none !important;
     border: 1px;
+}
+
+
+.navbar a i {
+    /*Text-shadow: 2px 0px 2px white, 2px 0px 0px white, 0px 2px 0px white, 0px 2px 0px white;*/
+    font-size: 24px;
+    color: #313885;
+    margin-top: 5px;
+    aria-hidden ="true"
+}
+
+.navbar ul li a:hover {
+    color: #313885;
+    background: #f6eb1a;
+    aria-hidden ="true"
 }
 
 .line {
@@ -86,8 +104,8 @@ i, span {
     z-index: 11;
     background-color: #000;
     width: 100%;
-    height: calc(100vh - 90px);
-    margin: 3px;
+    height: calc(100vh - 99px);
+    margin : 2px ;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     border-radius: 5px; /* 5px rounded corners */
@@ -95,10 +113,9 @@ i, span {
 }
 
 .card-header {
-    background-color: #7a59aa;
+    background-color: #33478a; /*#2d2c4f; */
     height: 65px;
     color: white;
-
 }
     .card-header i {
         float:left;
@@ -147,48 +164,6 @@ td a {
     margin: 0 -2px;
     padding: 5px 10px;
     border: 1px solid #666666;
-}
-
-/* Modal styles */
-.modal .modal-dialog {
-    max-width: 600px;
-    width: 600px;
-}
-
-.modal .modal-header, .modal .modal-body, .modal .modal-footer {
-    padding: 20px 30px;
-}
-
-.modal .modal-content {
-    border-radius: 3px;
-}
-
-.modal .modal-footer {
-    background: #ecf0f1;
-    border-radius: 0 0 3px 3px;
-}
-
-.modal .modal-title {
-    display: inline-block;
-}
-
-.modal .form-control {
-    border-radius: 2px;
-    box-shadow: none;
-    border-color: #dddddd;
-}
-
-.modal textarea.form-control {
-    resize: vertical;
-}
-
-.modal .btn {
-    border-radius: 2px;
-    min-width: 100px;
-}
-
-.modal form label {
-    font-weight: normal;
 }
 
 

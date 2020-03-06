@@ -1,10 +1,10 @@
 ﻿@model ITAW000.Models.Regra
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
 }
 
-@using (Html.BeginForm("Create", "Regra", FormMethod.Post))
+@using (Html.BeginForm("Edit", "Regra", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -62,16 +62,16 @@
                                         <label class="col-sm-12 control-label">Descricao</label>
                                         @Html.TextAreaFor(model => model.Descricao,
                                                                 new
-                                                                {                                                                    
-                                                                    @class = "form-control",                                                                    
+                                                                {
+                                                                    @class = "form-control",
                                                                     cols = "50",
-                                                                    rows = "10",                                                 
+                                                                    rows = "10",
                                                                     @style = "width=100%",
-                                                                    @draggable = "false",                                                                 
-                                                                    @maxlength="200",
+                                                                    @draggable = "false",
+                                                                    @maxlength = "200",
                                                                     @minlength = "5",
                                                                     @required = "true"
-                                                                })                                        
+                                                                })
                                         @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -91,10 +91,11 @@
                                     <button type="submit" class="btn btn-primary ">
                                         <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Gravar
                                     </button>
-                                    <input type="button" value="Cancelar" class="btn btn-danger " data-dismiss="modal" />
+                                    @Html.ActionLink("Cancelar", "Index", "Regra", new { @class = "btn btn-danger" })
+                                    
                                 </div>
                             </div>
-                        </form>                      
+                        </form>
                     </div>
                 </div>
             </div>

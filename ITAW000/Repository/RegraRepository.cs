@@ -113,7 +113,7 @@ namespace ITAW000.Repository
         {
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "Select Id, Descricao FROM AMBIENTE_regra_tb WHERE IdRegra=@Id";
+                string sql = "Select * FROM AMBIENTE_regra_tb WHERE IdRegra=@Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", id);
                 Regra p = null;
@@ -127,9 +127,14 @@ namespace ITAW000.Repository
                             if (reader.Read())
                             {
                                 p = new Regra();
-                                p.IdRegra = (int)reader["Id"];
+                                p.IdRegra = (int)reader["IdRegra"];
                                 p.Descricao = reader["Descricao"].ToString();
-             
+                                p.IdSistema = (int)reader["IdSistema"];
+                                p.IdResponsavel = (int)reader["IdResponsavel"];
+                                p.IdRetorno = (int)reader["IdRetorno"];
+                                p.IdTipo = (int)reader["IdTipo"];
+                                p.IdSituacao = (int)reader["IdSituacao"];
+
                             }
                         }
                     }
@@ -179,6 +184,9 @@ namespace ITAW000.Repository
 
         public override void Update(Regra entity)
         {
+            entity.DtAlteracao = DateTime.Now;
+            entity.Usuario = "Sistema";
+
             using (var conn = new SqlConnection(StringConnection))
             {
                 string sql = "UPDATE AMBIENTE_regra_tb SET IdResponsavel=@IdResponsavel,  IdSistema=@IdSistema, IdSituacao=@IdSituacao," +

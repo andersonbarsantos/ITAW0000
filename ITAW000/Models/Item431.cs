@@ -48,6 +48,8 @@ namespace ITAW000.Models
 
         public string DtRemessaBB { get; set; }
 
+        public string Descricao { get; set; }
+
 
     }
 }

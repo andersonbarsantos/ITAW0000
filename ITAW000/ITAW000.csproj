@@ -127,6 +127,7 @@
     <Compile Include="Controllers\SistemaController.cs" />
     <Compile Include="Controllers\SituacaoController.cs" />
     <Compile Include="Controllers\ResponsavelController.cs" />
+    <Compile Include="Controllers\HistoricoController.cs" />
     <Compile Include="Controllers\TipoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -197,6 +198,8 @@
     <Content Include="Views\Regra\Create.cshtml" />
     <Content Include="Views\Pendencias\Index.cshtml" />
     <Content Include="Views\Pendencias\Lista.cshtml" />
+    <Content Include="Views\Regra\Edit.cshtml" />
+    <Content Include="Views\Historico\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

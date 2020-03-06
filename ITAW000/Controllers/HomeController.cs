@@ -9,10 +9,16 @@ namespace ITAW000.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly TipoRepository respository = new TipoRepository();
+        private PendenciaRepository pendenciaRespository = new PendenciaRepository();
 
         public ActionResult Index()
         {
+            List<int> valor = pendenciaRespository.GetTotal();
+
+            ViewBag.TotalRecebidos = valor[0];
+            ViewBag.TotalClassificado = valor[1];
+            ViewBag.TotalNaoClassificado = valor[2];
+                       
             return View();
         }
 
@@ -25,7 +31,7 @@ namespace ITAW000.Controllers
 
         public ActionResult Contact()
         {
-            return View(respository.GetAll());
+            return View();
         }
     }
 }

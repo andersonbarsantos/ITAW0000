@@ -14,6 +14,8 @@ namespace ITAW000.Controllers
         // GET: Regra
         public ActionResult Index()
         {
+    
+
             ViewBag.ListaAll = pendenciaRespository.GetAll();
             ViewBag.ListaClassificados = pendenciaRespository.GetNaoClassificados();
             

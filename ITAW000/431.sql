@@ -1,7 +1,7 @@
 
-drop table [Acompanhamento_431_tb]
+drop table [AMBIENTE_Acompanhamento_431_tb]
 
-CREATE TABLE [dbo].[Acompanhamento_431_tb](
+CREATE TABLE [dbo].[AMBIENTE_Acompanhamento_431_tb](
 	[acompanhamento_431_ID] [int] IDENTITY(1,1) NOT NULL,
 	[empresa] [varchar](5) NULL,
 	[unidade] [varchar](50) NULL,
@@ -60,17 +60,17 @@ CREATE TABLE [dbo].[Acompanhamento_431_tb](
 	[Dt_alteracao] [smalldatetime] NULL,
 	[Dt_inclusao_pend] [smalldatetime] NULL,
 	[Regra_aplicada] [int] NULL,
- CONSTRAINT [PK_Acompanhamento_431] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_AMBIENTE_Acompanhamento_431] PRIMARY KEY CLUSTERED 
 (
 	[acompanhamento_431_ID] ASC
 ))
 GO
 
 
-drop table regra_tb
+drop table AMBIENTE_regra_tb
 go
 
-create table regra_tb (
+create table AMBIENTE_regra_tb (
 	IdRegra int identity ,
 	IdResponsavel int,
 	IdSistema int,
@@ -87,9 +87,9 @@ create table regra_tb (
 	Usuario varchar(255) 
 ) 
 
-drop table responsavel_tb
+drop table AMBIENTE_responsavel_tb
 go
-create table responsavel_tb (
+create table AMBIENTE_responsavel_tb (
 	IdResponsavel int identity ,
 	NomeResponsavel varchar(255) ,
 	DescResponsavel varchar(255) ,
@@ -98,9 +98,9 @@ create table responsavel_tb (
 	Usuario varchar(255) 
 ) 
 
-drop table retorno_tb
+drop table AMBIENTE_retorno_tb
 go
-create table retorno_tb (
+create table AMBIENTE_retorno_tb (
 	IdRetorno int identity ,
 	NomeRetorno varchar(255) ,
 	DescRetorno varchar(255) ,
@@ -109,9 +109,9 @@ create table retorno_tb (
 	Usuario varchar(255) 
 ) 
 
-drop table Sistema_tb
+drop table AMBIENTE_Sistema_tb
 go
-create table Sistema_tb (
+create table AMBIENTE_Sistema_tb (
 	IdSistema int identity ,
 	NomeSistema varchar(255) ,
 	DescSistema varchar(255) ,
@@ -121,9 +121,9 @@ create table Sistema_tb (
 ) 
 
 
-drop table Situacao_tb
+drop table AMBIENTE_Situacao_tb
 go
-create table Situacao_tb (
+create table AMBIENTE_Situacao_tb (
 	IdSituacao int identity ,
 	NomeSituacao varchar(255) ,
 	DescSituacao varchar(255) ,
@@ -132,9 +132,9 @@ create table Situacao_tb (
 	Usuario varchar(255) 
 ) 
 
-drop table Tipo_tb
+drop table AMBIENTE_Tipo_tb
 go
-create table Tipo_tb (
+create table AMBIENTE_Tipo_tb (
 	IdTipo int identity ,
 	NomeTipo varchar(255) ,
 	DescTipo varchar(255) ,
@@ -144,10 +144,86 @@ create table Tipo_tb (
 ) 
 
 
-select * from regra_tb
-select * from responsavel_tb
-select * from retorno_tb
-select * from Sistema_tb
-select * from Situacao_tb
-select * from Tipo_tb
 
+
+insert into  [AMBIENTE_Acompanhamento_431_tb] 
+select  
+empresa,
+unidade,
+sistema, 
+sistema_regra,
+responsavel,   
+responsavel_regra ,
+situacao,
+situacao_regra ,
+Cod_produto_bb,
+Produto_id, 
+Produto_externo, 
+nome ,
+Proposta_bb,
+Proposta_id,    
+Dt_contratacao,
+Situacao_proposta ,
+Ramo_id ,
+Subramo_id ,
+Dt_inicio_vigencia,
+Dt_fim_vigencia  ,
+Val_premio      ,
+Qtd_parcelas,
+Forma_pgto    ,        
+Cd_prd   ,  
+Cd_mdld ,
+Cd_item_mdld,
+Nr_ctr_sgro        ,
+Nr_vrs_eds ,
+Wf_id   ,  
+Numero_agrupador,
+tipo      ,
+tipo_regra  ,
+Situacao_bb_id ,
+Tp_endosso_id   ,
+Num_endosso_bb     ,
+Dt_processamento_bb   ,
+Dt_remessa_bb       ,
+Tempo_permanencia          ,
+Dias_permanencia,
+descricao   ,     
+observacao    ,
+Dt_inicio_solucao    ,
+Dt_previsao_solucao,
+Dt_relatorio       ,
+Dt_carga             ,
+Dt_consulta_produto  ,
+Dt_consulta_proposta   ,
+Dt_critica_proposta1  ,
+Dt_critica_proposta2   ,
+Responsavel_gerencial  ,
+Situacao_gerencial ,
+Descrição_gerencial  ,
+usuario    ,    
+dt_inclusao ,       
+Dt_alteracao,    
+Dt_inclusao_pend, 
+Regra_aplicada
+from  [Acompanhamento_431_tb]
+
+
+
+select * from AMBIENTE_regra_tb
+select * from AMBIENTE_responsavel_tb
+select * from AMBIENTE_retorno_tb
+select * from AMBIENTE_Sistema_tb
+select * from AMBIENTE_Situacao_tb
+select * from AMBIENTE_Tipo_tb
+select * from  [AMBIENTE_Acompanhamento_431_tb]
+
+
+ SELECT distinct descricao,  COUNT(*) AS quantidade  FROM desenv_db.dbo.An_sustentacao_geral_teste_RCA455_tb WITH(NOLOCK) 
+ GROUP BY descricao  ORDER BY quantidade DESC
+
+
+ select  * from  An_sustentacao_geral_teste_RCA455_tb
+
+
+ select count(*) from  [AMBIENTE_Acompanhamento_431_tb] WHERE not Regra_aplicada is null
+ select count(*) from  [AMBIENTE_Acompanhamento_431_tb] WHERE  Regra_aplicada is null

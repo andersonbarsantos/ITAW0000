@@ -16,6 +16,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 
 
+
+
+
  
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
@@ -51,7 +54,7 @@
                 <li>
                     <a href="#classSubmenu" data-toggle="collapse" aria-expanded="false">
                         <i class="glyphicon glyphicon-arrow-up"></i>
-                        Classificar 
+                        Classificar
                     </a>
                     <ul class="collapse list-unstyled" id="classSubmenu">
                         <li><a href="@Url.Action("index", "Pendencias")"> <i class="glyphicon glyphicon-user"></i>A Classificar</a></li>
@@ -71,6 +74,12 @@
                         <li><a href="@Url.Action("index", "Situacao")"> <i class="glyphicon glyphicon-comment"></i>Situação</a></li>
                         <li><a href="@Url.Action("index", "Tipo")"> <i class="glyphicon glyphicon-compressed"></i>Tipo</a></li>
                     </ul>
+                </li>
+                <li class="active">
+                    <a href="@Url.Action("index", "Historico")">
+                        <i class="glyphicon glyphicon-registration-mark"></i>
+                        Histórico
+                    </a>
                 </li>
 
                 @*<ul class="list-unstyled CTAs">
@@ -92,27 +101,30 @@
                                 menu
                             </i>
                         </button>
-                        <Span class="title" style="font-size:x-large; padding-left:8px;">Monitoramento 431</Span>
+                        <Span class="title" style="font-size:x-large;">Monitoramento <strong>431</strong></Span>
                     </div>
 
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="@Url.Action("Contact", "Home")">Contato</a></li>
-                            <li><a href="@Url.Action("About","Home")">Sobre</a></li>
+                            <li ><a href="@Url.Action("Contact", "Home")"><i class="glyphicon glyphicon-cog "></i></a></li>
+                            <li ><a href="@Url.Action("About", "Home")"><i class="glyphicon glyphicon-info-sign"></i></a></li>
+
                         </ul>
                     </div>
                 </div>
             </nav>
 
 
-                @RenderBody()
-   
+            @RenderBody()
+
 
             @*<div class="footer">
-              <span >@DateTime.Now.Year - Meu Aplicativo ASP.NET</span>
-             </div>*@
+                 <span >@DateTime.Now.Year - Meu Aplicativo ASP.NET</span>
+                </div>*@
         </div>
     </div>
+
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
