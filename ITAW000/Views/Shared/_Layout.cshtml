@@ -4,18 +4,18 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+          integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.min.css">
 
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
 
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+    <link rel="stylesheet" href="~/Content/css/main.css">
+    <link rel="stylesheet" href="~/Content/css/side-bar-theme.css">
 
     <title>@ViewBag.Title - App Classificação</title>
 
@@ -23,126 +23,166 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="wrapper">
-        <!-- Sidebar Holder -->
-        <nav id="sidebar">
-            <div class="sidebar-header">
 
-                @*<div class="hero-image"> <img src="~/images/logo.png" alt="" style="max-width:720px;" /></div>*@
-                <h3></h3>
-
-            </div>
-
-            <div class="sidebar-Detail">
-                <div class="card">
-                    <i class="glyphicon glyphicon-home"></i>
-                    Ultimo Arquivo Importado
+    <div class="page-wrapper default-theme sidebar-bg bg1 toggled">
+        <nav id="sidebar" class="sidebar-wrapper">
+            <div class="sidebar-content">
+                <!-- sidebar-brand  -->
+                <div class="sidebar-item sidebar-brand">
+                    <div class="hero-image"> <img src="~/images/logo.png" alt="" style="max-width:720px;" /></div>
                 </div>
-               
+                <!-- sidebar-header  -->
+                <div class="sidebar-item sidebar-header d-flex flex-nowrap">
+                    <div class="user-pic">
+                        <img class="img-responsive img-rounded" src="~/Images/user.jpg" alt="User picture">
+                    </div>
+                    <div class="user-info">
+                        <span class="user-name">
+                            Jhon
+                            <strong>Smith</strong>
+                        </span>
+                        <span class="user-role">Administrator</span>
+                        <span class="user-status">
+                            <i class="fa fa-circle"></i>
+                            <span>Online</span>
+                        </span>
+                    </div>
+                </div>
 
+                <!-- sidebar-menu  -->
+                <div class=" sidebar-item sidebar-menu">
+                    <ul>
+                        <li class="header-menu">
+                            <span>General</span>
+                        </li>
+                        <li class="sidebar-dropdown">
+                            <a href="#">
+                                <i class="glyphicon glyphicon-home"></i>
+                                <span class="menu-text">Dashboard</span>
+
+                            </a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li>
+                                        <a href="@Url.Action("index", "Home")">
+                                            <i class="glyphicon glyphicon-home"></i>
+                                            Dashboard 431
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="@Url.Action("index", "Home")">
+                                            <i class="glyphicon glyphicon-home"></i>
+                                            Dashboard 987
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="sidebar-dropdown">
+                            <a href="#">
+                                <i class="glyphicon glyphicon-th"></i>
+                                <span class="menu-text">Dominios</span>
+                            </a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li><a href="@Url.Action("index", "Responsavel")"> <i class="glyphicon glyphicon-user"></i>Responsavel</a></li>
+                                    <li><a href="@Url.Action("index", "Retorno")"> <i class="glyphicon glyphicon-share-alt"></i>Retorno</a></li>
+                                    <li><a href="@Url.Action("index", "Sistema")"> <i class="glyphicon glyphicon-modal-window"></i>Sistema</a></li>
+                                    <li><a href="@Url.Action("index", "Situacao")"> <i class="glyphicon glyphicon-flag"></i>Situação</a></li>
+                                    <li><a href="@Url.Action("index", "Tipo")"> <i class="glyphicon glyphicon-tags"></i>Tipo</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="header-menu">
+                            <span>Menu 431</span>
+                        </li>
+                        <li class="sidebar-dropdown">
+                            <a href="#">
+                                <i class="glyphicon glyphicon-th-list"></i>
+                                <span class="menu-text">Classificação</span>
+                            </a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li><a href="@Url.Action("index", "Pendencias")"> <i class="glyphicon glyphicon-arrow-down"></i>A classificar</a></li>
+                                    <li><a href="@Url.Action("Lista", "Pendencias")"> <i class="glyphicon glyphicon-arrow-up"></i>Classificados</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("index", "Regra")">
+                                <i class="glyphicon glyphicon-sort"></i>
+                                Regras
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="@Url.Action("index", "Historico")">
+                                <i class="glyphicon glyphicon-transfer"></i>
+                                Histórico
+                            </a>
+                        </li>
+
+                        <li class="header-menu">
+                            <span>Menu 987</span>
+                        </li>
+
+                    </ul>
+                </div>
+                <!-- sidebar-menu  -->
             </div>
-
-            <ul class="list-unstyled components">
-
-                <li class="active">
-                    <a href="@Url.Action("index", "Home")">
-                        <i class="glyphicon glyphicon-home"></i>
-                        Dashboard
-                    </a>
-                </li>
-                <li class="active">
-                    <a href="@Url.Action("index", "Regra")">
-                        <i class="glyphicon glyphicon-registration-mark"></i>
-                        Regras
-                    </a>
-                </li>
-                <li>
-                    <a href="#classSubmenu" data-toggle="collapse" aria-expanded="false">
-                        <i class="glyphicon glyphicon-arrow-up"></i>
-                        Classificar
-                    </a>
-                    <ul class="collapse list-unstyled" id="classSubmenu">
-                        <li><a href="@Url.Action("index", "Pendencias")"> <i class="glyphicon glyphicon-user"></i>A Classificar</a></li>
-                        <li><a href="@Url.Action("Lista", "Pendencias")"> <i class="glyphicon glyphicon-hand-up"></i>Classificados</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="#CadSubmenu" data-toggle="collapse" aria-expanded="false">
-                        <i class="glyphicon glyphicon-grain"></i>
-                        Dominios
-                    </a>
-                    <ul class="collapse list-unstyled" id="CadSubmenu">
-                        <li><a href="@Url.Action("index", "Responsavel")"> <i class="glyphicon glyphicon-user"></i>Responsavel</a></li>
-                        <li><a href="@Url.Action("index", "Retorno")"> <i class="glyphicon glyphicon-hand-up"></i>Retorno</a></li>
-                        <li><a href="@Url.Action("index", "Sistema")"> <i class="glyphicon glyphicon-ok-sign"></i>Sistema</a></li>
-                        <li><a href="@Url.Action("index", "Situacao")"> <i class="glyphicon glyphicon-comment"></i>Situação</a></li>
-                        <li><a href="@Url.Action("index", "Tipo")"> <i class="glyphicon glyphicon-compressed"></i>Tipo</a></li>
-                    </ul>
-                </li>
-                <li class="active">
-                    <a href="@Url.Action("index", "Historico")">
-                        <i class="glyphicon glyphicon-registration-mark"></i>
-                        Histórico
-                    </a>
-                </li>
-
-                @*<ul class="list-unstyled CTAs">
-                <li><a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a></li>
-                <li><a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a></li>
-            </ul>*@
-
-            </ul>
-
-
+            <!-- sidebar-footer  -->
+            <div class="sidebar-footer">
+                <div style="text-align:center">
+                    <span>@DateTime.Now.Year </span>
+                </div>
+                 
+            </div>
         </nav>
-
-        <!-- Page Content Holder -->
-        <div id="content" class="container-fluid">
-
+        <!-- page-content  -->
+        <main class="page-content pt-2">
+            <div id="overlay" class="overlay"></div>
             <nav class="navbar navbar-expand-lg navbar-dark ">
+                <button id="pin-sidebar" class="btn btn-success navbar-btn">
+                    <i class="glyphicon glyphicon-align-justify"></i>
+                </button>
+                <div class="navbar-header">
 
-                    <div class="navbar-header">
-                        <button id="sidebarCollapse" class="btn btn-success navbar-btn">
-                            <i class="material-icons">
-                                menu
-                            </i>
-                        </button>
-                        <Span class="title" style="font-size:xx-large;">Monitoramento <strong>431</strong></Span>
-                    </div>
+                    <Span class="title">Monitor <strong>431</strong></Span>
+                </div>
 
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="@Url.Action("Contact", "Home")"><i class="glyphicon glyphicon-cog "></i></a></li>
-                            <li><a href="@Url.Action("About", "Home")"><i class="glyphicon glyphicon-info-sign"></i></a></li>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="@Url.Action("Contact", "Home")"><i class="glyphicon glyphicon-cog "></i></a></li>
+                        <li><a href="@Url.Action("About", "Home")"><i class="glyphicon glyphicon-info-sign"></i></a></li>
+                    </ul>
+                </div>
 
-                        </ul>
-                    </div>
-              
             </nav>
-
-
-            @RenderBody()
-
-
-            @*<div class="footer">
-                 <span >@DateTime.Now.Year - Meu Aplicativo ASP.NET</span>
-                </div>*@
-        </div>
+            <div class="container-fluid p-3">
+                    @RenderBody()
+            </div>
+        </main>
+        <!-- page-content" -->
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
+    </script>
+    <script src="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
 
-
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-
-    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-
-    
+    <script src="~/Scripts/js/main.js"></script>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+
 </body>
 </html>
 
