@@ -70,7 +70,7 @@ namespace ITAW000.Repository
                             item.PropostaID = reader["proposta_id"].ToString();
                             item.SituacaoProposta = reader["situacao_proposta"].ToString();
                             item.TipoMovimento = reader["tipo"].ToString();
-                            item.DiasPermanencia = (int)reader["dias_permanencia"];
+                            item.DiasPermanencia = (int)reader["Dias_permanencia"];
                             item.DtInicioVigencia = reader["dt_inicio_vigencia"].ToString();
                             item.DtFimVigencia = reader["dt_fim_vigencia"].ToString();
                             item.IdProduto = reader["produto_id"].ToString(); ;
@@ -189,9 +189,38 @@ namespace ITAW000.Repository
                 return list;
             }
         }
-        
-    
 
+        public List<ItemView> GetTempoPermanencia()
+        {
+            string sql = "Select Tempo_permanencia,  COUNT(Dias_permanencia) as total from  AMBIENTE_Acompanhamento_431_tb  GROUP by Tempo_permanencia";
+
+            using (var conn = new SqlConnection(StringConnection))
+            {
+                var cmd = new SqlCommand(sql, conn);
+                List<ItemView> list = new List<ItemView>();
+   
+                try
+                {
+                    conn.Open();
+                    using (var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                    {
+                        while (reader.Read())
+                        {
+                            list.Add(new ItemView(reader[0].ToString(), reader[1].ToString()) );
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+                return list;
+            }
+        }
+
+
+
+ 
 
         public override Item431 GetById(int id)
         {

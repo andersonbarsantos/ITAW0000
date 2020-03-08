@@ -18,7 +18,9 @@ namespace ITAW000.Controllers
             ViewBag.TotalRecebidos = valor[0];
             ViewBag.TotalClassificado = valor[1];
             ViewBag.TotalNaoClassificado = valor[2];
-                       
+
+            ViewBag.ListaTempoPermanencia = pendenciaRespository.GetTempoPermanencia();
+
             return View();
         }
 

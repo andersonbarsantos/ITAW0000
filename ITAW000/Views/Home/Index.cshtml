@@ -4,11 +4,59 @@
 
         <div class="row">
             <div class="col-8">
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header ">
+                                <i class="glyphicon glyphicon-time"></i>
+                                <h3>Tempo de Permanência </h3>
+                                <p>Realação de Registros Tempo de permanencia</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="container-fluid">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Descriçao</th>
+                                                    <th align="center">Quantidade</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in ViewBag.ListaTempoPermanencia as IList<ITAW000.Models.ItemView>)
+                                                {
+                                                    <tr>
+                                                        <td> <i class="glyphicon glyphicon-time alert-warning" style="font-size:20px;"></i> </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Name)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Valor)
+                                                        </td>
+
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <br>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <i class="material-icons">assignment</i>
+                                <i class="glyphicon glyphicon-th-list"></i>
                                 <h3>Classificações Relatório </h3>
                                 <p>Realação de Registros Classificados em @DateTime.Today.ToShortDateString()</p>
                             </div>
@@ -63,20 +111,6 @@
                                         </table>
                                     </div>
 
-                                    <nav aria-label="Page navigation example">
-                                        <ul class="pagination justify-content-center">
-                                            <li class="page-item disabled">
-                                                <a class="page-link" href="#" tabindex="-1">Previous</a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="#">Next</a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-
 
                                 </div>
                             </div>
@@ -84,6 +118,7 @@
                         </div>
                     </div>
                 </div>
+
 
             </div>
             <div class="col-4 ">

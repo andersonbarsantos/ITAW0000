@@ -17,8 +17,9 @@ namespace ITAW000.Controllers
     
 
             ViewBag.ListaAll = pendenciaRespository.GetAll();
-            ViewBag.ListaClassificados = pendenciaRespository.GetNaoClassificados();
-            
+            ViewBag.ListaNaoClassificados = pendenciaRespository.GetNaoClassificados();
+            ViewBag.ListaClassificados = pendenciaRespository.GetClassificados();
+
             return View();
         }
 
@@ -41,11 +42,11 @@ namespace ITAW000.Controllers
 
         // POST: Regra/Create
         [HttpPost]
-        public ActionResult Edit(Item431 objModel)
+        public ActionResult Classificar(string itens)
         {
             try
             {
-                pendenciaRespository.Update(objModel); 
+                //pendenciaRespository.Update(objModel); 
 
                 return RedirectToAction("Index");
             }

@@ -227,3 +227,85 @@ select * from  [AMBIENTE_Acompanhamento_431_tb]
 
  select count(*) from  [AMBIENTE_Acompanhamento_431_tb] WHERE not Regra_aplicada is null
  select count(*) from  [AMBIENTE_Acompanhamento_431_tb] WHERE  Regra_aplicada is null
+
+
+
+
+
+ 
+insert into  [AMBIENTE_Acompanhamento_431_tb] 
+select  
+'AB',			-- empresa,		
+5,				-- unidade,
+'ALS',			-- sistema, 
+3,					--sistema_regra,
+'responsavel',    -- responsavel,
+58,                     --responsavel_regra ,
+0,             -- situacao,
+NULL ,        --  situacao_regra ,
+252222,      -- Cod_produto_bb,
+11,          -- Produto_id, 
+22565,         --Produto_externo,
+'nome' ,        --nome ,
+22656544,-- Proposta_bb,
+5286699554,-- Proposta_id,    
+GETDATE() ,    -- Dt_contratacao,
+'c' ,        -- Situacao_proposta ,
+1 ,      -- Ramo_id ,
+1154 ,         -- Subramo_id ,
+GETDATE() ,            -- Dt_inicio_vigencia,
+GETDATE() ,           -- Dt_fim_vigencia  ,
+0.00     ,              -- Val_premio      ,
+0,                    -- Qtd_parcelas,
+2    ,              -- Forma_pgto    , 
+14   ,              -- Cd_prd   ,
+4455 ,              -- Cd_mdld ,
+1425,                  -- Cd_item_mdld,
+1        ,         -- Nr_ctr_sgro        ,
+2 ,              -- Nr_vrs_eds ,
+121242   ,         -- Wf_id   ,
+5,                 -- Numero_agrupador,
+55      ,           -- tipo      ,
+5  ,                -- tipo_regra  ,
+0 ,					-- Situacao_bb_id ,
+0   ,				-- Tp_endosso_id   ,
+0       , -- Num_endosso_bb     ,
+GETDATE() ,         -- Dt_processamento_bb   ,
+GETDATE() ,         -- Dt_remessa_bb       ,
+'365 DIAS',         -- Tempo_permanencia          ,
+25,                 -- Dias_permanencia,
+'descricao'   ,     -- descricao   ,    
+'observacao'    ,   -- observacao    ,
+GETDATE() ,         -- Dt_previsao_solucao,
+GETDATE() ,         -- Dt_relatorio       ,
+GETDATE() ,         -- Dt_carga             ,     
+GETDATE() ,         -- Dt_consulta_produto  ,
+GETDATE() ,         -- Dt_consulta_proposta   ,
+GETDATE() ,         -- Dt_critica_proposta1  ,
+GETDATE() ,          -- Dt_critica_proposta2   ,
+NULL  ,             -- Responsavel_gerencial  ,
+NULL ,                 -- Situacao_gerencial ,
+NULL  ,                    -- Descrição_gerencial  ,
+'SISTEMA'    , 				-- usuario    ,    
+GETDATE() , 				-- dt_inclusao ,   
+GETDATE() ,  			-- 	Dt_alteracao,   
+GETDATE() ,  			-- 	Dt_inclusao_pend
+NULL					-- 	Regra_aplicada
+
+Select * from  AMBIENTE_Acompanhamento_431_tb  WITH(NOLOCK)
+delete from  AMBIENTE_Acompanhamento_431_tb where acompanhamento_431_ID =  13
+
+UPdate   AMBIENTE_Acompanhamento_431_tb set Regra_aplicada = 1 where acompanhamento_431_ID in (45,46)
+
+insert into  [AMBIENTE_Acompanhamento_431_tb] 
+select  'AB',5,'ALS',3,'Anderson',null,0,5,698,2,
+26,NULL,2226655,9985647,GETDATE(),'c',15,1566,GETDATE(),NULL,
+0.00,0,2,12,1245,225655,66695589,2,336696,
+NULL,1,NULL,NULL,3,23366544,GETDATE(),GETDATE(),'40 dias',
+7,'descricao','observacao',GETDATE(),GETDATE(),GETDATE(),GETDATE(),GETDATE(),GETDATE(),GETDATE(),GETDATE(),NULL,
+NULL,NULL,'SISTEMA',GETDATE(),GETDATE(),GETDATE(),NUll
+
+
+
+
+Select Tempo_permanencia, Dias_permanencia from  AMBIENTE_Acompanhamento_431_tb  GROUP by Tempo_permanencia, Dias_permanencia
