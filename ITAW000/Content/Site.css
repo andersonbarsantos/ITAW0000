@@ -263,6 +263,13 @@ td a {
             background-attachment: fixed;
         }
 
+    #sidebar .sidebar-detail {
+        padding: 20px;
+        background: #ffe400;
+        height: 105px;
+
+    }
+
     #sidebar .sidebar-footer {
         padding: 20px;
         background: #757272;
