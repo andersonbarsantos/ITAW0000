@@ -1,10 +1,8 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-
         <div class="row">
-            <div class="col-8">
-
+            <div class="col-9">
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
@@ -41,10 +39,6 @@
                                             </tbody>
                                         </table>
                                     </div>
-
-
-
-
                                 </div>
                             </div>
 
@@ -58,7 +52,7 @@
                             <div class="card-header">
                                 <i class="glyphicon glyphicon-th-list"></i>
                                 <h3>Classificações Relatório </h3>
-                                <p>Realação de Registros Classificados em @DateTime.Today.ToShortDateString()</p>
+                                <p>Relação de Classificados agrupadas por regras ja definidas </p>
                             </div>
                             <div class="card-body">
                                 <div class="container-fluid">
@@ -68,46 +62,25 @@
                                                 <tr>
                                                     <th></th>
                                                     <th>Classificação</th>
-                                                    <th style="text-align:center" >Quantidade</th>
+                                                    <th style="text-align:center">Quantidade</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td Style="max-width: 5px;"> <i class="glyphicon glyphicon-check alert-success" style="font-size:20px;"></i> </td>
-                                                    <td Style="max-width: 130px;text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">- Documento com evento de estudo enviado para o Banco e aceito, com pedido de laudo emitido dentro do prazo de 45 dias e aguardando retorno.</td>
-                                                    <td style="text-align:center"><strong>691</strong></td>
-                                                </tr>
-                                                <tr>
-                                                    <td> <i class="glyphicon glyphicon-check alert-success" style="font-size:20px;"></i> </td>
-                                                    <td> - Documento vencido. Solicitar descarte ao BB.</td>
-                                                    <td style="text-align:center"><strong>520</strong></td>
-                                                </tr>
-                                                <tr>
-                                                    <td> <i class="glyphicon glyphicon-check alert-success" style="font-size:20px;"></i> </td>
-                                                    <td> - Pendente de classificação.</td>
-                                                    <td style="text-align:center"><strong>377</strong></td>
-                                                </tr>
-                                                <tr>
-                                                    <td> <i class="glyphicon glyphicon-check alert-success" style="font-size:20px;"></i> </td>
-                                                    <td>  - Pendente de classificação.</td>
-                                                    <td style="text-align:center"><strong>1012</strong></td>
-                                                </tr>
-                                                <tr>
-                                                    <td> <i class="glyphicon glyphicon-check alert-success" style="font-size:20px;"></i> </td>
-                                                    <td> - Pendente de classificação.</td>
-                                                    <td style="text-align:center"><strong>695</strong></td>
-                                                </tr>
-                                                <tr>
-                                                    <td> <i class="glyphicon glyphicon-check alert-success" style="font-size:20px;"></i> </td>
-                                                    <td> - Pendente de classificação.</td>
-                                                    <td style="text-align:center"><strong>02</strong></td>
-                                                </tr>
-                                                <tr>
-                                                    <td> <i class="glyphicon glyphicon-check alert-success" style="font-size:20px;"></i> </td>
-                                                    <td> - Classificado com erro. </td>
-                                                    <td style="text-align:center"><strong>245</strong></td>
-                                                </tr>
-                                            </tbody>
+                                            <tbody>
+                                                @foreach (var item in ViewBag.ListaDescricaoGroupBy as IList<ITAW000.Models.ItemView>)
+                                                {
+                                                    <tr>
+                                                        <td style="text-align:center; width:15px;"> <i class="glyphicon glyphicon-ok-circle alert-warning" style="font-size:20px;"></i> </td>
+                                                        <td Style="max-width: 130px;text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
+                                                            @Html.DisplayFor(modelItem => item.Name)
+                                                        </td>
+                                                        <td style="text-align:center; width:15px;">
+                                                            @Html.DisplayFor(modelItem => item.Valor)
+                                                        </td>
+
+                                                    </tr>
+                                                }
+                                            </tbody>                                     
                                         </table>
                                     </div>
 
@@ -118,41 +91,42 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
-            <div class="col-4 ">
+            <div class="col-3 ">
                 <div class="row">
                     <div class="col-12 ">
                         <div class=" alert alert-info " role="alert">
                             <h4 class="alert-heading"><i class="glyphicon glyphicon-inbox"></i> - Recebidos</h4>
+                            <hr>
                             <span style="float:right ; font-size:40px"><strong> @ViewBag.TotalRecebidos</strong></span>
-                            <p>Total de Registros Recebidos</p>
+                            <br>
                             <br>
                             <hr>
-                            <p class="mb-0">Lista Atualizada em @DateTime.Now.ToShortDateString()</p>
+                            <p class="mb-0" style="font-size:small">Ultima Atualização @DateTime.Now.ToShortDateString()</p>
                         </div>
                     </div>
 
                     <div class="col-12 ">
                         <div class=" alert alert-success " role="alert">
                             <h4 class="alert-heading"><i class="glyphicon glyphicon-check"></i> - Já Classificados </h4>
-                            <span style="float:right ; font-size:40px"><strong> @ViewBag.TotalClassificado</strong></span>
-                            <p>lista de registros Classificados.</p>
-                            <br>
                             <hr>
-                            <p class="mb-0">Lista Atualizada em @DateTime.Now.ToShortDateString()</p>
+                            <span style="float:right ; font-size:40px"><strong> @ViewBag.TotalClassificado</strong></span>
+                            <p style="font-family:Arial, Times, Times New Roman, serif">Automatico : <strong>0</strong></p>
+                            <p style="font-family:Arial, Times, Times New Roman, serif">Manualmente : <strong>0</strong></p>
+                            <hr>
+                            <p class="mb-0" style="font-size:small">Ultima Atualização @DateTime.Now.ToShortDateString()</p>
                         </div>
                     </div>
 
                     <div class="col-12 ">
                         <div class=" alert alert-danger " role="alert">
                             <h4 class="alert-heading"><i class="glyphicon glyphicon-unchecked"></i> - Não Classificados</h4>
+                            <hr>
                             <span style="float:right ; font-size:40px"><strong> @ViewBag.TotalNaoClassificado</strong></span>
-                            <p>Registros ainda não Classificados .</p>
+                            <br>
                             <br>
                             <hr>
-                            <p class="mb-0">Lista Atualizada em @DateTime.Now.ToShortDateString()</p>
+                            <p class="mb-0" style="font-size:small">Ultima Atualização @DateTime.Now.ToShortDateString()</p>
                         </div>
                     </div>
 

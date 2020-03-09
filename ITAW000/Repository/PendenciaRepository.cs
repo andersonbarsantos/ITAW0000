@@ -143,7 +143,7 @@ namespace ITAW000.Repository
 
         public List<Item431> GetNaoClassificados()
         {
-            string sql = "Select * from  AMBIENTE_Acompanhamento_431_tb  WITH(NOLOCK) WHERE Regra_aplicada is null";
+            string sql = "Select top 13 * from  AMBIENTE_Acompanhamento_431_tb  WITH(NOLOCK) WHERE Regra_aplicada is null";
 
             using (var conn = new SqlConnection(StringConnection))
             {
@@ -218,9 +218,68 @@ namespace ITAW000.Repository
             }
         }
 
+        public List<ItemView> GetDescricaoGroupBy()
+        {
+            string sql = "SELECT regra.descricao , counT(1)  from AMBIENTE_Acompanhamento_431_tb acompanhamento" +
+                            " JOIN AMBIENTE_regra_tb regra ON acompanhamento.Regra_aplicada = regra.IdRegra"+
+                            " WHERE not Regra_aplicada is null" +
+                            " GROUP by regra.descricao";
+
+            using (var conn = new SqlConnection(StringConnection))
+            {
+                var cmd = new SqlCommand(sql, conn);
+                List<ItemView> list = new List<ItemView>();
+
+                try
+                {
+                    conn.Open();
+                    using (var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                    {
+                        while (reader.Read())
+                        {
+                            list.Add(new ItemView(reader[0].ToString(), reader[1].ToString()));
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+                return list;
+            }
+        }
+
+        public bool UpdateToRegra(string ids ,  int idRegra)
+        {
+            bool result = false;
+
+            using (var conn = new SqlConnection(StringConnection))
+            {
+                string sql = "UPDATE AMBIENTE_Acompanhamento_431_tb SET regra_aplicada=@RegraAplicada  Where IdRegra in(@Ids)";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@Id", ids);
+                cmd.Parameters.AddWithValue("@RegraAplicada", idRegra);
+
+                try
+                {
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+
+            return result; 
+        }
 
 
- 
+
+
+
+
 
         public override Item431 GetById(int id)
         {

@@ -20,6 +20,8 @@ namespace ITAW000.Controllers
             ViewBag.TotalNaoClassificado = valor[2];
 
             ViewBag.ListaTempoPermanencia = pendenciaRespository.GetTempoPermanencia();
+            ViewBag.ListaDescricaoGroupBy = pendenciaRespository.GetDescricaoGroupBy();
+                       
 
             return View();
         }
