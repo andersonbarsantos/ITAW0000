@@ -5,10 +5,10 @@
 }
 
 <script>
-    function GetDetails(id) {
+    function GetDetails(ids) {
         $.ajax({
-            url: "/responsavel/Edit/" + id,
-            typr: "GET",
+            url: "/pendencias/classificar/",
+            typr: "POST",
             contentType: "application/json;charset=UTF-8",
             dataType: "json",
             success: function (response) {
