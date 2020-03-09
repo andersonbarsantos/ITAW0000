@@ -19,6 +19,10 @@ namespace ITAW000.Controllers
             ViewBag.TotalClassificado = valor[1];
             ViewBag.TotalNaoClassificado = valor[2];
 
+            ViewBag.AprovacaoAutomica = valor[3];
+            ViewBag.AprovacaoManual = valor[4];
+
+
             ViewBag.ListaTempoPermanencia = pendenciaRespository.GetTempoPermanencia();
             ViewBag.ListaDescricaoGroupBy = pendenciaRespository.GetDescricaoGroupBy();
                        

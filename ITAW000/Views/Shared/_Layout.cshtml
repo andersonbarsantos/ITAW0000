@@ -145,7 +145,7 @@
         <!-- page-content  -->
 
         <main class="page-content pt-0">
-            <nav class="navbar navbar-expand-lg  ">
+            <nav class="navbar navbar-expand-md  ">
                 <button id="pin-sidebar" class="btn btn-info navbar-btn">
                     <i class="glyphicon glyphicon-align-justify"></i>
                 </button>
@@ -153,7 +153,7 @@
                     <div class="hero-image"> <img src="~/images/logo.png" alt="" style="max-width:720px;" /></div>
                 </div>
 
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="@Url.Action("Contact", "Home")"><i class="glyphicon glyphicon-cog "></i></a></li>
                         <li><a href="@Url.Action("About", "Home")"><i class="glyphicon glyphicon-info-sign"></i></a></li>
@@ -162,7 +162,7 @@
             </nav>
             <div id="overlay" class="overlay"></div>
 
-            <div class="container-fluid p-3">
+            <div class="container-fluid p-4">
                 @RenderBody()
             </div>
         </main>

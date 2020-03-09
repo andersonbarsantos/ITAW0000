@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
 using System.Web;
 
 using ITAW000.Models;
@@ -15,10 +16,14 @@ namespace ITAW000.Repository
         public  List<int> GetTotal()
         {
             string sql = " select count(*) from  [AMBIENTE_Acompanhamento_431_tb] " +
-            " Union all" + 
-            " select count(*) from[AMBIENTE_Acompanhamento_431_tb] WHERE not Regra_aplicada is null" + 
-            " Union all" + 
-            " select count(*) from[AMBIENTE_Acompanhamento_431_tb] WHERE Regra_aplicada is null";
+            " Union all" +
+            " select count(*) from [AMBIENTE_Acompanhamento_431_tb] WHERE not Regra_aplicada is null" +
+            " Union all" +
+            " select count(*) from [AMBIENTE_Acompanhamento_431_tb] WHERE Regra_aplicada is null" +
+            " Union all" +
+            " select count(*) from [AMBIENTE_Acompanhamento_431_tb] WHERE  flg_classificacao = 'A' and  not Regra_aplicada is null " +
+            " Union all" +
+            " select count(*) from [AMBIENTE_Acompanhamento_431_tb] WHERE  flg_classificacao = 'M' and  not Regra_aplicada is null";
 
             using (var conn = new SqlConnection(StringConnection))
             {
@@ -249,17 +254,41 @@ namespace ITAW000.Repository
             }
         }
 
-        public bool UpdateToRegra(string ids ,  int idRegra)
+        public bool UpdateToRegra(Regra entity)
         {
             bool result = false;
 
             using (var conn = new SqlConnection(StringConnection))
             {
-                string sql = "UPDATE AMBIENTE_Acompanhamento_431_tb SET regra_aplicada=@RegraAplicada  Where IdRegra in(@Ids)";
+                StringBuilder  sql = new StringBuilder();
 
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@Id", ids);
-                cmd.Parameters.AddWithValue("@RegraAplicada", idRegra);
+                sql.AppendLine(" UPDATE AMBIENTE_Acompanhamento_431_tb SET regra_aplicada= @RegraAplicada , observacao = @observacao , flg_classificacao = 'M' WHERE acompanhamento_431_ID in(" + entity.IDs + ")"); 
+                sql.AppendLine(" UPDATE a431 " +
+                                    " SET  sistema_regra = sistema_tb.IdSistema" +
+                                    " , responsavel_regra = responsavel_tb.IdResponsavel" +
+                                    " , situacao_regra = situacao_tb.IdSituacao" +
+                                    " , tipo_regra = tipo_tb.IdTipo" +
+                                    " FROM AMBIENTE_Acompanhamento_431_tb a431" +
+                                    " INNER JOIN AMBIENTE_regra_tb regra" +
+                                    " ON  a431.Regra_aplicada = regra.IdRegra" +
+                                    " INNER JOIN AMBIENTE_sistema_tb sistema_tb WITH(NOLOCK)" +
+                                    " ON sistema_tb.IdSistema = regra.IdSistema" +
+                                    " INNER JOIN AMBIENTE_responsavel_tb responsavel_tb WITH(NOLOCK)" +
+                                    " ON responsavel_tb.IdResponsavel = regra.IdResponsavel" +
+                                    " INNER JOIN AMBIENTE_situacao_tb situacao_tb WITH(NOLOCK)" +
+                                    " ON situacao_tb.IdSituacao = regra.IdSituacao" +
+                                    " INNER JOIN AMBIENTE_tipo_tb tipo_tb WITH(NOLOCK)" +
+                                    " ON tipo_tb.IdTipo = regra.IdTipo " +
+                                    " INNER JOIN AMBIENTE_retorno_tb retorno_tb WITH(NOLOCK)" +
+                                    " ON retorno_tb.IdRetorno = regra.IdRetorno" +
+                                    " WHERE acompanhamento_431_ID in(" + entity.IDs + ")");
+
+
+
+                SqlCommand cmd = new SqlCommand(sql.ToString(), conn);
+                //cmd.Parameters.AddWithValue("@Ids", entity.IDs);
+                cmd.Parameters.AddWithValue("@observacao", entity.Observacao);
+                cmd.Parameters.AddWithValue("@RegraAplicada", entity.IdRegra);
 
                 try
                 {

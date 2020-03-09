@@ -1,0 +1,222 @@
+﻿@model ITAW000.Models.Item431
+
+@{
+    Layout = null;
+    ViewBag.Title = "Details";
+}
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">Detalhes do Registro</h4>
+        </div>
+        <div class="modal-body">
+            <p>@Html.DisplayNameFor(model => model.Id) : @Html.DisplayFor(model => model.Id)</p>
+            <p>@Html.DisplayNameFor(model => model.NomeProduto) : @Html.DisplayFor(model => model.NomeProduto)</p>
+            <p>@Html.DisplayNameFor(model => model.PropostaID) : @Html.DisplayFor(model => model.PropostaID)</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+        </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+@*<div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Detalhes do produto</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-9">
+                        <div class="card">
+                            <h4>Item431</h4>
+                            <hr />
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Empresa)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Empresa)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Responsavel)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Responsavel)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Unidade)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Unidade)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Sistema)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Sistema)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.IdProduto)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.IdProduto)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.NomeProduto)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.NomeProduto)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.IdProdutoBB)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.IdProdutoBB)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.PropostaBB)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.PropostaBB)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.PropostaID)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.PropostaID)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.SituacaoProposta)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.SituacaoProposta)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Ramo)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Ramo)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.SubRamo)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.SubRamo)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.DtInicioVigencia)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.DtInicioVigencia)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.DtFimVigencia)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.DtFimVigencia)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.TipoMovimento)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.TipoMovimento)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.NumeroContrato)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.NumeroContrato)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.NumeroVersaoEndosso)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.NumeroVersaoEndosso)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.DiasPermanencia)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.DiasPermanencia)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.RegraAplicada)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.RegraAplicada)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.DtRemessaBB)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.DtRemessaBB)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Descricao)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Descricao)
+                                </dd>
+
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+        </div> /.modal-content
+    </div> /.modal-dialog*@
+
+
+
+
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

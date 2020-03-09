@@ -175,36 +175,7 @@ namespace ITAW000.Controllers
             }
         }
         
-        private void SetViewBagRetornoType(Retorno itemSelected)
-        {
-            IEnumerable<Retorno> values =
 
-                              Enum.GetValues(typeof(Retorno))
-
-                              .Cast<Retorno>();
-
-            IEnumerable<SelectListItem> items =
-
-                from value in values
-
-                select new SelectListItem
-                {
-                    Text = value.ToString(),
-                    Value = value.ToString(),
-                    Selected = value == itemSelected,
-                };
-
-            ViewBag.MovieType = items;
-        }
-
-        public ActionResult SelectRetornoEnum()
-        {
-
-            SetViewBagRetornoType(new Retorno());
-
-            return View("SelectCategory");
-
-        }
 
 
     }

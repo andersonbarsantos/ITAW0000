@@ -208,6 +208,8 @@ Regra_aplicada
 from  [Acompanhamento_431_tb]
 
 
+ALTER TABLE dbo.[AMBIENTE_Acompanhamento_431_tb] ADD flg_classificacao CHAR(2)  ;
+
 
 select * from AMBIENTE_regra_tb
 select * from AMBIENTE_responsavel_tb
@@ -228,9 +230,7 @@ select * from  [AMBIENTE_Acompanhamento_431_tb]
  select count(*) from  [AMBIENTE_Acompanhamento_431_tb] WHERE not Regra_aplicada is null
  select count(*) from  [AMBIENTE_Acompanhamento_431_tb] WHERE  Regra_aplicada is null
 
-
-
-
+ 
 
  
 insert into  [AMBIENTE_Acompanhamento_431_tb] 
@@ -295,7 +295,6 @@ NULL					-- 	Regra_aplicada
 Select * from  AMBIENTE_Acompanhamento_431_tb  WITH(NOLOCK)
 delete from  AMBIENTE_Acompanhamento_431_tb where acompanhamento_431_ID =  13
 
-UPdate   AMBIENTE_Acompanhamento_431_tb set Regra_aplicada = 1 where acompanhamento_431_ID in (45,46)
 
 insert into  [AMBIENTE_Acompanhamento_431_tb] 
 select  'AB',5,'ALS',3,'Anderson',null,0,5,698,2,
@@ -309,3 +308,46 @@ NULL,NULL,'SISTEMA',GETDATE(),GETDATE(),GETDATE(),NUll
 
 
 Select Tempo_permanencia, Dias_permanencia from  AMBIENTE_Acompanhamento_431_tb  GROUP by Tempo_permanencia, Dias_permanencia
+
+Select regra.descricao ,  counT(1)  from  AMBIENTE_Acompanhamento_431_tb acompanhamento
+JOIN  AMBIENTE_regra_tb regra ON acompanhamento.Regra_aplicada = regra.IdRegra
+WHERE not Regra_aplicada is null
+GROUP by regra.descricao
+
+Select * from  AMBIENTE_Acompanhamento_431_tb  WITH(NOLOCK)
+
+UPDATE a431
+SET regra_aplicada= 1 
+, a431.observacao = 'texte' 
+, a431.flg_classificacao = 'M' 
+, sistema_regra = sistema_tb.NomeSistema
+, responsavel_regra = responsavel_tb.NomeResponsavel
+, situacao_regra = situacao_tb.NomeSituacao
+, tipo_regra = tipo_tb.NomeTipo
+FROM  AMBIENTE_Acompanhamento_431_tb a431
+INNER JOIN  AMBIENTE_regra_tb regra 
+ON  a431.Regra_aplicada = regra.IdRegra
+INNER JOIN AMBIENTE_sistema_tb sistema_tb WITH(NOLOCK) 
+ON sistema_tb.IdSistema = regra.IdSistema 
+INNER JOIN AMBIENTE_responsavel_tb responsavel_tb WITH(NOLOCK) 
+ON responsavel_tb.IdResponsavel = regra.IdResponsavel 
+INNER JOIN AMBIENTE_situacao_tb situacao_tb WITH(NOLOCK) 
+ON situacao_tb.IdSituacao = regra.IdSituacao
+INNER JOIN AMBIENTE_tipo_tb tipo_tb WITH(NOLOCK) 
+ON tipo_tb.IdTipo = regra.IdTipo 
+INNER JOIN AMBIENTE_retorno_tb retorno_tb WITH(NOLOCK) 
+ON retorno_tb.IdRetorno = regra.IdRetorno
+WHERE acompanhamento_431_ID in(1)
+
+
+_regra_tb AMBIENTE_regra_tb WITH(NOLOCK) 
+LEFT JOIN AMBIENTE_sistema_tb sistema_tb WITH(NOLOCK) 
+ON sistema_tb.IdSistema = AMBIENTE_regra_tb.IdSistema 
+LEFT JOIN AMBIENTE_responsavel_tb responsavel_tb WITH(NOLOCK) 
+ON responsavel_tb.IdResponsavel = AMBIENTE_regra_tb.IdResponsavel 
+LEFT JOIN AMBIENTE_situacao_tb situacao_tb WITH(NOLOCK) 
+ON situacao_tb.IdSituacao = AMBIENTE_regra_tb.IdSituacao
+LEFT JOIN AMBIENTE_tipo_tb tipo_tb WITH(NOLOCK) 
+ON tipo_tb.IdTipo = AMBIENTE_regra_tb.IdTipo 
+LEFT JOIN AMBIENTE_retorno_tb retorno_tb WITH(NOLOCK) 
+ON retorno_tb.IdRetorno = AMBIENTE_regra_tb.IdRetorno

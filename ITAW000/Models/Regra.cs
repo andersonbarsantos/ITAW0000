@@ -51,5 +51,8 @@ namespace ITAW000.Models
         public DateTime DtInclusao { get; set; }
         public DateTime DtAlteracao { get; set; }
         public string Usuario { get; set; }
+
+        public string IDs { get; set; }
+        public string Observacao { get; set; }
     }
 }

@@ -8,14 +8,53 @@
 <div class="row">
     <div class="col-12 ">
         <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="form-group col-md-10">
+                        <label class="col-sm-3 control-label">Regra a ser aplicada</label>
+                        @Html.DropDownList("idRegra", new SelectList(ViewBag.ListaRegras, "IdRegra", "descricao", -1), htmlAttributes: new { @class = "form-control", id = "IdRegra", name = "IdRegra" })
+                        @Html.ValidationMessage("idRegra", "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-md-2">
+                        <a id="confirmar" class="btn btn-success pull-right" data-toggle="modal">
+                            Classificar Selecionados
+                        </a>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label class="col-sm-12 control-label">Observação</label>
+                        @Html.TextArea("observacao",
+                                                new
+                                                {
+                                                    @class = "form-control",
+                                                    id = "observacao",
+                                                    name = "observacao",
+                                                    @style = "width=100%",
+                                                    rows = "3",
+                                                    @draggable = "false",
+                                                    @maxlength = "500",
+                                                    @minlength = "5",
+                                                    @required = "false"
+                                                })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-12 ">
+        <div class="card">
             <div class="card-header">
                 <i class="glyphicon glyphicon-arrow-down"></i>
                 <h3>Classificação de Pendências </h3>
                 <p>Classificar registros ainda não classificados</p>
                 @*<a href="@Url.Action("", "Pendencia")" class="btn btn-success pull-right" id="confirmar" data-toggle="modal">Classificar Selecionados</a>*@
-            <a id="confirmar" class="btn btn-success pull-right" id="confirmar" data-toggle="modal">
-                Classificar Selecionados
-            </a>
+                @*<a id="confirmar" class="btn btn-success pull-right" data-toggle="modal">
+                        Classificar Selecionados
+                    </a>*@
             </div>
             <div class="card-body">
                 <div class="container-fluid">
@@ -24,10 +63,10 @@
                             <thead>
                                 <tr>
                                     <th>
-                                        <span class="custom-checkbox">
-                                            <input type="checkbox" id="selectAll">
-                                            <label for="selectAll"></label>
-                                        </span>
+                                        <label class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" value=0 id="selectAll">
+                                            <span class="custom-control-indicator"></span>
+                                        </label>
                                     </th>
                                     <th>Empresa</th>
                                     <th>Sistema</th>
@@ -47,10 +86,10 @@
                                 {
                                     <tr>
                                         <td>
-                                            <span class="custom-checkbox">
-                                                <input type="checkbox" id="checkItem" name="options[]" value=@item.Id class="custom-checkbox">
-                                                <label for="checkItem"></label>
-                                            </span>
+                                            <label class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" value=@item.Id>
+                                                <span class="custom-control-indicator"></span>
+                                            </label>
                                         </td>
 
                                         <td>
@@ -83,6 +122,17 @@
                                         <td style="text-align:center">
                                             @Html.DisplayFor(modelItem => item.DiasPermanencia)
                                         </td>
+                                        <td>
+                                            @*<a href="@Url.Action("Detail", "Pendencias", new {  id=@item.Id  })">
+                                                    <i class="glyphicon glyphicon-zoom-in"></i>
+                                                </a>*@
+
+                                            <button class="btn btn-default details" data-id="@item.Id" id="details"><i class="glyphicon glyphicon-file"></i></button>
+                                        </td>
+
+
+
+
                                     </tr>
                                 }
 
@@ -95,6 +145,9 @@
     </div>
 </div>
 
+<div class="modal" id="modal">
+
+</div>
 
 @section Scripts {
 
@@ -124,33 +177,43 @@
         });
 
 
-       $('#confirmar    ').on('click', function() {
-            var valores = $('input:checked').map(function() {
+        $('#confirmar').on('click', function () {
+            var valores = $('table tbody tr td label input:checked').map(function () {
                 return this.value;
             }).get().join(', ');
 
-           console.log(valores)
-            $('#resultado').html(valores);
-       });
+            $('#resultado').val(valores);
+
+            var val2 = $('#IdRegra').val();
+            var obs = $('#observacao').val();
 
 
-      function GetDetails(id) {
-        $.ajax({
-            url: "/responsavel/Edit/" + id,
-            typr: "GET",
-            contentType: "application/json;charset=UTF-8",
-            dataType: "json",
-            success: function (response) {
-                $('#IdEdit').val(response.IdResponsavel);
-                $('#idNome').val(response.NomeResponsavel);
-                $('#idDescricao').val(response.DescResponsavel);
-                $('#editModal').modal('show');
-            },
-            error: function (response) {
-                console.log(response);
-            }
+
+            $.ajax({
+                type: "POST",
+                url: '/Pendencias/Classificar',
+                contentType: "application/json; charset=utf-8",
+                dataType: "text",
+                data: "{ IdRegra:'" + val2 + "', IDs:'" + valores + "', observacao:'" + obs + "' }",
+                success: function (result) {
+                    alert("Atualizaçao feita com sucesso");
+                },
+                error: function (ex) {
+                    console.log(ex);
+                }
+            });
+
         });
-        return false;
-    }
+
+        $(function () {
+            $(".details").click(function () {
+                var id = $(this).attr("data-id");
+              
+                $("#modal").load("pendencias/Detail?id=" + id, function () {
+                    $("#modal").modal();
+                })
+            });
+        })
+
     </script>
 }
