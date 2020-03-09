@@ -6,12 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
-          integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <link rel="stylesheet" href="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.min.css">
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   
 
 
     <link rel="stylesheet" href="~/Content/css/main.css">
@@ -29,12 +28,13 @@
             <div class="sidebar-content">
                 <!-- sidebar-brand  -->
                 <div class="sidebar-item sidebar-brand">
-                    <div class="hero-image"> <img src="~/images/logo.png" alt="" style="max-width:720px;" /></div>
-                </div>
+                    <Span class="title">Monitor 431 - 987 </Span> 
+                 </div>
+
                 <!-- sidebar-header  -->
                 <div class="sidebar-item sidebar-header d-flex flex-nowrap">
                     <div class="user-pic">
-                        <img class="img-responsive img-rounded" src="~/Images/user.jpg" alt="User picture">
+                        <img class="img-responsive img-rounded" src="~/Images/usuario.png" alt="User picture">
                     </div>
                     <div class="user-info">
                         <span class="user-name">
@@ -47,7 +47,9 @@
                             <span>Online</span>
                         </span>
                     </div>
+
                 </div>
+
 
                 <!-- sidebar-menu  -->
                 <div class=" sidebar-item sidebar-menu">
@@ -137,19 +139,18 @@
                 <div style="text-align:center">
                     <span>@DateTime.Now.Year </span>
                 </div>
-                 
+
             </div>
         </nav>
         <!-- page-content  -->
-        <main class="page-content pt-2">
-            <div id="overlay" class="overlay"></div>
-            <nav class="navbar navbar-expand-lg navbar-dark ">
-                <button id="pin-sidebar" class="btn btn-success navbar-btn">
+
+        <main class="page-content pt-0">
+            <nav class="navbar navbar-expand-lg  ">
+                <button id="pin-sidebar" class="btn btn-info navbar-btn">
                     <i class="glyphicon glyphicon-align-justify"></i>
                 </button>
-                <div class="navbar-header">
-
-                    <Span class="title">Monitor <strong>431</strong></Span>
+                <div class="navbar-header">                  
+                    <div class="hero-image"> <img src="~/images/logo.png" alt="" style="max-width:720px;" /></div>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -158,23 +159,21 @@
                         <li><a href="@Url.Action("About", "Home")"><i class="glyphicon glyphicon-info-sign"></i></a></li>
                     </ul>
                 </div>
-
             </nav>
+            <div id="overlay" class="overlay"></div>
+
             <div class="container-fluid p-3">
-                    @RenderBody()
+                @RenderBody()
             </div>
         </main>
         <!-- page-content" -->
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
-    </script>
-    <script src="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   @* <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>*@
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+          <script src="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
 
     <script src="~/Scripts/js/main.js"></script>
 
