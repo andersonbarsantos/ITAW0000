@@ -5,16 +5,21 @@
     ViewBag.Title = "Details";
 }
 
-<div class="modal-dialog">
+<div class="modal-dialog modal-lg">
     <div class="modal-content">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title">Detalhes do Registro</h4>
+            <h4 class="modal-title">Detalhe do Registro</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         </div>
         <div class="modal-body">
             <p>@Html.DisplayNameFor(model => model.Id) : @Html.DisplayFor(model => model.Id)</p>
             <p>@Html.DisplayNameFor(model => model.NomeProduto) : @Html.DisplayFor(model => model.NomeProduto)</p>
             <p>@Html.DisplayNameFor(model => model.PropostaID) : @Html.DisplayFor(model => model.PropostaID)</p>
+            <p>@Html.DisplayNameFor(model => model.PropostaID) : @Html.DisplayFor(model => model.Responsavel)</p>
+            <p>@Html.DisplayNameFor(model => model.PropostaID) : @Html.DisplayFor(model => model.Unidade)</p>
+            <p>@Html.DisplayNameFor(model => model.PropostaID) : @Html.DisplayFor(model => model.Sistema)</p>
+            <p>@Html.DisplayNameFor(model => model.PropostaID) : @Html.DisplayFor(model => model.NomeProduto)</p>
+            <p>@Html.DisplayNameFor(model => model.PropostaID) : @Html.DisplayFor(model => model.PropostaBB)</p>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
@@ -218,8 +223,3 @@
 
 
 
-
-
-<p>
-    @Html.ActionLink("Back to List", "Index")
-</p>

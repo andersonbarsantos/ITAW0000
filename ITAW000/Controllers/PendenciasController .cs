@@ -11,7 +11,6 @@ namespace ITAW000.Controllers
         // GET: Regra
         public ActionResult Index()
         {
-
             ViewBag.ListaRegras = regraRespository.GetAll();
 
             ViewBag.ListaAll = pendenciaRespository.GetAll();
@@ -41,10 +40,20 @@ namespace ITAW000.Controllers
 
         }
 
+        // GET: Regra/Details/5
+        public ActionResult Classificar(string ids) {
+             ViewBag.ListaRegras = regraRespository.GetAll();
 
+            Regra regra = new Regra
+                {
+                    IDs = ids
+                };
 
-        // POST: ItemView/Classificar
-        [HttpPost]
+                return View("Classificar", regra); 
+        }
+
+       // POST: ItemView/Classificar
+       [HttpPost]
         public ActionResult Classificar(Regra objModel)
         {
             try

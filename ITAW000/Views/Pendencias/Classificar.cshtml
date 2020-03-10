@@ -1,0 +1,51 @@
+﻿@model ITAW000.Models.Regra
+
+@{
+      Layout = null;
+    ViewBag.Title = "Classificar";
+}
+
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">Detalhe do Registro</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        @using (Html.BeginForm("Classificar", "Pendencias", FormMethod.Post))
+        {
+            <div class="modal-body">
+                <div class="form-group">
+                    @Html.ValidationSummary(true, "Nenhum registro Selecionado", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.IDs, htmlAttributes: new { @class = "form-control", id = "ids", name = "ids" })
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-12 control-label">Regra a ser aplicada</label>
+                    @Html.DropDownList("idRegra", new SelectList(ViewBag.ListaRegras, "IdRegra", "descricao", -1), htmlAttributes: new { @class = "form-control", id = "IdRegra", name = "IdRegra" })
+                    @Html.ValidationMessage("idRegra", "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-12 control-label">Observação</label>
+                    @Html.TextArea("observacao",
+                                          new
+                                          {
+                                              @class = "form-control",
+                                              id = "observacao",
+                                              name = "observacao",
+                                              @style = "width=100%",
+                                              rows = "3",
+                                              @draggable = "false",
+                                              @maxlength = "500",
+                                              @minlength = "5",
+                                              @required = "false"
+                                          })
+                </div>
+            </div>
+        
+            <div class="modal-footer">
+                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                <input type="submit" class="btn btn-success" value="Confirmar">
+            </div>
+        }
+        </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->

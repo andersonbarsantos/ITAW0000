@@ -254,6 +254,15 @@ JOIN  AMBIENTE_regra_tb regra ON acompanhamento.Regra_aplicada = regra.IdRegra
 WHERE not Regra_aplicada is null
 GROUP by regra.descricao
 
+
+
+Select acompanhamento.Produto_id , produto.nome,  counT(1) as total from  AMBIENTE_Acompanhamento_431_tb acompanhamento
+JOIN  AMBIENTE_regra_tb regra ON acompanhamento.Regra_aplicada = regra.IdRegra
+JOIN  seguros_db.dbo.produto_tb produto ON acompanhamento.Produto_id = produto.produto_id
+WHERE not Regra_aplicada is null
+GROUP by acompanhamento.Produto_id , produto.nome
+
+
 Select * from  AMBIENTE_Acompanhamento_431_tb  WITH(NOLOCK)
 
 UPDATE a431

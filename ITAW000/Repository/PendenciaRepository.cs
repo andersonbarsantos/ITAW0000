@@ -223,6 +223,41 @@ namespace ITAW000.Repository
             }
         }
 
+        public List<ItemView> GetProdutoGroupBy()
+        {
+            string sql = "Select acompanhamento.Produto_id , produto.nome,  counT(1) as total  " +
+                " FROM  AMBIENTE_Acompanhamento_431_tb acompanhamento" +
+                " JOIN  AMBIENTE_regra_tb regra ON acompanhamento.Regra_aplicada = regra.IdRegra" +
+                " JOIN  seguros_db.dbo.produto_tb produto ON acompanhamento.Produto_id = produto.produto_id" +
+                " WHERE not Regra_aplicada is null" +
+                " GROUP by acompanhamento.Produto_id , produto.nome"; 
+            
+            using (var conn = new SqlConnection(StringConnection))
+            {
+                var cmd = new SqlCommand(sql, conn);
+                List<ItemView> list = new List<ItemView>();
+
+                try
+                {
+                    conn.Open();
+                    using (var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                    {
+                        while (reader.Read())
+                        {
+                            list.Add(new ItemView(reader[0].ToString(), reader[1].ToString(), reader[2].ToString()));
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+                return list;
+            }
+        }
+
+        
+
         public List<ItemView> GetDescricaoGroupBy()
         {
             string sql = "SELECT regra.descricao , counT(1)  from AMBIENTE_Acompanhamento_431_tb acompanhamento" +

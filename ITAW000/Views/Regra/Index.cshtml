@@ -4,11 +4,8 @@
     ViewBag.Title = "Regras";
 }
 
-
-
 <div class="row">
     <div class="col-12">
-
         <div class="card">
             <div class="card-header">
                 <i class="glyphicon glyphicon-sort"></i>
@@ -39,8 +36,8 @@
                                         <th>Tipo</th>
                                         <th>Retorno</th>
                                         <th>Sistema</th>
-                                        <th>Descricao</th>
                                         <th>Situacao</th>
+                                        <th>Descricao</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -68,29 +65,19 @@
                                                 @Html.DisplayFor(modelItem => item.Sistema.NomeSistema)
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.Descricao)
-                                            </td>
-                                            <td>
                                                 @Html.DisplayFor(modelItem => item.Situacao.NomeSituacao)
                                             </td>
                                             <td>
-                                                @*<a onclick="GetDetails(@item.IdRegra)">
-            <i class="fa fa-edit text-success"></i>
-        </a>*@
+                                                @Html.DisplayFor(modelItem => item.Descricao)
+                                            </td>
 
+                                            <td>                                                
                                                 <a class="edit" data-id="@item.IdRegra">
-                                                   <i class="fa fa-edit text-success"></i>
-                                                </a>
-
-                                                @*<a onclick="Delete(@item.IdRegra)">
-            <i class="fa fa-trash-o text-danger"></i>
-        </a>*@
-
-                                                @*<a class="b details" data-id="@item.IdRegra" id="details"><i class="glyphicon glyphicon-file"></i></a>*@
+                                                    <i class="fa fa-edit text-success"></i>
+                                                </a>                               
                                             </td>
                                         </tr>
                                     }
-
                                 </tbody>
                             </table>
                         </div>
@@ -105,12 +92,9 @@
 
 </div>
 
-
-
 @section Scripts {
 
     <script type="text/javascript">
-
         $(function () {
 
             $("#create").click(function () {
@@ -120,123 +104,14 @@
 
             });
 
-             $(".edit").click(function () {
-                    var id = $(this).attr("data-id");
+            $(".edit").click(function () {
+                var id = $(this).attr("data-id");
 
-                    $("#modal").load("Regra/edit?id=" + id, function () {
-                        $("#modal").modal();
-                    })
-                });
+                $("#modal").load("Regra/edit?id=" + id, function () {
+                    $("#modal").modal();
+                })
+            });
 
         })
     </script>
 }
-
-<!-- Edit Modal HTML -->
-@*<div id="editModal" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <div class="modal-header">
-                    <h4 class="modal-title">Editar Registro</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                @using (Html.BeginForm("edit", "Regra", FormMethod.Post))
-                {
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title text-center">CADASTRO DE REGRA</h3>
-                        </div>
-
-                        <div class="panel-body">
-
-                            <form action="#" class="form-horizontal">
-                                <fieldset>
-                                    <legend>Informações Principais</legend>
-
-                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                    @Html.HiddenFor(model => model.IdRegra)
-
-
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label class="col-sm-3 control-label">Sistema</label>>
-                                            @Html.DropDownListFor(model => model.IdSistema, new SelectList(ViewBag.ListSistema, "value", "Text"), htmlAttributes: new { @class = "form-control", id = "idSistema" })
-                                            @Html.ValidationMessageFor(x => x.IdSistema, "", new { @class = "text-danger" })
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label class="col-sm-3 control-label">Responsavel</label>
-                                            @Html.DropDownListFor(model => model.IdResponsavel, new SelectList(ViewBag.ListResponsavel, "value", "Text"), htmlAttributes: new { @class = "form-control", id = "IdResponsavel", name = "IdResponsavel" })
-                                            @Html.ValidationMessageFor(x => x.IdResponsavel, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">Situação</label>
-                                        @Html.DropDownListFor(model => model.IdSituacao, new SelectList(ViewBag.ListSituacao, "value", "Text"), htmlAttributes: new { @class = "form-control", id = "IdSituacao", name = "IdSituacao" })
-                                        @Html.ValidationMessageFor(x => x.IdSituacao, "", new { @class = "text-danger" })
-                                    </div>
-
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label class="col-sm-3 control-label">Tipo</label>
-                                            @Html.DropDownListFor(model => model.IdTipo, new SelectList(ViewBag.ListTipo, "value", "Text"), htmlAttributes: new { @class = "form-control", id = "IdTipo" })
-                                            @Html.ValidationMessageFor(x => x.IdTipo, "", new { @class = "text-danger" })
-                                        </div>
-
-                                        <div class="form-group col-md-6">
-                                            <label class="col-sm-3 control-label">Retorno</label>
-                                            @Html.DropDownListFor(model => model.IdRetorno, new SelectList(ViewBag.ListRetorno, "value", "Text"), htmlAttributes: new { @class = "form-control", id = "IdRetorno" })
-                                            @Html.ValidationMessageFor(x => x.IdRetorno, "", new { @class = "text-danger" })
-                                        </div>
-
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <label class="col-sm-12 control-label">Descricao</label>
-                                        @Html.TextAreaFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control", rows = "4" } })
-                                        @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
-                                    </div>
-
-                                    <div class="form-group col-md-12">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="gridCheck">
-                                            <label class="form-check-label" for="gridCheck">
-                                                Situação
-                                            </label>
-                                        </div>
-                                    </div>
-
-                                </fieldset>
-                            </form>
-                        </div>
-                    </div>
-                }
-            </div>
-        </div>
-    </div>*@
-
-<!-- Delete Modal HTML -->
-@*<div id="deleteModal" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                @using (Html.BeginForm("Delete", "Regra", FormMethod.Post))
-                {
-                    <div class="modal-header">
-                        <h4 class="modal-title">Apagar Registro</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div>
-                    <div class="form-group">
-                        <input type="hidden" class="form-control" name="idRetorno" id="IdDelete">
-                    </div>
-
-                    <div class="modal-body">
-                        <p>Deseja Relamente excluir o item selecionado?</p>
-                        <p class="text-warning"><small>Esta ação não podera ser desfeita.</small></p>
-                    </div>
-                    <div class="modal-footer">
-                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <input type="submit" class="btn btn-danger" value="Delete">
-                    </div>
-                }
-            </div>
-        </div>
-    </div>*@

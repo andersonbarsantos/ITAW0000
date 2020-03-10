@@ -826,12 +826,14 @@ body {
         margin: -50px 0 0 10px;
     }
 
+    .card-header a i {
+       font-size:15px;
+    }
 
-
-td a {
-    font-size: 25px;
-    cursor: pointer;
-}
+    .card-body td a {
+        font-size: 18px;
+        cursor: pointer;
+    }
 
 p {
     font-family: 'Poppins', sans-serif;
@@ -919,13 +921,25 @@ p {
     }
 
 
-.modal-dialog {
-    width: 360px;
+
+
+.gi-2x {
+    font-size: 2em;
 }
 
-.modal-header {
-    background-color: #337AB7;
-    padding: 16px 16px;
-    color: #FFF;
-    border-bottom: 2px dashed #337AB7;
+.gi-3x {
+    font-size: 3em;
+}
+
+.gi-4x {
+    font-size: 4em;
+}
+
+.gi-5x {
+    font-size: 5em;
+}
+
+
+.accordion-toggle:hover {
+    text-decoration: none;
 }
