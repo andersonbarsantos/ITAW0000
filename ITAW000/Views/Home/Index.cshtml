@@ -4,17 +4,17 @@
         <div class="row">
             <div class="col-9">
                 <div class="row-no-gutters ">                    
-                        <div id="accordion">
-                            <div class="card">
-                                <div class="card-header">
-                                    <i class="glyphicon glyphicon-paste"></i>
-                                    <h3>Classificação por produtos </h3>
-                                    <p>Realação de Registros Por Produtos</p>                                    
-                                    <a class="pull-right" data-toggle="collapse" href="#collapseOne"> <i class="glyphicon glyphicon-menu-down gi-5x;"></i> </a>
-                                </div>
-                                <div id="collapseOne" class="collapse" data-parent="#accordion">
-                                    <div class="card-body">                                 
-                                   <table class="table table-hover table-striped ">
+                    <div id="accordion">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="glyphicon glyphicon-option-vertical"></i>
+                                <h3>Total classificados por produto </h3>
+                                <p>Realação de Registros Por Produtos</p>
+                                <a class="pull-right" data-toggle="collapse" href="#collapseOne"> <i class="glyphicon glyphicon-menu-down gi-5x;"></i> </a>
+                            </div>
+                            <div id="collapseOne" class="collapse" data-parent="#accordion">
+                                <div class="card-body">
+                                    <table class="table table-hover table-striped ">
                                         <thead>
                                             <tr>
                                                 <th></th>
@@ -25,84 +25,95 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach (var item in ViewBag.ListaPorProduto as IList<ITAW000.Models.ItemView>)
+                                            @foreach (var item in ViewBag.ListaClassProdutoGroupBy as IList<ITAW000.Models.ItemView>)
                                             {
-                                            <tr>
-                                                <td style="text-align:center; width:15px;"> <i class="glyphicon glyphicon-paste alert-warning" style="font-size:20px;"></i> </td>
-                                                <td Style="max-width: 10px;text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
-                                                    @Html.DisplayFor(modelItem => item.Name).ToString().ToUpper()
-                                                </td>
-                                                <td Style="max-width: 130px;text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
-                                                    @Html.DisplayFor(modelItem => item.Valor)
-                                                </td>
-                                                <td style="text-align:center; width:15px;">
-                                                    @Html.DisplayFor(modelItem => item.Total)
-                                                </td>
-                                                <td style="text-align:center; width:15px;">
-                                                    <a class="details">
-                                                        <i class="glyphicon glyphicon-zoom-in"></i>
-                                                    </a>
-                                                </td>
+                                                <tr>
+                                                    <td style="text-align:center; width:15px;"> <i class="glyphicon glyphicon-paste alert-warning" style="font-size:20px;"></i> </td>
+                                                    <td Style="max-width: 10px;text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
+                                                        @Html.DisplayFor(modelItem => item.Name).ToString().ToUpper()
+                                                    </td>
+                                                    <td Style="max-width: 130px;text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
+                                                        @Html.DisplayFor(modelItem => item.Valor)
+                                                    </td>
+                                                    <td style="text-align:center; width:15px;">
+                                                        @Html.DisplayFor(modelItem => item.Total)
+                                                    </td>
+                                                    <td style="text-align:center; width:15px;">
+                                                        <a class="details">
+                                                            <i class="glyphicon glyphicon-zoom-in"></i>
+                                                        </a>
+                                                    </td>
 
-                                            </tr>
+                                                </tr>
                                             }
                                         </tbody>
-                                    </table>                          
-                                    </div>
+                                    </table>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="card">
-                                <div class="card-header">
-                                    <i class="glyphicon glyphicon-paste"></i>
-                                    <h3>Classificação por Tipo de endossos </h3>
-                                    <p>Realação de Registros Por Produtos</p>
-                                    <a class="pull-right" data-toggle="collapse" href="#collapseTwo"> <i class="glyphicon glyphicon-menu-down gi-5x;"></i> </a>
-                                </div>
-                                <div id="collapseTwo" class="collapse" data-parent="#accordion">
-                                    <div class="card-body">
-                                        <table class="table table-hover table-striped  ">
-                                            <thead>
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="glyphicon glyphicon-option-vertical"></i>
+                                <h3>Total não classificados por produto </h3>
+                                <p>Realação de Registros Por Produtos</p>
+                                <a class="pull-right" data-toggle="collapse" href="#collapseTwo"> <i class="glyphicon glyphicon-menu-down gi-5x;"></i> </a>
+                            </div>
+                            <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                                <div class="card-body">
+                                    <table class="table table-hover table-striped ">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th Style="max-width: 10px;">Produto ID</th>
+                                                <th>Nome Produto</th>
+                                                <th style="text-align:center">Total</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in ViewBag.ListaNoClassProdutoGroupBy as IList<ITAW000.Models.ItemView>)
+                                            {
                                                 <tr>
-                                                    <th></th>
-                                                    <th>Classificação</th>
-                                                    <th style="text-align:center">Quantidade</th>
+                                                    <td style="text-align:center; width:15px;"> <i class="glyphicon glyphicon-paste alert-warning" style="font-size:20px;"></i> </td>
+                                                    <td Style="max-width: 10px;text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
+                                                        @Html.DisplayFor(modelItem => item.Name).ToString().ToUpper()
+                                                    </td>
+                                                    <td Style="max-width: 130px;text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
+                                                        @Html.DisplayFor(modelItem => item.Valor)
+                                                    </td>
+                                                    <td style="text-align:center; width:15px;">
+                                                        @Html.DisplayFor(modelItem => item.Total)
+                                                    </td>
+                                                    <td style="text-align:center; width:15px;">
+                                                        <a class="details">
+                                                            <i class="glyphicon glyphicon-zoom-in"></i>
+                                                        </a>
+                                                    </td>
+
                                                 </tr>
-                                            </thead>                                         
-                                            <tbody>
-                                                @foreach (var item in ViewBag.ListaDescricaoGroupBy as IList<ITAW000.Models.ItemView>)
-                                                {
-                                                    <tr>
-                                                        <td style="text-align:center; width:15px;"> <i class="glyphicon glyphicon-ok-circle alert-warning" style="font-size:20px;"></i> </td>
-                                                        <td Style="max-width: 130px;text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
-                                                            @Html.DisplayFor(modelItem => item.Name)
-                                                        </td>
-                                                        <td style="text-align:center; width:15px;">
-                                                            @Html.DisplayFor(modelItem => item.Valor)
-                                                        </td>
-                                                    </tr>
-                                                }
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                            }
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
+                        </div>                  
 
-                             @* <div class="card">
-                                <div class="card-header">
-                                    <i class="glyphicon glyphicon-paste"></i>
-                                    <h3>Produtos </h3>
-                                    <p>Realação de Registros Por Produtos</p>
-                                    <a class="pull-right " data-toggle="collapse" href="#collapseThree"> <i class="glyphicon glyphicon-menu-down gi-5x;"></i> </a>
-                                </div>
-                                <div id="collapseThree" class="collapse" data-parent="#accordion">
-                                    <div class="card-body">
-                                        Lorem ipsum..
-                                    </div>
-                                </div>
-                            </div>*@
+                        @* <div class="card">
+                            <div class="card-header">
+                                <i class="glyphicon glyphicon-paste"></i>
+                                <h3>Produtos </h3>
+                                <p>Realação de Registros Por Produtos</p>
+                                <a class="pull-right " data-toggle="collapse" href="#collapseThree"> <i class="glyphicon glyphicon-menu-down gi-5x;"></i> </a>
+                            </div>
+                            <div id="collapseThree" class="collapse" data-parent="#accordion">
+                                <div class="card-body">
 
-                        </div>                    
+                                </div>
+                            </div>
+                        </div>*@
+
+                    </div>                    
                 </div>
                 <br>
                 <div class="row">

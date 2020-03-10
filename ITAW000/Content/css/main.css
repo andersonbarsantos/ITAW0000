@@ -726,7 +726,7 @@ body {
 
 
 .navbar {
-    background-color:#ffe400;
+    /*background-color: #FFC300; /* #ffe400; */*/
     transition: 0.3s;
     height: 54px;
     box-shadow: 0px 0px 3px 0px #999;
@@ -796,7 +796,7 @@ body {
 
 
 .card-header {
-    background-color: #33478a; /*#2d2c4f; */
+    background-color: #415789; /*#33478a; #2d2c4f; */
     height: 65px;
     color: white;
 }

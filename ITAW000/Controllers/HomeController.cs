@@ -22,10 +22,13 @@ namespace ITAW000.Controllers
             ViewBag.AprovacaoAutomica = valor[3];
             ViewBag.AprovacaoManual = valor[4];
 
-            ViewBag.ListaPorProduto = pendenciaRespository.GetProdutoGroupBy();
+            
             ViewBag.ListaTempoPermanencia = pendenciaRespository.GetTempoPermanencia();
             ViewBag.ListaDescricaoGroupBy = pendenciaRespository.GetDescricaoGroupBy();
-                       
+
+            ViewBag.ListaClassProdutoGroupBy = pendenciaRespository.GetClassProdutoGroupBy();
+            ViewBag.ListaNoClassProdutoGroupBy = pendenciaRespository.GetNoClassProdutoGroupBy();
+            
 
             return View();
         }
