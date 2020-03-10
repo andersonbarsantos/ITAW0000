@@ -8,11 +8,11 @@
                         <div class="card">
                             <div class="card-header">
                                 <i class="glyphicon glyphicon-option-vertical"></i>
-                                <h3>Total classificados por produto </h3>
-                                <p>Realação de Registros Por Produtos</p>
-                                <a class="pull-right" data-toggle="collapse" href="#collapseOne"> <i class="glyphicon glyphicon-menu-down gi-5x;"></i> </a>
+                                <h3>Lista por produtos classificados</h3>
+                                <p>Realação de registros agrupados por produtos já classificados</p>
+                                <a class="pull-right" data-toggle="collapse" href="#collapseOne" data-parent="#accordion">  <i class="glyphicon glyphicon-menu-down gi-5x;"></i> </a>
                             </div>
-                            <div id="collapseOne" class="collapse" data-parent="#accordion">
+                            <div id="collapseOne" class="panel-collapse collapse ">
                                 <div class="card-body">
                                     <table class="table table-hover table-striped ">
                                         <thead>
@@ -21,7 +21,7 @@
                                                 <th Style="max-width: 10px;">Produto ID</th>
                                                 <th>Nome Produto</th>
                                                 <th style="text-align:center">Total</th>
-                                                <th></th>
+                                                @*<th></th>*@
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -38,11 +38,11 @@
                                                     <td style="text-align:center; width:15px;">
                                                         @Html.DisplayFor(modelItem => item.Total)
                                                     </td>
-                                                    <td style="text-align:center; width:15px;">
+                                                    @*<td style="text-align:center; width:15px;">                                                       
                                                         <a class="details">
                                                             <i class="glyphicon glyphicon-zoom-in"></i>
                                                         </a>
-                                                    </td>
+                                                    </td>*@
 
                                                 </tr>
                                             }
@@ -55,11 +55,11 @@
                         <div class="card">
                             <div class="card-header">
                                 <i class="glyphicon glyphicon-option-vertical"></i>
-                                <h3>Total não classificados por produto </h3>
-                                <p>Realação de Registros Por Produtos</p>
-                                <a class="pull-right" data-toggle="collapse" href="#collapseTwo"> <i class="glyphicon glyphicon-menu-down gi-5x;"></i> </a>
+                                <h3>Lista por produtos não classificados</h3>
+                                <p>Realação de registros agrupados por produtos ainda nao classificados</p>
+                                <a class="pull-right" data-toggle="collapse" href="#collapseTwo"  data-parent="#accordion"> <i class="glyphicon glyphicon-menu-down gi-5x;"></i> </a>
                             </div>
-                            <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                            <div id="collapseTwo" class="panel-collapse collapse">
                                 <div class="card-body">
                                     <table class="table table-hover table-striped ">
                                         <thead>
@@ -74,24 +74,33 @@
                                         <tbody>
                                             @foreach (var item in ViewBag.ListaNoClassProdutoGroupBy as IList<ITAW000.Models.ItemView>)
                                             {
-                                                <tr>
-                                                    <td style="text-align:center; width:15px;"> <i class="glyphicon glyphicon-paste alert-warning" style="font-size:20px;"></i> </td>
-                                                    <td Style="max-width: 10px;text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
-                                                        @Html.DisplayFor(modelItem => item.Name).ToString().ToUpper()
-                                                    </td>
-                                                    <td Style="max-width: 130px;text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
-                                                        @Html.DisplayFor(modelItem => item.Valor)
-                                                    </td>
-                                                    <td style="text-align:center; width:15px;">
-                                                        @Html.DisplayFor(modelItem => item.Total)
-                                                    </td>
-                                                    <td style="text-align:center; width:15px;">
-                                                        <a class="details">
-                                                            <i class="glyphicon glyphicon-zoom-in"></i>
-                                                        </a>
+                                            <tr>
+                                                <td style="text-align:center; width:15px;"> <i class="glyphicon glyphicon-paste alert-warning" style="font-size:20px;"></i> </td>
+                                                <td Style="max-width: 10px;text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
+                                                    @Html.DisplayFor(modelItem => item.Name).ToString().ToUpper()
+                                                </td>
+                                                <td Style="max-width: 130px;text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
+                                                    @Html.DisplayFor(modelItem => item.Valor)
+                                                </td>
+                                                <td style="text-align:center; width:15px;">
+                                                    @Html.DisplayFor(modelItem => item.Total)
+                                                </td>
+                                                                                               
+                                                <td style="text-align:center; width:15px;">
+
+                                                    @using (Html.BeginForm("IndexProduto", "Pendencias", FormMethod.Post))
+                                                    {
+                                                    <div class="form-group">
+                                                        <input type="hidden" name="id" id="id" />
+                                                    </div>
+                                                            <input type="submit" class="btn btn-success" value="Confirmar">
+                                                            
+
+                                                            }
+
                                                     </td>
 
-                                                </tr>
+                                            </tr>
                                             }
                                         </tbody>
                                     </table>

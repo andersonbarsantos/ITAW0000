@@ -195,6 +195,55 @@ namespace ITAW000.Repository
             }
         }
 
+        public List<Item431> GetNaoClassificadosProduto(int idProduto)
+        {
+            string sql = "Select top 13 * from  AMBIENTE_Acompanhamento_431_tb  WITH(NOLOCK) WHERE Regra_aplicada is null and produto_id = " + idProduto+ " order by  dias_permanencia DESC  ";
+
+            using (var conn = new SqlConnection(StringConnection))
+            {
+                var cmd = new SqlCommand(sql, conn);
+                List<Item431> list = new List<Item431>();
+                Item431 item = null;
+                try
+                {
+                    conn.Open();
+                    using (var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                    {
+                        while (reader.Read())
+                        {
+                            item = new Item431();
+                            item.Id = (int)reader["acompanhamento_431_ID"];
+                            item.Empresa = reader["empresa"].ToString();
+                            item.Unidade = reader["unidade"].ToString();
+                            item.Sistema = reader["sistema"].ToString();
+                            item.Ramo = reader["ramo_id"].ToString(); ;
+                            item.SubRamo = reader["subramo_id"].ToString(); ;
+                            item.PropostaBB = reader["proposta_bb"].ToString();
+                            item.PropostaID = reader["proposta_id"].ToString();
+                            item.SituacaoProposta = reader["situacao_proposta"].ToString();
+                            item.TipoMovimento = reader["tipo"].ToString();
+                            item.DiasPermanencia = (int)reader["dias_permanencia"];
+                            item.DtInicioVigencia = reader["dt_inicio_vigencia"].ToString();
+                            item.DtFimVigencia = reader["dt_fim_vigencia"].ToString();
+                            item.IdProduto = reader["produto_id"].ToString(); ;
+                            item.IdProdutoBB = reader["cod_produto_bb"].ToString(); ;
+                            item.NomeProduto = reader["nome"].ToString();
+                            item.NumeroContrato = reader["nr_ctr_sgro"].ToString(); ;
+                            item.NumeroVersaoEndosso = reader["Nr_vrs_eds"].ToString(); ;
+                            item.DtRemessaBB = reader["dt_remessa_bb"].ToString();
+
+                            list.Add(item);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+                return list;
+            }
+        }
+
         public List<ItemView> GetTempoPermanencia()
         {
             string sql = "Select Tempo_permanencia,  COUNT(Dias_permanencia) as total from  AMBIENTE_Acompanhamento_431_tb  GROUP by Tempo_permanencia";

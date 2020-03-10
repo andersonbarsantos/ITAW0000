@@ -212,6 +212,7 @@
     <Content Include="Views\Pendencias\Detail.cshtml" />
     <Content Include="Views\Pendencias\ClassficarView.cshtml" />
     <Content Include="Views\Pendencias\Classificar.cshtml" />
+    <Content Include="Views\Pendencias\IndexProduto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

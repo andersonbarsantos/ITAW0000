@@ -1,0 +1,159 @@
+﻿@model IEnumerable<ITAW000.Models.Item431>
+
+@{
+    ViewBag.Title = "Regras";
+}
+
+
+<div class="row">
+    <div class="col-12 ">
+        <div class="card">
+            <div class="card-header">
+                <i class="glyphicon glyphicon-arrow-down"></i>
+                <h3>Classificação de Pendências </h3>
+                <p>Classificar registros ainda não classificados</p>
+                @*<a href="@Url.Action("", "Pendencia")" class="btn btn-success pull-right" id="confirmar" data-toggle="modal">Classificar Selecionados</a>*@
+                <a class="btn btn-success pull-right classificar " data-toggle="modal">Classificar Selecionados</a>
+            </div>
+            <div class="card-body">
+                <div class="container-fluid">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <label class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" value=0 id="selectAll">
+                                            <span class="custom-control-indicator"></span>
+                                        </label>
+                                    </th>
+                                    <th>Empresa</th>
+                                    <th>Sistema</th>
+                                    <th>Responsavel</th>
+                                    <th>Cod Produto BB</th>
+                                    <th>Nome Produto</th>
+                                    <th>proposta_bb</th>
+                                    <th>proposta_id</th>
+                                    <th>N. Contrato</th>
+                                    <th>N. Versão endosso</th>
+                                    <th>Dias Permanencia</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in ViewBag.ListaNaoClassificadosProduto as IList<ITAW000.Models.Item431>)
+                                {
+                                <tr>
+                                    <td>
+                                        <label class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" value=@item.Id>
+                                            <span class="custom-control-indicator"></span>
+                                        </label>
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Empresa)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Sistema)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Responsavel)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IdProdutoBB)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NomeProduto)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PropostaBB)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PropostaID)
+                                    </td>
+                                    <td style="text-align:center">
+                                        @Html.DisplayFor(modelItem => item.NumeroContrato)
+                                    </td>
+                                    <td style="text-align:center">
+                                        @Html.DisplayFor(modelItem => item.NumeroVersaoEndosso)
+                                    </td>
+                                    <td style="text-align:center">
+                                        @Html.DisplayFor(modelItem => item.DiasPermanencia)
+                                    </td>
+                                    <td>
+                                        <a class="details" data-id="@item.Id">
+                                            <i class="glyphicon glyphicon-zoom-in"></i>
+                                        </a>                                        
+                                    </td>
+                                </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="modal"  class="modal fade" tabindex="-1" role="dialog">
+
+</div>
+
+    @section Scripts {
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                // Activate tooltip
+                $('[data-toggle="tooltip"]').tooltip();
+
+                // Select/Deselect checkboxes
+                var checkbox = $('table tbody input[type="checkbox"]');
+                $("#selectAll").click(function () {
+                    if (this.checked) {
+                        checkbox.each(function () {
+                            this.checked = true;
+                        });
+                    } else {
+                        checkbox.each(function () {
+                            this.checked = false;
+                        });
+                    }
+                });
+                checkbox.click(function () {
+                    if (!this.checked) {
+                        $("#selectAll").prop("checked", false);
+                    }
+                });
+            });
+
+            $(function () {
+                $(".details").click(function () {
+                    var id = $(this).attr("data-id");
+
+                    $("#modal").load("pendencias/Detail?id=" + id, function () {
+                        $("#modal").modal();
+                    })
+                });
+
+               $(".classificar").click(function () {
+                     var ids = $('table tbody tr td label input:checked').map(function () {
+                       return this.value;
+                     }).get().join(',');
+
+
+                   alert(ids);
+                   var link = "Pendencias/Classificar?ids=".concat(ids);
+
+                    $("#modal").load(link, function () {
+                        $("#modal").modal();
+                    })
+                });
+
+            })                                 
+
+        </script>
+    }

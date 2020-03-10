@@ -20,6 +20,15 @@ namespace ITAW000.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult IndexProduto(int id)
+        {            
+            ViewBag.ListaNaoClassificadosProduto = pendenciaRespository.GetNaoClassificadosProduto(id);
+
+            return View();
+        }
+
+
         public ActionResult Lista()
         {
             ViewBag.ListaAll = pendenciaRespository.GetAll();
