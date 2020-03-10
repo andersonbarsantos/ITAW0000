@@ -1,116 +1,123 @@
 ﻿@model ITAW000.Models.Regra
 
 @{
+    Layout = null;
     ViewBag.Title = "Create";
 }
 
-@using (Html.BeginForm("Create", "Regra", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="row">
-        <div class="col-12">
-            <div class="container-fluid">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title text-center">CADASTRO DE REGRA</h3>
-                    </div>
-
-                    <div class="panel-body">
-                        <form action="#" class="form-horizontal">
-                            <fieldset>
-                                <legend>Informações Principais</legend>
-
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                @Html.HiddenFor(model => model.IdRegra)
 
 
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label class="col-sm-3 control-label">Sistema</label>
-                                        @Html.DropDownListFor(model => model.IdSistema, new SelectList(ViewBag.ListSistema, "value", "Text", -1), htmlAttributes: new { @class = "form-control", id = "idSistema" })
-                                        @Html.ValidationMessageFor(x => x.IdSistema, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="col-sm-3 control-label">Responsavel</label>
-                                        @Html.DropDownListFor(model => model.IdResponsavel, new SelectList(ViewBag.ListResponsavel, "value", "Text", "-1"), htmlAttributes: new { @class = "form-control", id = "IdResponsavel", name = "IdResponsavel" })
-                                        @Html.ValidationMessageFor(x => x.IdResponsavel, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Situação</label>
-                                    @Html.DropDownListFor(model => model.IdSituacao, new SelectList(ViewBag.ListSituacao, "value", "Text", "-1"), htmlAttributes: new { @class = "form-control", id = "IdSituacao", name = "IdSituacao" })
-                                    @Html.ValidationMessageFor(x => x.IdSituacao, "", new { @class = "text-danger" })
-                                </div>
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Detalhes do Registro</h4>
+            </div>
+            <div class="modal-body">
 
-                                <div class="form-row">
-                                    <div class="form-group col-md-5">
-                                        <label class="col-sm-3 control-label">Tipo</label>
-                                        @Html.DropDownListFor(model => model.IdTipo, new SelectList(ViewBag.ListTipo, "value", "Text", "-1"), htmlAttributes: new { @class = "form-control", id = "IdTipo" })
-                                        @Html.ValidationMessageFor(x => x.IdTipo, "", new { @class = "text-danger" })
+                @using (Html.BeginForm("Create", "Regra", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="container-fluid">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title text-center">CADASTRO DE REGRA</h3>
                                     </div>
 
-                                    <div class="form-group col-md-6">
-                                        <label class="col-sm-3 control-label">Retorno</label>
-                                        @Html.DropDownListFor(model => model.IdRetorno, new SelectList(ViewBag.ListRetorno, "value", "Text", "-1"), htmlAttributes: new { @class = "form-control", id = "IdRetorno" })
-                                        @Html.ValidationMessageFor(x => x.IdRetorno, "", new { @class = "text-danger" })
+                                    <div class="panel-body">
+                                        <form action="#" class="form-horizontal">
+                                            <fieldset>
+                                                <legend>Informações Principais</legend>
+
+                                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                                @Html.HiddenFor(model => model.IdRegra)
+
+
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <label class="col-sm-3 control-label">Sistema</label>
+                                                        @Html.DropDownListFor(model => model.IdSistema, new SelectList(ViewBag.ListSistema, "value", "Text", -1), htmlAttributes: new { @class = "form-control", id = "idSistema" })
+                                                        @Html.ValidationMessageFor(x => x.IdSistema, "", new { @class = "text-danger" })
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label class="col-sm-3 control-label">Responsavel</label>
+                                                        @Html.DropDownListFor(model => model.IdResponsavel, new SelectList(ViewBag.ListResponsavel, "value", "Text", "-1"), htmlAttributes: new { @class = "form-control", id = "IdResponsavel", name = "IdResponsavel" })
+                                                        @Html.ValidationMessageFor(x => x.IdResponsavel, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Situação</label>
+                                                    @Html.DropDownListFor(model => model.IdSituacao, new SelectList(ViewBag.ListSituacao, "value", "Text", "-1"), htmlAttributes: new { @class = "form-control", id = "IdSituacao", name = "IdSituacao" })
+                                                    @Html.ValidationMessageFor(x => x.IdSituacao, "", new { @class = "text-danger" })
+                                                </div>
+
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-5">
+                                                        <label class="col-sm-3 control-label">Tipo</label>
+                                                        @Html.DropDownListFor(model => model.IdTipo, new SelectList(ViewBag.ListTipo, "value", "Text", "-1"), htmlAttributes: new { @class = "form-control", id = "IdTipo" })
+                                                        @Html.ValidationMessageFor(x => x.IdTipo, "", new { @class = "text-danger" })
+                                                    </div>
+
+                                                    <div class="form-group col-md-6">
+                                                        <label class="col-sm-3 control-label">Retorno</label>
+                                                        @Html.DropDownListFor(model => model.IdRetorno, new SelectList(ViewBag.ListRetorno, "value", "Text", "-1"), htmlAttributes: new { @class = "form-control", id = "IdRetorno" })
+                                                        @Html.ValidationMessageFor(x => x.IdRetorno, "", new { @class = "text-danger" })
+                                                    </div>
+
+
+                                                    <div class="form-group col-md-1">
+                                                        <div class="form-check">
+                                                            <label class="col-sm-3 control-label">Ativo</label>
+                                                            @Html.CheckBoxFor(model => Model.Ativo, htmlAttributes: new { @class = "form-control pull-left", id = "Ativo" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-12">
+                                                        <label class="col-sm-12 control-label">Descricao</label>
+                                                        @Html.TextAreaFor(model => model.Descricao,
+                                                                                new
+                                                                                {
+                                                                                    @class = "form-control",
+                                                                                    cols = "50",
+                                                                                    rows = "10",
+                                                                                    @style = "width=100%",
+                                                                                    @draggable = "false",
+                                                                                    @maxlength = "200",
+                                                                                    @minlength = "5",
+                                                                                    @required = "true"
+                                                                                })
+                                                        @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12 ">
+                                                    <button type="submit" class="btn btn-primary ">
+                                                        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Gravar
+                                                    </button>
+                                                    @Html.ActionLink("Cancelar", "Index", "Regra", new { @class = "btn btn-danger" })
+
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
-
-
-                                    <div class="form-group col-md-1">
-                                        <div class="form-check">
-                                            <label class="col-sm-3 control-label">Ativo</label>
-                                            @Html.CheckBoxFor(model => Model.Ativo, htmlAttributes: new { @class = "form-control pull-left", id = "Ativo" })
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="form-group col-md-12">
-                                        <label class="col-sm-12 control-label">Descricao</label>
-                                        @Html.TextAreaFor(model => model.Descricao,
-                                                                new
-                                                                {
-                                                                    @class = "form-control",
-                                                                    cols = "50",
-                                                                    rows = "10",
-                                                                    @style = "width=100%",
-                                                                    @draggable = "false",
-                                                                    @maxlength = "200",
-                                                                    @minlength = "5",
-                                                                    @required = "true"
-                                                                })
-                                        @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            </fieldset>
-                            <div class="form-row">
-                                <div class="form-group col-md-12 ">
-                                    <button type="submit" class="btn btn-primary ">
-                                        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Gravar
-                                    </button>
-                                    @Html.ActionLink("Cancelar", "Index", "Regra", new { @class = "btn btn-danger" })
-
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
+
+                }
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
                 </div>
-            </div>
+            </div><!-- /.modal-content -->
         </div>
     </div>
 
-}
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-
-    <script>
-        $(document).ready(function () {
-            $("#myAlert").on('closed.bs.alert', function () {
-                alert("Alert message box has been closed.");
-            });
-        });
-    </script>
-
-}

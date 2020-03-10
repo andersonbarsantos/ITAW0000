@@ -1,144 +1,139 @@
 ﻿@model IEnumerable<ITAW000.Models.Regra>
-    
+
 @{
     ViewBag.Title = "Regras";
 }
 
-@section scripts{
-    <script>
-        $(function () {
-            $(".details").click(function () {
-                var id = $(this).attr("data-id");
-                alert(id);
-                $("#modal").load("Details?id=" + id, function () {
-                    $("#modal").modal();
-                })
-            });
-
-            $(".edit").click(function () {
-                var id = $(this).attr("data-id");            
-                $("#modal").load("/Regra/Edit?id=" + id, function () {
-                    $("#modal").modal();
-                })
-            });
-
-            $(".delete").click(function () {
-                var id = $(this).attr("data-id");            
-                $("#modal").load("Delete?id=" + id, function () {
-                    $("#modal").modal();
-                })
-            });
-
-           $(".create").click(function () {
-                $("#modal").load("/Regra/Create", function () {
-                    $("#modal").modal();
-                })
-            });
-
-        })
-    </script>
- }
 
 
-    <div class="row">
-        <div class="col-12">
+<div class="row">
+    <div class="col-12">
 
-            <div class="card">
-                <div class="card-header">
-                    <i class="glyphicon glyphicon-sort"></i>
-                    <h3>Regras </h3>
-                    <p>Realação de regras cadastradas no sistema</p>
-                    <a href="@Url.Action("Create", "Regra")" class="btn btn-success" data-toggle="modal">Adicionar Nova</a>
-                </div>
-                <div class="card-body">
-                    @if (@Model.Count() == 0)
-                    {
-                        <section class="container-fluid h-100 d-flex justify-content-center">
-                            <div class="jumbotron my-auto">
-                                <h3 class="display-3">Nenhum regra foi localizada</h3>
-                            </div>
-                        </section>
-                    }
-                    else
-                    {
-                        <div class="container-fluid">
-                            <div class="table-responsive">
-                                <table class="table table-hover table-striped ">
-                                    <thead>
+        <div class="card">
+            <div class="card-header">
+                <i class="glyphicon glyphicon-sort"></i>
+                <h3>Regras </h3>
+                <p>Realação de regras cadastradas no sistema</p>
+                @*<a href="@Url.Action("Create", "Regra")" class="btn btn-success" data-toggle="modal">Adicionar Nova</a>*@
+                <a class="btn btn-success" id="create">Adicionar Nova</a>
+            </div>
+            <div class="card-body">
+                @if (@Model.Count() == 0)
+                {
+                    <section class="container-fluid h-100 d-flex justify-content-center">
+                        <div class="jumbotron my-auto">
+                            <h3 class="display-3">Nenhum regra foi localizada</h3>
+                        </div>
+                    </section>
+                }
+                else
+                {
+                    <div class="container-fluid">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped ">
+                                <thead>
+                                    <tr>
+                                        @*<th></th>*@
+                                        <th>Id</th>
+                                        <th>Responsavel</th>
+                                        <th>Tipo</th>
+                                        <th>Retorno</th>
+                                        <th>Sistema</th>
+                                        <th>Descricao</th>
+                                        <th>Situacao</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var item in Model)
+                                    {
                                         <tr>
-                                            @*<th></th>*@
-                                            <th>Id</th>
-                                            <th>Responsavel</th>
-                                            <th>Tipo</th>
-                                            <th>Retorno</th>
-                                            <th>Sistema</th>
-                                            <th>Descricao</th>
-                                            <th>Situacao</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                        @foreach (var item in Model)
-                                        {
-                                            <tr>
-                                                @*<td>
-                                                        <i class="material-icons">cached</i>
-                                                    </td>*@
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.IdRegra)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.Responsavel.NomeResponsavel)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.Tipo.NomeTipo)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.Retorno.NomeRetorno)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.Sistema.NomeSistema)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.Descricao)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.Situacao.NomeSituacao)
-                                                </td>
-                                                <td>
-                                                    @*<a onclick="GetDetails(@item.IdRegra)">
+                                            @*<td>
+                                                    <i class="material-icons">cached</i>
+                                                </td>*@
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.IdRegra)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Responsavel.NomeResponsavel)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Tipo.NomeTipo)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Retorno.NomeRetorno)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Sistema.NomeSistema)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Descricao)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Situacao.NomeSituacao)
+                                            </td>
+                                            <td>
+                                                @*<a onclick="GetDetails(@item.IdRegra)">
             <i class="fa fa-edit text-success"></i>
         </a>*@
 
-                                                    @*<a class="edit" data-id="@item.IdRegra">
-            <i class="fa fa-edit text-success"></i>
-        </a>*@
+                                                <a class="edit" data-id="@item.IdRegra">
+                                                   <i class="fa fa-edit text-success"></i>
+                                                </a>
 
-                                                    @*<a onclick="Delete(@item.IdRegra)">
+                                                @*<a onclick="Delete(@item.IdRegra)">
             <i class="fa fa-trash-o text-danger"></i>
         </a>*@
 
-                                                    <a href="@Url.Action("Edit", "Regra",  new { id=item.IdRegra })"> <i class="fa fa-edit text-success"></i></a>
+                                                @*<a class="b details" data-id="@item.IdRegra" id="details"><i class="glyphicon glyphicon-file"></i></a>*@
+                                            </td>
+                                        </tr>
+                                    }
 
-                                                </td>
-                                            </tr>
-                                        }
-
-                                    </tbody>
-                                </table>
-                            </div>
+                                </tbody>
+                            </table>
                         </div>
-                    }
-                </div>
+                    </div>
+                }
             </div>
         </div>
     </div>
-    <div id="modal" class="modal fade" role="dialog" />
+</div>
+
+<div id="modal" class="modal fade" tabindex="-1" role="dialog">
+
+</div>
 
 
-    <!-- Edit Modal HTML -->
-    @*<div id="editModal" class="modal fade">
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+        $(function () {
+
+            $("#create").click(function () {
+                $("#modal").load("Regra/Create", function () {
+                    $("#modal").modal();
+                })
+
+            });
+
+             $(".edit").click(function () {
+                    var id = $(this).attr("data-id");
+
+                    $("#modal").load("Regra/edit?id=" + id, function () {
+                        $("#modal").modal();
+                    })
+                });
+
+        })
+    </script>
+}
+
+<!-- Edit Modal HTML -->
+@*<div id="editModal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
 
@@ -219,29 +214,29 @@
         </div>
     </div>*@
 
-    <!-- Delete Modal HTML -->
-    @*<div id="deleteModal" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    @using (Html.BeginForm("Delete", "Regra", FormMethod.Post))
-                    {
-                        <div class="modal-header">
-                            <h4 class="modal-title">Apagar Registro</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        </div>
-                        <div class="form-group">
-                            <input type="hidden" class="form-control" name="idRetorno" id="IdDelete">
-                        </div>
+<!-- Delete Modal HTML -->
+@*<div id="deleteModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                @using (Html.BeginForm("Delete", "Regra", FormMethod.Post))
+                {
+                    <div class="modal-header">
+                        <h4 class="modal-title">Apagar Registro</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" name="idRetorno" id="IdDelete">
+                    </div>
 
-                        <div class="modal-body">
-                            <p>Deseja Relamente excluir o item selecionado?</p>
-                            <p class="text-warning"><small>Esta ação não podera ser desfeita.</small></p>
-                        </div>
-                        <div class="modal-footer">
-                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                            <input type="submit" class="btn btn-danger" value="Delete">
-                        </div>
-                    }
-                </div>
+                    <div class="modal-body">
+                        <p>Deseja Relamente excluir o item selecionado?</p>
+                        <p class="text-warning"><small>Esta ação não podera ser desfeita.</small></p>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <input type="submit" class="btn btn-danger" value="Delete">
+                    </div>
+                }
             </div>
-        </div>*@
+        </div>
+    </div>*@

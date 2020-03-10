@@ -917,3 +917,15 @@ p {
     .custom-checkbox .custom-control-input:focus ~ .custom-control-indicator {
         box-shadow: none !important;
     }
+
+
+.modal-dialog {
+    width: 360px;
+}
+
+.modal-header {
+    background-color: #337AB7;
+    padding: 16px 16px;
+    color: #FFF;
+    border-bottom: 2px dashed #337AB7;
+}

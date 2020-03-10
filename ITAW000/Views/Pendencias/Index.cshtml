@@ -145,75 +145,76 @@
     </div>
 </div>
 
-<div class="modal" id="modal">
 
-</div>
+    <div id="modal"  class="modal fade" tabindex="-1" role="dialog">
 
-@section Scripts {
+    </div>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            // Activate tooltip
-            $('[data-toggle="tooltip"]').tooltip();
+    @section Scripts {
 
-            // Select/Deselect checkboxes
-            var checkbox = $('table tbody input[type="checkbox"]');
-            $("#selectAll").click(function () {
-                if (this.checked) {
-                    checkbox.each(function () {
-                        this.checked = true;
-                    });
-                } else {
-                    checkbox.each(function () {
-                        this.checked = false;
-                    });
-                }
-            });
-            checkbox.click(function () {
-                if (!this.checked) {
-                    $("#selectAll").prop("checked", false);
-                }
-            });
-        });
+        <script type="text/javascript">
+            $(document).ready(function () {
+                // Activate tooltip
+                $('[data-toggle="tooltip"]').tooltip();
 
-
-        $('#confirmar').on('click', function () {
-            var valores = $('table tbody tr td label input:checked').map(function () {
-                return this.value;
-            }).get().join(', ');
-
-            $('#resultado').val(valores);
-
-            var val2 = $('#IdRegra').val();
-            var obs = $('#observacao').val();
-
-
-
-            $.ajax({
-                type: "POST",
-                url: '/Pendencias/Classificar',
-                contentType: "application/json; charset=utf-8",
-                dataType: "text",
-                data: "{ IdRegra:'" + val2 + "', IDs:'" + valores + "', observacao:'" + obs + "' }",
-                success: function (result) {
-                    alert("Atualizaçao feita com sucesso");
-                },
-                error: function (ex) {
-                    console.log(ex);
-                }
+                // Select/Deselect checkboxes
+                var checkbox = $('table tbody input[type="checkbox"]');
+                $("#selectAll").click(function () {
+                    if (this.checked) {
+                        checkbox.each(function () {
+                            this.checked = true;
+                        });
+                    } else {
+                        checkbox.each(function () {
+                            this.checked = false;
+                        });
+                    }
+                });
+                checkbox.click(function () {
+                    if (!this.checked) {
+                        $("#selectAll").prop("checked", false);
+                    }
+                });
             });
 
-        });
 
-        $(function () {
-            $(".details").click(function () {
-                var id = $(this).attr("data-id");
-              
-                $("#modal").load("pendencias/Detail?id=" + id, function () {
-                    $("#modal").modal();
-                })
+            $('#confirmar').on('click', function () {
+                var valores = $('table tbody tr td label input:checked').map(function () {
+                    return this.value;
+                }).get().join(', ');
+
+                $('#resultado').val(valores);
+
+                var val2 = $('#IdRegra').val();
+                var obs = $('#observacao').val();
+
+
+
+                $.ajax({
+                    type: "POST",
+                    url: '/Pendencias/Classificar',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "text",
+                    data: "{ IdRegra:'" + val2 + "', IDs:'" + valores + "', observacao:'" + obs + "' }",
+                    success: function (result) {
+                        alert("Atualizaçao feita com sucesso");
+                    },
+                    error: function (ex) {
+                        console.log(ex);
+                    }
+                });
+
             });
-        })
 
-    </script>
-}
+            $(function () {
+                $(".details").click(function () {
+                    var id = $(this).attr("data-id");
+
+                    $("#modal").load("pendencias/Detail?id=" + id, function () {
+                        $("#modal").modal();
+                    })
+                });
+            })
+
+        </script>
+    }
