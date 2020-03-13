@@ -12,14 +12,21 @@
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         </div>
         <div class="modal-body">
-            <p>@Html.DisplayNameFor(model => model.Id) : @Html.DisplayFor(model => model.Id)</p>
-            <p>@Html.DisplayNameFor(model => model.NomeProduto) : @Html.DisplayFor(model => model.NomeProduto)</p>
-            <p>@Html.DisplayNameFor(model => model.PropostaID) : @Html.DisplayFor(model => model.PropostaID)</p>
-            <p>@Html.DisplayNameFor(model => model.PropostaID) : @Html.DisplayFor(model => model.Responsavel)</p>
-            <p>@Html.DisplayNameFor(model => model.PropostaID) : @Html.DisplayFor(model => model.Unidade)</p>
-            <p>@Html.DisplayNameFor(model => model.PropostaID) : @Html.DisplayFor(model => model.Sistema)</p>
-            <p>@Html.DisplayNameFor(model => model.PropostaID) : @Html.DisplayFor(model => model.NomeProduto)</p>
-            <p>@Html.DisplayNameFor(model => model.PropostaID) : @Html.DisplayFor(model => model.PropostaBB)</p>
+            <p>@Html.DisplayName("Empresa: ") @Html.DisplayFor(model => model.Empresa)</p>
+            <p>@Html.DisplayName("NomeProduto: ") @Html.DisplayFor(model => model.NomeProduto)</p>
+            <p>@Html.DisplayName("Proposta ID: ") @Html.DisplayFor(model => model.PropostaID)</p>
+            <p>@Html.DisplayName("Responsavel: ") @Html.DisplayFor(model => model.Responsavel)</p>
+            <p>@Html.DisplayName("Sistema:") : @Html.DisplayFor(model => model.Sistema)</p>
+            <p>@Html.DisplayName("Unidade: ") : @Html.DisplayFor(model => model.Unidade)</p>
+            <p>@Html.DisplayName("Descrição: ") : @Html.DisplayFor(model => model.Descricao)</p>
+            <p>@Html.DisplayName("Proposta BB: ") : @Html.DisplayFor(model => model.PropostaBB)</p>
+            <p>@Html.DisplayName("Dias de Permanencia: ") : @Html.DisplayFor(model => model.DiasPermanencia)</p>
+            <p>@Html.DisplayName("Numero do Contrato: ") : @Html.DisplayFor(model => model.NumeroContrato)</p>
+            <p>@Html.DisplayName("N. Versão endosso: ") : @Html.DisplayFor(model => model.NumeroVersaoEndosso)</p>
+            <p>@Html.DisplayName("Situacao proposta: ") : @Html.DisplayFor(model => model.SituacaoProposta)</p>
+            <p>@Html.DisplayName("Ramo: ") : @Html.DisplayFor(model => model.Ramo)</p>
+            <p>@Html.DisplayName("Sub-Ramo: ") : @Html.DisplayFor(model => model.SubRamo)</p>
+
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>

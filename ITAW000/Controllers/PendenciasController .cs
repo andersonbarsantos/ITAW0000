@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using ITAW000.Models;
 using ITAW000.Repository;
 
@@ -21,8 +22,9 @@ namespace ITAW000.Controllers
         }
 
         [HttpPost]
-        public ActionResult IndexProduto(int id)
-        {            
+        public ActionResult IndexProduto(ItemView item)
+        {
+            int id = Convert.ToInt16( item.Name); 
             ViewBag.ListaNaoClassificadosProduto = pendenciaRespository.GetNaoClassificadosProduto(id);
 
             return View();
